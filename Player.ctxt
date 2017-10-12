@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=room
+comment0.target=Player(Room)
+comment1.params=
+comment1.target=java.lang.String\ getRoomName()
+comment2.params=
+comment2.target=java.lang.String\ getRoomDesc()
+numComments=3
