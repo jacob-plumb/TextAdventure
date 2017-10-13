@@ -13,20 +13,30 @@ public class TextAdventure
        kitchen.setName("KITCHEN");
        kitchen.setDesc("You're in the kitchen. It is not cluttered, but it's super dusty.");
        
+       //SETTING MAP COORDINATES
+       basement.setUp(kitchen);
+       kitchen.setDown(basement);
+       
        Player player = new Player(basement);
        System.out.println(player.getRoomName());
        System.out.println(player.getRoomDesc());
        
        String action = scanner.next();
        action.toLowerCase();
+       
+       //DO TRY/EXCEPT FOR ROOMS w/o a particular option
        if (action.equals("up") || action.equals("u"))
        {
-           System.out.println("You go up.");
+           player.playerMove((player.getRoom()).getUp());   
+           System.out.println(player.getRoomName());
+           System.out.println(player.getRoomDesc());
        }
        
        if (action.equals("down") || action.equals("d"))
        {
-           System.out.println("You go down.");
+           player.playerMove((player.getRoom()).getDown());   
+           System.out.println(player.getRoomName());
+           System.out.println(player.getRoomDesc());
        }
        
        if (action.equals("north") || action.equals("n"))

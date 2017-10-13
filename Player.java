@@ -1,21 +1,29 @@
 public class Player
 {
-    private Room room;
+    private Room currentRoom;
     
-    public Player(Room room)
+    public Player(Room currentRoom)
     {
-        this.room = room;
+        this.currentRoom = currentRoom;
     }
     
     public String getRoomName()
     {
-        return room.getName();
+        return currentRoom.getName();
     }
     
     public String getRoomDesc()
     {
-        return room.getDesc();
+        return currentRoom.getDesc();
     }
     
+    public Room getRoom()
+    {
+        return currentRoom;
+    }
     
+    public void playerMove(Room newRoom)
+    {
+        currentRoom = newRoom;
+    }
 }
