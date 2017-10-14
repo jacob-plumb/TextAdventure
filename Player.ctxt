@@ -1,12 +1,13 @@
 #BlueJ class context
-comment0.params=currentRoom
-comment0.target=Player(Room)
-comment1.params=
-comment1.target=java.lang.String\ getRoomName()
+comment0.target=Player
+comment1.params=currentRoom
+comment1.target=Player(Room)
 comment2.params=
-comment2.target=java.lang.String\ getRoomDesc()
+comment2.target=java.lang.String\ getRoomName()
 comment3.params=
-comment3.target=Room\ getRoom()
-comment4.params=newRoom
-comment4.target=void\ playerMove(Room)
-numComments=5
+comment3.target=java.lang.String\ getRoomDesc()
+comment4.params=
+comment4.target=Room\ getRoom()
+comment5.params=newRoom
+comment5.target=void\ playerMove(Room)
+numComments=6

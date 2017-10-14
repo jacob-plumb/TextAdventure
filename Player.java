@@ -24,6 +24,13 @@ public class Player
     
     public void playerMove(Room newRoom)
     {
-        currentRoom = newRoom;
+        if(newRoom != null)
+        {
+            currentRoom = newRoom;
+        }
+        else
+        {
+            currentRoom = currentRoom;
+        }
     }
 }
