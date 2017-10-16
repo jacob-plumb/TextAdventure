@@ -2,8 +2,13 @@ public class Room
 {
     private String name;
     private String desc;
+    
     private Room up;
     private Room down;
+    private Room north;
+    private Room east;
+    private Room south;
+    private Room west;
     
     public String getName()
     {
@@ -25,7 +30,6 @@ public class Room
         this.desc = desc;
     }
     
-    
     //MOVEMENT
     
     public Room getUp()
@@ -46,5 +50,45 @@ public class Room
     public void setDown(Room down)
     {
         this.down = down;
+    }
+    
+    public Room getNorth()
+    {
+        return north;
+    }
+    
+    public void setNorth(Room north)
+    {
+        this.north = north;
+    }
+    
+    public Room getEast()
+    {
+        return east;
+    }
+    
+    public void setEast(Room east)
+    {
+        this.east = east;
+    }
+    
+    public Room getSouth()
+    {
+        return south;
+    }
+    
+    public void setSouth(Room south)
+    {
+        this.south = south;
+    }
+    
+    public Room getWest()
+    {
+        return west;
+    }
+    
+    public void setWest(Room west)
+    {
+        this.west = west;
     }
 }

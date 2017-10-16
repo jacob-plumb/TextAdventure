@@ -28,9 +28,5 @@ public class Player
         {
             currentRoom = newRoom;
         }
-        else
-        {
-            currentRoom = currentRoom;
-        }
     }
 }
