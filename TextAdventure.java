@@ -69,7 +69,21 @@ public class TextAdventure
        
        nursery.setWest(hallway);
        
+       //CREATING THE PLAYER
        Player player = new Player(basement);
+       player.setStr(10);
+       player.setDex(10);
+       player.setCon(10);
+       player.setKnow(10);
+       player.setWis(10);
+       player.setCha(10);
+       
+       player.setGold(0);
+       player.setXP(0);
+       player.setMaxHP(player.getCon() * 5);
+       player.setMaxMP(player.getKnow() * 5);
+       player.setTempHP(player.getMaxHP());
+       player.setTempMP(player.getMaxMP());
        
        //WHILE loop for game running condition
        while (gameLoop == true)
@@ -103,7 +117,12 @@ public class TextAdventure
            else if (action.equals("west") || action.equals("w"))
            {
                player.playerMove((player.getRoom()).getWest());
-           }else if (action.equals("exit"))
+           }
+           else if (action.equals("stats"))
+           {
+               player.printStats();
+           }
+           else if (action.equals("exit"))
            {
                gameLoop = false;
            }
