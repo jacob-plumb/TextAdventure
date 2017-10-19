@@ -1,17 +1,90 @@
-public class Character
+public abstract class Character
 {
+    //ATTRIBUTES
+    private int str;
+    private int dex;
+    private int con;
+    private int know;
+    private int wis;
+    private int cha;
+    
+    //HEALTH/MANA
     private int maxHP;
     private int tempHP;
     private int maxMP;
     private int tempMP;
-
-    private Room currentRoom;
     
-    public Character(Room currentRoom)
+    //STATS
+    private int level;
+    private int gold;
+    private int xp;
+    
+    //INVENTORY
+    private Weapon currentWep;
+    private Armor currentArmor;
+
+    //PLAYER ATTRIBUTES
+    public int getStr()
     {
-        this.currentRoom = currentRoom;
+        return str;
     }
     
+    public void setStr(int str)
+    {
+        this.str = str;
+    }
+    
+    public int getDex()
+    {
+        return dex;
+    }
+    
+    public void setDex(int dex)
+    {
+        this.dex = dex;
+    }
+    
+    public int getCon()
+    {
+        return con;
+    }
+    
+    public void setCon(int con)
+    {
+        this.con = con;
+    }
+    
+    public int getKnow()
+    {
+        return know;
+    }
+    
+    public void setKnow(int know)
+    {
+        this.know = know;
+    }
+    
+    public int getWis()
+    {
+        return wis;
+    }
+    
+    public void setWis(int wis)
+    {
+        this.wis = wis;
+    }
+    
+    public int getCha()
+    {
+        return cha;
+    }
+    
+    public void setCha(int cha)
+    {
+        this.cha = cha;
+    }
+    
+    //HEALTH/MANA
     public int getMaxHP()
     {
         return maxHP;
@@ -52,32 +125,73 @@ public class Character
         this.maxMP = maxMP;
     }
     
-    
-    public String getRoomName()
+    //STATS
+    public int getLevel()
     {
-        return currentRoom.getName();
+        return level;
     }
     
-    public String getRoomDesc()
+    public void setLevel(int level)
     {
-        return currentRoom.getDesc();
+        this.level = level;
     }
     
-    public Room getRoom()
+    public int getGold()
     {
-        return currentRoom;
+        return gold;
     }
     
-    void printStats(){
+    public void setGold(int gold)
+    {
+        this.gold = gold;
+    }
+    
+    public int getXP()
+    {
+        return xp;
+    }
+    
+    public void setXP(int xp)
+    {
+        this.xp = xp;
+    }
+    
+    //INVENTORY
+    public Weapon getWep()
+    {
+        return currentWep;
+    }
+    
+    public void setWep(Weapon currentWep)
+    {
+        this.currentWep = currentWep;
+    }
+    
+    public Armor getArmor()
+    {
+        return currentArmor;
+    }
+    
+    public void setArmor(Armor currentArmor)
+    {
+        this.currentArmor = currentArmor;
+    }
+    
+    protected void printStats()
+    {
+        /**@Override
+         * 
+         */
         System.out.println("Health: " + tempHP);
         System.out.println("Magic: " + tempMP);
+        System.out.println("Gold: " + gold);
+        System.out.println("XP: " + xp);
+        System.out.println("Strength: " + str);
+        System.out.println("Dexterity: " + dex);
+        System.out.println("Constitution: " + con);
+        System.out.println("Knowledge: " + know);
+        System.out.println("Wisdom: " + wis);
+        System.out.println("Charisma: " + cha);
     }
     
-    public void playerMove(Room newRoom)
-    {
-        if(newRoom != null)
-        {
-            currentRoom = newRoom;
-        }
-    }
 }

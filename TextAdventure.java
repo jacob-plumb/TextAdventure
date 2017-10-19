@@ -69,18 +69,38 @@ public class TextAdventure
        
        nursery.setWest(hallway);
        
+       //CREATING ITEMS
+       Weapon sword = new Weapon();
+       sword.setName("SWORD");
+       sword.setDesc("This is a sword.");
+       sword.setValue(5);
+       sword.setDamage(1, 10);
+       
+       Armor gambeson = new Armor();
+       gambeson.setName("GAMBESON");
+       gambeson.setDesc("This is a gambeson.");
+       gambeson.setValue(10);
+       gambeson.setArmorValue(20);
+       
+       
        //CREATING THE PLAYER
        Player player = new Player(basement);
-       player.setStr(10);
-       player.setDex(10);
-       player.setCon(10);
-       player.setKnow(10);
-       player.setWis(10);
-       player.setCha(10);
+       player.setStr(5);
+       player.setDex(5);
+       player.setCon(5);
+       player.setKnow(5);
+       player.setWis(5);
+       player.setCha(5);
        
+       player.setWep(sword);
+       player.setArmor(gambeson);
+       
+       player.setLevel(1);
        player.setGold(0);
        player.setXP(0);
-       player.setMaxHP(player.getCon() * 5);
+       
+       //LOOK INTO PUTTING THIS IN ITS OWN THINGS
+       player.setMaxHP((player.getCon() * 5) + player.getArmor().getArmorValue());
        player.setMaxMP(player.getKnow() * 5);
        player.setTempHP(player.getMaxHP());
        player.setTempMP(player.getMaxMP());
