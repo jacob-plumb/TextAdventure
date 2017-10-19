@@ -1,9 +1,8 @@
 #BlueJ class context
-comment0.target=Weapon
+comment0.params=
+comment0.target=int\ getMinDamage()
 comment1.params=
-comment1.target=int\ getMinDamage()
-comment2.params=
-comment2.target=int\ getMaxDamage()
-comment3.params=minDamage\ maxDamage
-comment3.target=void\ setDamage(int,\ int)
-numComments=4
+comment1.target=int\ getMaxDamage()
+comment2.params=minDamage\ maxDamage
+comment2.target=void\ setDamage(int,\ int)
+numComments=3

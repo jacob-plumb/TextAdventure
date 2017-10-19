@@ -85,14 +85,25 @@ public class Player extends Character
     {
         System.out.println("1. Attack");
         System.out.println("2. Die");
-        int option = scanner.nextInt();
-        if (option == 1)
-        {
-            player.attack(player, enemy);
+        try {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+        
+            if (option == 1)
+            {
+                player.attack(player, enemy);
+            }
+            else
+            {
+                player.setTempHP(0);
+            }
         }
-        else
+        catch(NumberFormatException e)
         {
-            player.setTempHP(0);
+            System.out.println("INVALID INPUT");
+            player.printCombatStats();
+            enemy.printCombatStats();
+            playerTurn(player, enemy);
         }
     }
 }

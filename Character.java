@@ -219,7 +219,7 @@ public abstract class Character
         
         if (toHit > targetDodge)
         {
-            int damage = (int)((Math.random() * attacker.getWep().getMaxDamage()) + attacker.getWep().getMinDamage());
+            int damage = (int)((Math.random() * attacker.getWep().getMaxDamage()) + attacker.getWep().getMinDamage() + (attacker.getStr() / 2));
             target.setTempHP(target.getTempHP() - damage);
             System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
             + attacker.getWep().getName() + " dealing " + damage + " damage!");

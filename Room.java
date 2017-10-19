@@ -5,6 +5,8 @@ public class Room
     
     private Enemy enemy;
     
+    //Potential boolean for whether or not a room is hostile
+    
     private Room up;
     private Room down;
     private Room north;
