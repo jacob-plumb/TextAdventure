@@ -15,6 +15,7 @@ public abstract class Character
     private int tempMP;
     
     //STATS
+    private String name;
     private int level;
     private int gold;
     private int xp;
@@ -126,6 +127,17 @@ public abstract class Character
     }
     
     //STATS
+    
+    public String getName()
+    {
+        return name;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
     public int getLevel()
     {
         return level;
@@ -192,6 +204,30 @@ public abstract class Character
         System.out.println("Knowledge: " + know);
         System.out.println("Wisdom: " + wis);
         System.out.println("Charisma: " + cha);
+    }
+    
+    public void printCombatStats()
+    {
+        System.out.println("" + name + " Health: " + tempHP);
+        System.out.println("" + name + " Magic: " + tempMP);
+    }
+    
+    public void attack(Character attacker, Character target)
+    {
+        int toHit = (int)((Math.random() * 20) + 1) + attacker.getDex();
+        int targetDodge = (int)((((Math.random() * 20) + 1) + target.getDex()) / 2);
+        
+        if (toHit > targetDodge)
+        {
+            int damage = (int)((Math.random() * attacker.getWep().getMaxDamage()) + attacker.getWep().getMinDamage());
+            target.setTempHP(target.getTempHP() - damage);
+            System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+            + attacker.getWep().getName() + " dealing " + damage + " damage!");
+        }
+        else
+        {
+            System.out.println("" + attacker.getName() + "'s attack misses!");
+        }
     }
     
 }

@@ -80,11 +80,18 @@ public class TextAdventure
        gambeson.setName("GAMBESON");
        gambeson.setDesc("This is a gambeson.");
        gambeson.setValue(10);
-       gambeson.setArmorValue(20);
+       gambeson.setArmorValue(15);
+       
+       Armor clothes = new Armor();
+       clothes.setName("CLOTHES");
+       clothes.setDesc("These are normal clothes.");
+       clothes.setValue(1);
+       clothes.setArmorValue(5);
        
        
        //CREATING THE PLAYER
        Player player = new Player(basement);
+       player.setName("PLAYER");
        player.setStr(5);
        player.setDex(5);
        player.setCon(5);
@@ -98,12 +105,35 @@ public class TextAdventure
        player.setLevel(1);
        player.setGold(0);
        player.setXP(0);
-       
-       //LOOK INTO PUTTING THIS IN ITS OWN THINGS
        player.setMaxHP((player.getCon() * 5) + player.getArmor().getArmorValue());
        player.setMaxMP(player.getKnow() * 5);
        player.setTempHP(player.getMaxHP());
        player.setTempMP(player.getMaxMP());
+       
+       //CREATING TEST ENEMY
+       
+       Enemy bandit = new Enemy();
+       bandit.setName("BANDIT");
+       bandit.setStr(5);
+       bandit.setDex(5);
+       bandit.setCon(5);
+       bandit.setKnow(5);
+       bandit.setWis(5);
+       bandit.setCha(5);
+       
+       bandit.setWep(sword);
+       bandit.setArmor(clothes);
+       
+       bandit.setLevel(1);
+       bandit.setGold(5);
+       bandit.setXP(25);
+       bandit.setMaxHP((bandit.getCon() * 5) + bandit.getArmor().getArmorValue());
+       bandit.setMaxMP(bandit.getKnow() * 5);
+       bandit.setTempHP(bandit.getMaxHP());
+       bandit.setTempMP(bandit.getMaxMP());
+       
+       //ENEMY PLACEMENT       
+       kitchen.setEnemy(bandit);
        
        //WHILE loop for game running condition
        while (gameLoop == true)
@@ -116,27 +146,27 @@ public class TextAdventure
            
            if (action.equals("up") || action.equals("u"))
            {
-               player.playerMove((player.getRoom()).getUp());
+               player.playerMove(player, (player.getRoom()).getUp());
            }
            else if (action.equals("down") || action.equals("d"))
            {
-               player.playerMove((player.getRoom()).getDown());
+               player.playerMove(player, (player.getRoom()).getDown());
            }
            else if (action.equals("north") || action.equals("n"))
            {
-               player.playerMove((player.getRoom()).getNorth());
+               player.playerMove(player, (player.getRoom()).getNorth());
            }
            else if (action.equals("east") || action.equals("e"))
            {
-               player.playerMove((player.getRoom()).getEast());
+               player.playerMove(player, (player.getRoom()).getEast());
            }
            else if (action.equals("south") || action.equals("s"))
            {
-               player.playerMove((player.getRoom()).getSouth());
+               player.playerMove(player, (player.getRoom()).getSouth());
            }
            else if (action.equals("west") || action.equals("w"))
            {
-               player.playerMove((player.getRoom()).getWest());
+               player.playerMove(player, (player.getRoom()).getWest());
            }
            else if (action.equals("stats"))
            {

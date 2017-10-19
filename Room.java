@@ -3,6 +3,8 @@ public class Room
     private String name;
     private String desc;
     
+    private Enemy enemy;
+    
     private Room up;
     private Room down;
     private Room north;
@@ -28,6 +30,16 @@ public class Room
     public void setDesc(String desc)
     {
         this.desc = desc;
+    }
+    
+    public Enemy getEnemy()
+    {
+        return enemy;
+    }
+    
+    public void setEnemy(Enemy enemy)
+    {
+        this.enemy = enemy;
     }
     
     //MOVEMENT

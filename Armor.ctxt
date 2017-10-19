@@ -1,6 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=int\ getArmorValue()
-comment1.params=armorValue
-comment1.target=void\ setArmorValue(int)
-numComments=2
+comment0.target=Armor
+comment1.params=
+comment1.target=int\ getArmorValue()
+comment2.params=armorValue
+comment2.target=void\ setArmorValue(int)
+numComments=3
