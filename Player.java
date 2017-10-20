@@ -106,4 +106,110 @@ public class Player extends Character
             playerTurn(player, enemy);
         }
     }
+    
+    public void playerCreation()
+    {
+        creationOptionsFather();
+        creationOptionsEarly();
+    }
+    
+    private void creationOptionsFather()
+    {
+        System.out.println("Your father was a: ");
+        System.out.println("1. Nobleman");
+        System.out.println("2. Veteran soldier");
+        System.out.println("3. Hunter");
+        System.out.println("4. Nomad");
+        System.out.println("5. Thief");
+        try {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+        
+            if (option == 1)
+            {
+                this.setCon(this.getCon() - 1);
+                this.setKnow(this.getKnow() + 1);
+                this.setCha(this.getCha() + 1);
+                this.setGold(this.getGold() + 20);
+            }
+            else if (option == 2)
+            {
+               this.setKnow(this.getKnow() - 1);
+               this.setStr(this.getStr() + 1);
+               this.setCon(this.getCon() + 1);
+               this.setGold(this.getGold() + 10);
+            }
+            else if(option == 3)
+            {
+                this.setCha(this.getCha() - 1);
+                this.setDex(this.getDex() + 1);
+                this.setKnow(this.getKnow() + 1);
+                this.setGold(this.getGold() + 10);
+            }
+            else if (option == 4)
+            {
+                this.setDex(this.getDex() - 1);
+                this.setCon(this.getCon() + 1);
+                this.setKnow(this.getKnow() + 1);
+                this.setGold(this.getGold() + 5);
+            }
+            else if (option == 5)
+            {
+                this.setStr(this.getStr() - 1);
+                this.setDex(this.getDex() + 1);
+                this.setWis(this.getWis() + 1);
+                this.setGold(this.getGold() + 5);
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            creationOptionsFather();
+        }
+    }
+    
+    private void creationOptionsEarly()
+    {
+        System.out.println("During your childhood, you were a: ");
+        System.out.println("1. Page");
+        System.out.println("2. Apprentice");
+        System.out.println("3. Assistant");
+        System.out.println("4. Street Urchin");
+        System.out.println("5. Steppe Child");
+        try {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+        
+            if (option == 1)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setCha(this.getCha() + 1);
+            }
+            else if (option == 2)
+            {
+               this.setKnow(this.getKnow() + 1);
+               this.setStr(this.getStr() + 1);
+            }
+            else if(option == 3)
+            {
+                this.setCha(this.getCha() + 1);
+                this.setKnow(this.getKnow() + 1);
+            }
+            else if (option == 4)
+            {
+                this.setKnow(this.getKnow() + 1);
+                this.setDex(this.getDex() + 1);
+            }
+            else if (option == 5)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setDex(this.getDex() + 1);
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            creationOptionsEarly();
+        }
+    }
 }

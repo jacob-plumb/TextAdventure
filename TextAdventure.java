@@ -92,12 +92,12 @@ public class TextAdventure
        //CREATING THE PLAYER
        Player player = new Player(basement);
        player.setName("PLAYER");
-       player.setStr(5);
-       player.setDex(5);
-       player.setCon(5);
-       player.setKnow(5);
-       player.setWis(5);
-       player.setCha(5);
+       player.setStr(4);
+       player.setDex(4);
+       player.setCon(4);
+       player.setKnow(4);
+       player.setWis(4);
+       player.setCha(4);
        
        player.setWep(sword);
        player.setArmor(gambeson);
@@ -134,6 +134,9 @@ public class TextAdventure
        
        //ENEMY PLACEMENT       
        kitchen.setEnemy(bandit);
+       
+       //START THE GAME WITH PLAYER CREATION
+       player.playerCreation();
        
        //WHILE loop for game running condition
        while (gameLoop == true)
