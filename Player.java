@@ -111,6 +111,7 @@ public class Player extends Character
     {
         creationOptionsFather();
         creationOptionsEarly();
+        creationOptionsAdult();
     }
     
     private void creationOptionsFather()
@@ -175,6 +176,102 @@ public class Player extends Character
         System.out.println("2. Apprentice");
         System.out.println("3. Assistant");
         System.out.println("4. Street Urchin");
+        System.out.println("5. Steppe Child");
+        try {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+        
+            if (option == 1)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setCha(this.getCha() + 1);
+            }
+            else if (option == 2)
+            {
+               this.setKnow(this.getKnow() + 1);
+               this.setStr(this.getStr() + 1);
+            }
+            else if(option == 3)
+            {
+                this.setCha(this.getCha() + 1);
+                this.setKnow(this.getKnow() + 1);
+            }
+            else if (option == 4)
+            {
+                this.setKnow(this.getKnow() + 1);
+                this.setDex(this.getDex() + 1);
+            }
+            else if (option == 5)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setDex(this.getDex() + 1);
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            creationOptionsEarly();
+        }
+    }
+    
+    private void creationOptionsAdult()
+    {
+        System.out.println("During your adulthood, you were a: ");
+        System.out.println("1. Squire");
+        System.out.println("2. Troubador");
+        System.out.println("3. Student");
+        System.out.println("4. Peddler");
+        System.out.println("5. Smith");
+        System.out.println("6. Poacher");
+        try {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+        
+            if (option == 1)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setDex(this.getDex() + 1);
+            }
+            else if (option == 2)
+            {
+                this.setKnow(this.getKnow() + 1);
+                this.setCha(this.getCha() + 1);
+            }
+            else if(option == 3)
+            {
+                this.setDex(this.getDex() + 1);
+                this.setCha(this.getCha() + 1);
+            }
+            else if (option == 4)
+            {
+                this.setKnow(this.getKnow() + 1);
+                this.setWis(this.getWis() + 1);
+            }
+            else if (option == 5)
+            {
+                this.setStr(this.getStr() + 1);
+                this.setCon(this.getCon() + 1);
+            }
+            else if (option == 6)
+            {
+                this.setDex(this.getDex() + 1);
+                this.setWis(this.getWis() + 1);
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            creationOptionsEarly();
+        }
+    }
+    
+    private void creationOptionsReason()
+    {
+        System.out.println("Your reason for adventuring is: ");
+        System.out.println("1. Page");
+        System.out.println("2. The loss of a loved one.");
+        System.out.println("3. Unquenchable wanderlust");
+        System.out.println("4. Being forced from your home");
         System.out.println("5. Steppe Child");
         try {
             String input = scanner.nextLine();

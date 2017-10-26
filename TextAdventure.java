@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class TextAdventure
 {
    public static void main(String[] args){
@@ -70,21 +71,20 @@ public class TextAdventure
        nursery.setWest(hallway);
        
        //CREATING ITEMS
-       Weapon sword = new Weapon();
-       sword.setName("SWORD");
-       sword.setDesc("This is a sword.");
-       sword.setValue(5);
-       sword.setDamage(1, 10);
+       
+       WeaponList weaponList = new WeaponList();
        
        Armor gambeson = new Armor();
        gambeson.setName("GAMBESON");
        gambeson.setDesc("This is a gambeson.");
+       gambeson.setID(201);
        gambeson.setValue(10);
        gambeson.setArmorValue(15);
        
        Armor clothes = new Armor();
        clothes.setName("CLOTHES");
        clothes.setDesc("These are normal clothes.");
+       clothes.setID(202);
        clothes.setValue(1);
        clothes.setArmorValue(5);
        
@@ -99,7 +99,7 @@ public class TextAdventure
        player.setWis(4);
        player.setCha(4);
        
-       player.setWep(sword);
+       player.setWep(weaponList.getItem(101));
        player.setArmor(gambeson);
        
        player.setLevel(1);
@@ -121,7 +121,7 @@ public class TextAdventure
        bandit.setWis(5);
        bandit.setCha(5);
        
-       bandit.setWep(sword);
+       bandit.setWep(weaponList.getItem(102));
        bandit.setArmor(clothes);
        
        bandit.setLevel(1);

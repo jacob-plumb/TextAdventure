@@ -3,6 +3,7 @@ public abstract class Item
     private String name;
     private String desc;
     private int value;
+    private int id = 0;
     
     public String getName()
     {
@@ -32,5 +33,15 @@ public abstract class Item
     public void setValue(int value)
     {
         this.value = value;
+    }
+    
+    public int getID()
+    {
+        return id;
+    }
+    
+    public void setID(int id)
+    {
+        this.id = id;
     }
 }

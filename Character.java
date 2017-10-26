@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public abstract class Character
 {
     //ATTRIBUTES
@@ -204,6 +205,8 @@ public abstract class Character
         System.out.println("Knowledge: " + know);
         System.out.println("Wisdom: " + wis);
         System.out.println("Charisma: " + cha);
+        System.out.println("Weapon: " + currentWep.getName());
+        System.out.println("Armor: " + currentArmor.getName());
     }
     
     public void printCombatStats()
