@@ -218,7 +218,7 @@ public abstract class Character
     public void attack(Character attacker, Character target)
     {
         int toHit = (int)((Math.random() * 20) + 1) + attacker.getDex();
-        int targetDodge = (int)((((Math.random() * 20) + 1) + target.getDex()) / 2);
+        int targetDodge = (int)((((Math.random() * 20) + 1) / 2) + target.getDex());
         
         if (toHit > targetDodge)
         {

@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 public class WeaponList
 {
-    private ArrayList<Weapon> list = new ArrayList<Weapon>();
+    private ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
+    
+    //USE HASHMAP, SET BY KEY(int) AND VALUE(weapon)
     
     WeaponList()
     {
@@ -11,29 +13,29 @@ public class WeaponList
        sword.setID(101);
        sword.setValue(5);
        sword.setDamage(1, 8);
-       list.add(sword);
+       weaponList.add(sword);
        
        Weapon rustySword = new Weapon();
-       sword.setName("RUSTY SWORD");
-       sword.setDesc("This is a rusty sword.");
-       sword.setID(102);
-       sword.setValue(1);
-       sword.setDamage(1, 5);
-       list.add(rustySword);
+       rustySword.setName("RUSTY SWORD");
+       rustySword.setDesc("This is a rusty sword.");
+       rustySword.setID(102);
+       rustySword.setValue(1);
+       rustySword.setDamage(1, 5);
+       weaponList.add(rustySword);
        
        Weapon betterSword = new Weapon();
-       sword.setName("BETTER SWORD");
-       sword.setDesc("This is a better sword.");
-       sword.setID(103);
-       sword.setValue(5);
-       sword.setDamage(1, 10);
-       list.add(betterSword);
+       betterSword.setName("BETTER SWORD");
+       betterSword.setDesc("This is a better sword.");
+       betterSword.setID(103);
+       betterSword.setValue(5);
+       betterSword.setDamage(1, 10);
+       weaponList.add(betterSword);;
       
     }
     
     public Weapon getItem(int ID)
     {
-        for (Weapon w : list)
+        for (Weapon w : weaponList)
         {
             if (w.getID() == ID)
             {

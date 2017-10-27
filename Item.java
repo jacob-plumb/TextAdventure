@@ -3,7 +3,7 @@ public abstract class Item
     private String name;
     private String desc;
     private int value;
-    private int id = 0;
+    private int id;
     
     public String getName()
     {

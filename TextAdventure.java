@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TextAdventure
 {
    public static void main(String[] args){
-       //GAME LOOP
+       //GAME LOOP CHANGED TO FALSE FOR TESTING
        boolean gameLoop = true;
        
        Scanner scanner = new Scanner(System.in);
