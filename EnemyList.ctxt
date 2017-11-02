@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=
-comment0.target=WeaponList()
+comment0.target=EnemyList()
 comment1.params=ID
-comment1.target=Weapon\ getItem(int)
+comment1.target=Enemy\ getEnemy(int)
 numComments=2

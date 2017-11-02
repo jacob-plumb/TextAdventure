@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class TextAdventure
 {
    public static void main(String[] args){
-       //GAME LOOP CHANGED TO FALSE FOR TESTING
        boolean gameLoop = true;
        
        Scanner scanner = new Scanner(System.in);
@@ -73,20 +72,9 @@ public class TextAdventure
        //CREATING ITEMS
        
        WeaponList weaponList = new WeaponList();
+       ArmorList armorList = new ArmorList();
        
-       Armor gambeson = new Armor();
-       gambeson.setName("GAMBESON");
-       gambeson.setDesc("This is a gambeson.");
-       gambeson.setID(201);
-       gambeson.setValue(10);
-       gambeson.setArmorValue(15);
-       
-       Armor clothes = new Armor();
-       clothes.setName("CLOTHES");
-       clothes.setDesc("These are normal clothes.");
-       clothes.setID(202);
-       clothes.setValue(1);
-       clothes.setArmorValue(5);
+       EnemyList enemyList = new EnemyList();
        
        
        //CREATING THE PLAYER
@@ -100,7 +88,7 @@ public class TextAdventure
        player.setCha(4);
        
        player.setWep(weaponList.getItem(101));
-       player.setArmor(gambeson);
+       player.setArmor(armorList.getItem(201));
        
        player.setLevel(1);
        player.setGold(0);
@@ -110,30 +98,9 @@ public class TextAdventure
        player.setTempHP(player.getMaxHP());
        player.setTempMP(player.getMaxMP());
        
-       //CREATING TEST ENEMY
-       
-       Enemy bandit = new Enemy();
-       bandit.setName("BANDIT");
-       bandit.setStr(5);
-       bandit.setDex(5);
-       bandit.setCon(5);
-       bandit.setKnow(5);
-       bandit.setWis(5);
-       bandit.setCha(5);
-       
-       bandit.setWep(weaponList.getItem(102));
-       bandit.setArmor(clothes);
-       
-       bandit.setLevel(1);
-       bandit.setGold(5);
-       bandit.setXP(25);
-       bandit.setMaxHP((bandit.getCon() * 5) + bandit.getArmor().getArmorValue());
-       bandit.setMaxMP(bandit.getKnow() * 5);
-       bandit.setTempHP(bandit.getMaxHP());
-       bandit.setTempMP(bandit.getMaxMP());
        
        //ENEMY PLACEMENT       
-       kitchen.setEnemy(bandit);
+       kitchen.setEnemy(enemyList.getEnemy(301));
        
        //START THE GAME WITH PLAYER CREATION
        player.playerCreation();

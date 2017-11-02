@@ -3,34 +3,36 @@ import java.lang.Math;
 public class Player extends Character
 {
     private Room currentRoom;
-    
+
     Scanner scanner = new Scanner(System.in);
-    
+
+    WeaponList weaponList = new WeaponList();
+
     public Player(Room currentRoom)
     {
         this.currentRoom = currentRoom;
     }
-    
+
     public String getRoomName()
     {
         return currentRoom.getName();
     }
-    
+
     public String getRoomDesc()
     {
         return currentRoom.getDesc();
     }
-    
+
     public Room getRoom()
     {
         return currentRoom;
     }
-    
+
     public void printStats(){
         System.out.println("PLAYER STATS");
         super.printStats();
     }
-    
+
     public void playerMove(Player player, Room newRoom)
     {
         if(newRoom != null)
@@ -49,7 +51,7 @@ public class Player extends Character
             }
         }
     }
-    
+
     public boolean playerCombat(Player player, Enemy enemy)
     {
         while (player.getTempHP() > 0 && enemy.getTempHP() > 0)
@@ -74,13 +76,13 @@ public class Player extends Character
         else
         {
             System.out.println("" + player.getName() + " wins, gaining " + enemy.getXP() 
-            + " XP and " + enemy.getGold() + " gold!");
+                + " XP and " + enemy.getGold() + " gold!");
             player.setXP(player.getXP() + enemy.getXP());
             player.setGold(player.getGold() + enemy.getGold());
             return true;
         }
     }
-    
+
     public void playerTurn(Player player, Enemy enemy)
     {
         System.out.println("1. Attack");
@@ -88,7 +90,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-        
+
             if (option == 1)
             {
                 player.attack(player, enemy);
@@ -106,14 +108,14 @@ public class Player extends Character
             playerTurn(player, enemy);
         }
     }
-    
+
     public void playerCreation()
     {
         creationOptionsFather();
         creationOptionsEarly();
         creationOptionsAdult();
     }
-    
+
     private void creationOptionsFather()
     {
         System.out.println("Your father was a: ");
@@ -125,7 +127,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-        
+
             if (option == 1)
             {
                 this.setCon(this.getCon() - 1);
@@ -135,10 +137,10 @@ public class Player extends Character
             }
             else if (option == 2)
             {
-               this.setKnow(this.getKnow() - 1);
-               this.setStr(this.getStr() + 1);
-               this.setCon(this.getCon() + 1);
-               this.setGold(this.getGold() + 10);
+                this.setKnow(this.getKnow() - 1);
+                this.setStr(this.getStr() + 1);
+                this.setCon(this.getCon() + 1);
+                this.setGold(this.getGold() + 10);
             }
             else if(option == 3)
             {
@@ -168,7 +170,7 @@ public class Player extends Character
             creationOptionsFather();
         }
     }
-    
+
     private void creationOptionsEarly()
     {
         System.out.println("During your childhood, you were a: ");
@@ -180,7 +182,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-        
+
             if (option == 1)
             {
                 this.setStr(this.getStr() + 1);
@@ -188,8 +190,8 @@ public class Player extends Character
             }
             else if (option == 2)
             {
-               this.setKnow(this.getKnow() + 1);
-               this.setStr(this.getStr() + 1);
+                this.setKnow(this.getKnow() + 1);
+                this.setStr(this.getStr() + 1);
             }
             else if(option == 3)
             {
@@ -213,7 +215,7 @@ public class Player extends Character
             creationOptionsEarly();
         }
     }
-    
+
     private void creationOptionsAdult()
     {
         System.out.println("During your adulthood, you were a: ");
@@ -226,7 +228,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-        
+
             if (option == 1)
             {
                 this.setStr(this.getStr() + 1);
@@ -264,7 +266,7 @@ public class Player extends Character
             creationOptionsEarly();
         }
     }
-    
+
     private void creationOptionsReason()
     {
         System.out.println("Your reason for adventuring is: ");
@@ -276,7 +278,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-        
+
             if (option == 1)
             {
                 this.setStr(this.getStr() + 1);
@@ -284,8 +286,8 @@ public class Player extends Character
             }
             else if (option == 2)
             {
-               this.setKnow(this.getKnow() + 1);
-               this.setStr(this.getStr() + 1);
+                this.setKnow(this.getKnow() + 1);
+                this.setStr(this.getStr() + 1);
             }
             else if(option == 3)
             {
