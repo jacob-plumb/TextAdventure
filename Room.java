@@ -2,17 +2,28 @@ public class Room
 {
     private String name;
     private String desc;
+    private int ID;
     
     private Enemy enemy;
     
     //Potential boolean for whether or not a room is hostile
     
-    private Room up;
-    private Room down;
-    private Room north;
-    private Room east;
-    private Room south;
-    private Room west;
+    private int up;
+    private int down;
+    private int north;
+    private int east;
+    private int south;
+    private int west;
+    
+    public int getID()
+    {
+        return ID;
+    }
+    
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
     
     public String getName()
     {
@@ -46,62 +57,62 @@ public class Room
     
     //MOVEMENT
     
-    public Room getUp()
+    public int getUp()
     {
         return up;
     }
     
-    public void setUp(Room up)
+    public void setUp(int up)
     {
         this.up = up;
     }
     
-    public Room getDown()
+    public int getDown()
     {
         return down;
     }
     
-    public void setDown(Room down)
+    public void setDown(int down)
     {
         this.down = down;
     }
     
-    public Room getNorth()
+    public int getNorth()
     {
         return north;
     }
     
-    public void setNorth(Room north)
+    public void setNorth(int north)
     {
         this.north = north;
     }
     
-    public Room getEast()
+    public int getEast()
     {
         return east;
     }
     
-    public void setEast(Room east)
+    public void setEast(int east)
     {
         this.east = east;
     }
     
-    public Room getSouth()
+    public int getSouth()
     {
         return south;
     }
     
-    public void setSouth(Room south)
+    public void setSouth(int south)
     {
         this.south = south;
     }
     
-    public Room getWest()
+    public int getWest()
     {
         return west;
     }
     
-    public void setWest(Room west)
+    public void setWest(int west)
     {
         this.west = west;
     }

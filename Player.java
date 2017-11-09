@@ -7,6 +7,7 @@ public class Player extends Character
     Scanner scanner = new Scanner(System.in);
 
     WeaponList weaponList = new WeaponList();
+    RoomList roomList = new RoomList();
 
     public Player(Room currentRoom)
     {
@@ -33,10 +34,11 @@ public class Player extends Character
         super.printStats();
     }
 
-    public void playerMove(Player player, Room newRoom)
+    public void playerMove(Player player, int newRoomID)
     {
-        if(newRoom != null)
+        if(roomList.getRoom(newRoomID) != null)
         {
+            Room newRoom = roomList.getRoom(newRoomID);
             if (newRoom.getEnemy() != null)
             {
                 if (playerCombat(player, newRoom.getEnemy()))
