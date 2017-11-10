@@ -1,6 +1,7 @@
 #BlueJ class context
-comment0.params=
-comment0.target=int\ getID()
-comment1.params=id
-comment1.target=void\ setID(int)
-numComments=2
+comment0.target=Enemy
+comment1.params=
+comment1.target=int\ getID()
+comment2.params=id
+comment2.target=void\ setID(int)
+numComments=3
