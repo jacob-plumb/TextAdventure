@@ -32,6 +32,7 @@ public class RoomList
                                 "the blacksmith, the inn, and the moderately sized marketplace.\n"+
                                 "Stone stairs lead down to the church foyer.");
         churchBellTower.setID(111);
+        churchBellTower.setEnemy(301);
         roomList.put(churchBellTower.getID(), churchBellTower);
         
         Room cMarketSquare = new Room();

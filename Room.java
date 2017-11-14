@@ -5,6 +5,7 @@ public class Room
     private int ID;
     
     private Enemy enemy;
+    private NPC npc;
     
     //Potential boolean for whether or not a room is hostile
     
@@ -14,6 +15,8 @@ public class Room
     private int east;
     private int south;
     private int west;
+    
+    EnemyList enemyList = new EnemyList();
     
     public int getID()
     {
@@ -50,9 +53,16 @@ public class Room
         return enemy;
     }
     
-    public void setEnemy(Enemy enemy)
+    public void setEnemy(int enemyID)
     {
-        this.enemy = enemy;
+        if (enemyID == 0)
+        {
+            this.enemy = null;
+        }
+        else
+        {
+            this.enemy = enemyList.getEnemy(enemyID);
+        }
     }
     
     //MOVEMENT

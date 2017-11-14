@@ -3,8 +3,6 @@ public class WeaponList
 {
     private HashMap<Integer, Weapon> weaponList = new HashMap<Integer, Weapon>();
 
-    //USE HASHMAP, SET BY KEY(int) AND VALUE(weapon)
-
     WeaponList()
     {
         Weapon sword = new Weapon();

@@ -52,27 +52,27 @@ public class TextAdventure
            
            if (action.equals("up") || action.equals("u"))
            {
-               player.playerMove(player, (player.getRoom()).getUp());
+               player.playerMove((player.getRoom()).getUp());
            }
            else if (action.equals("down") || action.equals("d"))
            {
-               player.playerMove(player, (player.getRoom()).getDown());
+               player.playerMove((player.getRoom()).getDown());
            }
            else if (action.equals("north") || action.equals("n"))
            {
-               player.playerMove(player, (player.getRoom()).getNorth());
+               player.playerMove((player.getRoom()).getNorth());
            }
            else if (action.equals("east") || action.equals("e"))
            {
-               player.playerMove(player, (player.getRoom()).getEast());
+               player.playerMove((player.getRoom()).getEast());
            }
            else if (action.equals("south") || action.equals("s"))
            {
-               player.playerMove(player, (player.getRoom()).getSouth());
+               player.playerMove((player.getRoom()).getSouth());
            }
            else if (action.equals("west") || action.equals("w"))
            {
-               player.playerMove(player, (player.getRoom()).getWest());
+               player.playerMove((player.getRoom()).getWest());
            }
            else if (action.equals("stats"))
            {

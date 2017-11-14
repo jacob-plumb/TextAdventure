@@ -7,6 +7,7 @@ public class Player extends Character
     Scanner scanner = new Scanner(System.in);
 
     WeaponList weaponList = new WeaponList();
+    ArmorList armorList = new ArmorList();
     RoomList roomList = new RoomList();
 
     public Player(Room currentRoom)
@@ -34,16 +35,17 @@ public class Player extends Character
         super.printStats();
     }
 
-    public void playerMove(Player player, int newRoomID)
+    public void playerMove(int newRoomID)
     {
         if(roomList.getRoom(newRoomID) != null)
         {
             Room newRoom = roomList.getRoom(newRoomID);
             if (newRoom.getEnemy() != null)
             {
-                if (playerCombat(player, newRoom.getEnemy()))
+                System.out.println("You encounter a " + newRoom.getEnemy().getName() + " in the " + newRoom.getName());
+                if (playerCombat(newRoom.getEnemy()))
                 {
-                    newRoom.setEnemy(null);
+                    newRoom.setEnemy(0);
                     currentRoom = newRoom;
                 }
             }
@@ -54,38 +56,38 @@ public class Player extends Character
         }
     }
 
-    public boolean playerCombat(Player player, Enemy enemy)
+    public boolean playerCombat(Enemy enemy)
     {
-        while (player.getTempHP() > 0 && enemy.getTempHP() > 0)
+        while (this.getTempHP() > 0 && enemy.getTempHP() > 0)
         {
             System.out.println();
             System.out.println("You are facing a " + enemy.getName());
-            player.printCombatStats();
+            this.printCombatStats();
             enemy.printCombatStats();
-            player.playerTurn(player, enemy);
+            this.playerTurn(enemy);
             if (enemy.getTempHP() > 0)
             {
-                enemy.attack(enemy, player);
+                enemy.attack(enemy, this);
             }
         }
-        if (player.getTempHP() <= 0)
+        if (this.getTempHP() <= 0)
         {
-            System.out.println("" + player.getName() + " loses!");
-            player.setGold(0);
-            player.setTempHP(player.getMaxHP() / 2);
+            System.out.println("" + this.getName() + " loses!");
+            this.setGold(0);
+            this.setTempHP(this.getMaxHP() / 2);
             return false;
         }
         else
         {
-            System.out.println("" + player.getName() + " wins, gaining " + enemy.getXP() 
+            System.out.println("" + this.getName() + " wins, gaining " + enemy.getXP() 
                 + " XP and " + enemy.getGold() + " gold!");
-            player.setXP(player.getXP() + enemy.getXP());
-            player.setGold(player.getGold() + enemy.getGold());
+            this.setXP(this.getXP() + enemy.getXP());
+            this.setGold(this.getGold() + enemy.getGold());
             return true;
         }
     }
 
-    public void playerTurn(Player player, Enemy enemy)
+    public void playerTurn(Enemy enemy)
     {
         System.out.println("1. Attack");
         System.out.println("2. Die");
@@ -95,19 +97,19 @@ public class Player extends Character
 
             if (option == 1)
             {
-                player.attack(player, enemy);
+                this.attack(this, enemy);
             }
             else
             {
-                player.setTempHP(0);
+                this.setTempHP(0);
             }
         }
         catch(NumberFormatException e)
         {
             System.out.println("INVALID INPUT");
-            player.printCombatStats();
+            this.printCombatStats();
             enemy.printCombatStats();
-            playerTurn(player, enemy);
+            playerTurn(enemy);
         }
     }
 
