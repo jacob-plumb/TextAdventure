@@ -1,5 +1,7 @@
 public class Dialogue
 {
+    DialogueList dialogueList = new DialogueList();
+    
     private String initStatement;
     private int responses;
     
