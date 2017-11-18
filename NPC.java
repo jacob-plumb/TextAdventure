@@ -1,5 +1,28 @@
 public class NPC extends Character
 {
-    private int ID;
-    //NPCS have a Dialogue object
+    DialogueList dialogueList = new DialogueList();
+    
+    private int id;
+    
+    private Dialogue dialogue;
+    
+    public int getID()
+    {
+        return id;
+    }
+    
+    public void setID(int id)
+    {
+        this.id = id;
+    }
+    
+    public Dialogue getDialogue()
+    {
+        return dialogue;
+    }
+    
+    public void setDialogue(Dialogue dialogue)
+    {
+        this.dialogue = dialogue;
+    }
 }

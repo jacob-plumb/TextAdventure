@@ -1,7 +1,5 @@
 public class Dialogue
 {
-    DialogueList dialogueList = new DialogueList();
-    
     private String initStatement;
     private int responses;
     
@@ -10,14 +8,12 @@ public class Dialogue
     private String resp3;
     private String resp4;
     
-    private String contra1;
-    private String contra2;
-    private String contra3;
-    private String contra4;
+    private Dialogue contra1;
+    private Dialogue contra2;
+    private Dialogue contra3;
+    private Dialogue contra4;
     
     private int id;
-    
-    private boolean exit;
     //Dialgues objects could have dialogue objects inside of them
     //Each responses leads to another connected dialogue, similar to 
     
@@ -83,42 +79,42 @@ public class Dialogue
         resp4 = resp;
     }
     
-    public String contra1()
+    public Dialogue contra1()
     {
         return contra1;
     }
     
-    public void setContra1(String contra)
+    public void setContra1(Dialogue contra)
     {
         contra1 = contra;
     }
     
-    public String contra2()
+    public Dialogue contra2()
     {
         return contra2;
     }
     
-    public void setContra2(String contra)
+    public void setContra2(Dialogue contra)
     {
         contra2 = contra;
     }
     
-    public String contra3()
+    public Dialogue contra3()
     {
         return contra3;
     }
     
-    public void setContra3(String contra)
+    public void setContra3(Dialogue contra)
     {
         contra3 = contra;
     }
     
-    public String contra4()
+    public Dialogue contra4()
     {
         return contra4;
     }
     
-    public void setContra4(String contra)
+    public void setContra4(Dialogue contra)
     {
         contra4 = contra;
     }
@@ -131,15 +127,5 @@ public class Dialogue
     public void setID(int id)
     {
         this.id = id;
-    }
-    
-    public boolean getExit()
-    {
-        return exit;
-    }
-    
-    public void setExit(boolean exit)
-    {
-        this.exit = exit;
     }
 }

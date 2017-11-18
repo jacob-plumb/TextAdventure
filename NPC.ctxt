@@ -1,2 +1,11 @@
 #BlueJ class context
-numComments=0
+comment0.target=NPC
+comment1.params=
+comment1.target=int\ getID()
+comment2.params=id
+comment2.target=void\ setID(int)
+comment3.params=
+comment3.target=Dialogue\ getDialogue()
+comment4.params=dialogue
+comment4.target=void\ setDialogue(Dialogue)
+numComments=5

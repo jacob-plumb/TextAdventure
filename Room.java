@@ -65,6 +65,16 @@ public class Room
         }
     }
     
+    public NPC getNPC()
+    {
+        return npc;
+    }
+    
+    public void setNPC(NPC npc)
+    {
+        this.npc = npc;
+    }
+    
     //MOVEMENT
     
     public int getUp()
