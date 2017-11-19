@@ -78,6 +78,10 @@ public class TextAdventure
            {
                player.printStats();
            }
+           else if (action.equals("talk"))
+           {
+               player.initDialogue(player.getRoom().getNPC());
+           }
            else if (action.equals("exit"))
            {
                gameLoop = false;

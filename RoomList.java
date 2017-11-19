@@ -3,10 +3,11 @@ public class RoomList
 {
     private HashMap<Integer, Room> roomList = new HashMap<Integer, Room>();
     
+    EnemyList enemyList = new EnemyList();
+    NPCList npcList = new NPCList();
+    
     RoomList()
     {
-        EnemyList enemyList = new EnemyList();
-        
         Room churchFoyer = new Room();
         churchFoyer.setName("CHURCH FOYER");
         churchFoyer.setDesc("You stand in the foyer of the church. The door to the main altar lies\n"+
@@ -23,6 +24,7 @@ public class RoomList
                             "to the west leads to the foyer, and a stone stairway leads down into\n"+
                             "the crypts.");
         churchAltar.setID(102);
+        churchAltar.setNPC(npcList.getNPC(101));
         roomList.put(churchAltar.getID(), churchAltar);
         
         Room churchBellTower = new Room();

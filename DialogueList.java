@@ -5,33 +5,41 @@ public class DialogueList
     
     DialogueList()
     {
-        Dialogue test_init = new Dialogue();
-        test_init.setResponses(3);
-        test_init.setInitStatement("Test initial statement");
-        test_init.setResp1("First player response");
-        test_init.setResp2("Second player response");
-        test_init.setResp3("Third player response");
-        test_init.setResp4("Fourth player response [exit]");
+        Dialogue testInit = new Dialogue();
+        testInit.setResponses(3);
+        testInit.setInitStatement("'Test initial statement'");
+        testInit.setResp1("'First player response'");
+        testInit.setResp2("'Second player response'");
+        testInit.setResp3("'Third player response'");
+        testInit.setResp4("'Fourth player response' [Exit]");
+        testInit.setID(1001);
+        dialogueList.put(testInit.getID(), testInit);
         
-        Dialogue test_resp1 = new Dialogue();
-        test_resp1.setResponses(1);
-        test_resp1.setInitStatement("Test statement responding to player choice 1.");
-        test_resp1.setResp1("Goodbye! [Exit]");
+        Dialogue testResp1 = new Dialogue();
+        testResp1.setResponses(1);
+        testResp1.setInitStatement("Test statement responding to player choice 1.");
+        testResp1.setResp1("Goodbye! [Exit]");
+        testResp1.setID(1002);
+        dialogueList.put(testResp1.getID(), testResp1);
         
-        Dialogue test_resp2 = new Dialogue();
-        test_resp2.setResponses(1);
-        test_resp2.setInitStatement("Test statement responding to player choice 2.");
-        test_resp2.setResp1("Farewell! [Exit]");
+        Dialogue testResp2 = new Dialogue();
+        testResp2.setResponses(1);
+        testResp2.setInitStatement("Test statement responding to player choice 2.");
+        testResp2.setResp1("Farewell! [Exit]");
+        testResp2.setID(1003);
+        dialogueList.put(testResp2.getID(), testResp2);
         
-        Dialogue test_resp3 = new Dialogue();
-        test_resp3.setResponses(1);
-        test_resp3.setInitStatement("Test statement responding to player choice 3.");
-        test_resp3.setResp1("Bye! [Exit]");
+        Dialogue testResp3 = new Dialogue();
+        testResp3.setResponses(1);
+        testResp3.setInitStatement("Test statement responding to player choice 3.");
+        testResp3.setResp1("Bye! [Exit]");
+        testResp3.setID(1004);
+        dialogueList.put(testResp3.getID(), testResp3);
         
         //SETTING CONTRAS
-        test_init.setContra1(test_resp1);
-        test_init.setContra2(test_resp2);
-        test_init.setContra3(test_resp3);
+        testInit.setContra1(testResp1);
+        testInit.setContra2(testResp2);
+        testInit.setContra3(testResp3);
     }
     
     public Dialogue getDialogue(int ID)

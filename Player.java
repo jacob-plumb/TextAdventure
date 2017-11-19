@@ -112,6 +112,16 @@ public class Player extends Character
             playerTurn(enemy);
         }
     }
+    
+    public void initDialogue(NPC npc)
+    {
+        if(currentRoom.getNPC() != null)
+        {
+            System.out.println();
+            System.out.println("" + npc.getName() + ":");
+            System.out.println("" + npc.getDialogue().getInitStatement());
+        }
+    }
 
     public void playerCreation()
     {

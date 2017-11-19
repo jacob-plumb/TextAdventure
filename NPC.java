@@ -1,6 +1,9 @@
+import java.util.Scanner;
 public class NPC extends Character
 {
     DialogueList dialogueList = new DialogueList();
+    
+    Scanner scanner = new Scanner(System.in);
     
     private int id;
     
