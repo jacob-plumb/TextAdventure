@@ -1,23 +1,21 @@
 public class Dialogue
 {
     private String initStatement;
-    private int responses;
     
-    private String resp1;
-    private String resp2;
-    private String resp3;
-    private String resp4;
-    
-    private Dialogue contra1;
-    private Dialogue contra2;
-    private Dialogue contra3;
-    private Dialogue contra4;
+    private String[] response;
+    private Dialogue[] contra;
     
     private int id;
     //Dialgues objects could have dialogue objects inside of them
-    //Each responses leads to another connected dialogue, similar to 
+    //Each response leads to another connected dialogue, similar to 
     
     //import NPC list, public initDialogue(NPC.getDialogue)
+    
+    public Dialogue(int numOfResponses)
+    {
+        response = new String[numOfResponses];
+        contra = new Dialogue[numOfResponses];
+    }
     
     public String getInitStatement()
     {
@@ -29,94 +27,24 @@ public class Dialogue
         this.initStatement = initStatement;
     }
     
-    public int getResponses()
+    public String getResponse(int index)
     {
-        return responses;
+        return response[index];
     }
     
-    public void setResponses(int responses)
+    public void setResponse(int index, String response)
     {
-        this.responses = responses;
+        this.response[index] = response;
     }
     
-    public String getResp1()
+    public Dialogue getContra(int index)
     {
-        return resp1;
+        return contra[index];
     }
     
-    public void setResp1(String resp)
+    public void setContra(int index, Dialogue contra)
     {
-        resp1= resp;
-    }
-    
-    public String getResp2()
-    {
-        return resp2;
-    }
-    
-    public void setResp2(String resp)
-    {
-        resp2 = resp;
-    }
-    
-    public String getResp3()
-    {
-        return resp3;
-    }
-    
-    public void setResp3(String resp)
-    {
-        resp3 = resp;
-    }
-    
-    public String getResp4()
-    {
-        return resp4;
-    }
-    
-    public void setResp4(String resp)
-    {
-        resp4 = resp;
-    }
-    
-    public Dialogue contra1()
-    {
-        return contra1;
-    }
-    
-    public void setContra1(Dialogue contra)
-    {
-        contra1 = contra;
-    }
-    
-    public Dialogue contra2()
-    {
-        return contra2;
-    }
-    
-    public void setContra2(Dialogue contra)
-    {
-        contra2 = contra;
-    }
-    
-    public Dialogue contra3()
-    {
-        return contra3;
-    }
-    
-    public void setContra3(Dialogue contra)
-    {
-        contra3 = contra;
-    }
-    
-    public Dialogue contra4()
-    {
-        return contra4;
-    }
-    
-    public void setContra4(Dialogue contra)
-    {
-        contra4 = contra;
+        this.contra[index] = contra;
     }
     
     public int getID()
