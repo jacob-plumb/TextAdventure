@@ -91,7 +91,8 @@ public class Player extends Character
     {
         System.out.println("1. Attack");
         System.out.println("2. Die");
-        try {
+        try 
+        {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
 
@@ -112,14 +113,40 @@ public class Player extends Character
             playerTurn(enemy);
         }
     }
-    
+
     public void initDialogue(NPC npc)
     {
-        if(currentRoom.getNPC() != null)
+        boolean talking = true;
+        System.out.println();
+        System.out.println("" + npc.getName() + ":");
+        System.out.println("" + npc.getDialogue().getInitStatement());
+        while (talking)
         {
-            System.out.println();
-            System.out.println("" + npc.getName() + ":");
-            System.out.println("" + npc.getDialogue().getInitStatement());
+            for (int i = 0; i < npc.getDialogue().getResponseArray().length; i++)
+            {
+                System.out.println("" + (i+1) + ". " + npc.getDialogue().getResponse(i));
+            }
+            try
+            {
+                String input = scanner.nextLine();
+                int option = Integer.parseInt(input);
+                option--;
+                
+                String response = npc.getDialogue().getResponse(option);
+                
+                if (response.contains("[Exit]"))
+                {
+                    
+                }
+            }
+            catch(NumberFormatException e)
+            {
+                System.out.println("UNABLE TO PARSE INPUT");
+            }
+            catch(NullPointerException e)
+            {
+                System.out.println("INPUT OUT OF BOUNDS");
+            }
         }
     }
 

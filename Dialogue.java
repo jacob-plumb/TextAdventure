@@ -17,6 +17,16 @@ public class Dialogue
         contra = new Dialogue[numOfResponses];
     }
     
+    public String[] getResponseArray()
+    {
+        return response;
+    }
+    
+    public Dialogue[] getContraArray()
+    {
+        return contra;
+    }
+    
     public String getInitStatement()
     {
         return initStatement;
