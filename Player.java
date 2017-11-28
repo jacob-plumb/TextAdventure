@@ -117,35 +117,38 @@ public class Player extends Character
     public void initDialogue(NPC npc)
     {
         boolean talking = true;
-        System.out.println();
-        System.out.println("" + npc.getName() + ":");
-        System.out.println("" + npc.getDialogue().getInitStatement());
+        Dialogue currentDialogue = npc.getDialogue();
         while (talking)
         {
-            for (int i = 0; i < npc.getDialogue().getResponseArray().length; i++)
+            System.out.println("");
+            System.out.println("" + npc.getName() + ":");
+            System.out.println("" + currentDialogue.getInitStatement());
+            for (int i = 0; i < currentDialogue.getResponseArray().length; i++)
             {
-                System.out.println("" + (i+1) + ". " + npc.getDialogue().getResponse(i));
+                System.out.println("" + currentDialogue.getResponse(i));
             }
             try
             {
                 String input = scanner.nextLine();
                 int option = Integer.parseInt(input);
-                option--;
-                
-                String response = npc.getDialogue().getResponse(option);
-                
-                if (response.contains("[Exit]"))
+                if(option > currentDialogue.getResponseArray().length)
                 {
-                    
+                    throw new Exception();
+                }
+
+                String playerResponse = currentDialogue.getResponse(option);
+                currentDialogue = currentDialogue.getContra(option);
+                if(playerResponse.contains("[Exit]"))
+                {
+                    System.out.println("");
+                    System.out.println("" + npc.getName() + ":");
+                    System.out.println("" + currentDialogue.getInitStatement());
+                    talking = false;
                 }
             }
-            catch(NumberFormatException e)
+            catch(Exception e)
             {
-                System.out.println("UNABLE TO PARSE INPUT");
-            }
-            catch(NullPointerException e)
-            {
-                System.out.println("INPUT OUT OF BOUNDS");
+                System.out.println("INVALID INPUT");
             }
         }
     }
