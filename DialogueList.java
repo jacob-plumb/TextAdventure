@@ -10,6 +10,8 @@ public class DialogueList
         testInit.setResponse(0, "Test player response 1");
         testInit.setResponse(1, "Test player response 2");
         testInit.setResponse(2, "Test player response 3 [Exit]");
+        testInit.setID(1001);
+        dialogueList.put(testInit.getID(), testInit);
         
         Dialogue testContra1 = new Dialogue(1);
         testContra1.setInitStatement("Test contra to response 1");
@@ -21,6 +23,10 @@ public class DialogueList
         
         Dialogue testContra3 = new Dialogue(0);
         testContra3.setInitStatement("Test contra to response 3");
+        
+        testInit.setContra(0, testContra1);
+        testInit.setContra(1, testContra2);
+        testInit.setContra(2, testContra3);
         
     }
     

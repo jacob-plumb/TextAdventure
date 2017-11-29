@@ -125,7 +125,7 @@ public class Player extends Character
             System.out.println("" + currentDialogue.getInitStatement());
             for (int i = 0; i < currentDialogue.getResponseArray().length; i++)
             {
-                System.out.println("" + currentDialogue.getResponse(i));
+                System.out.println("" + (i+1) + ". " + currentDialogue.getResponse(i));
             }
             try
             {
@@ -135,15 +135,20 @@ public class Player extends Character
                 {
                     throw new Exception();
                 }
-
+                option--;
                 String playerResponse = currentDialogue.getResponse(option);
-                currentDialogue = currentDialogue.getContra(option);
+
                 if(playerResponse.contains("[Exit]"))
                 {
                     System.out.println("");
                     System.out.println("" + npc.getName() + ":");
-                    System.out.println("" + currentDialogue.getInitStatement());
+                    System.out.println("" + currentDialogue.getExitStatement());
                     talking = false;
+                }
+                else
+                {
+                    Dialogue newDialogue = currentDialogue.getContra(option);
+                    currentDialogue = newDialogue;;
                 }
             }
             catch(Exception e)
@@ -171,6 +176,11 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
+            
+            if (option < 1 || option > 5)
+            {
+                throw new Exception();
+            }
 
             if (option == 1)
             {
@@ -208,7 +218,7 @@ public class Player extends Character
                 this.setGold(this.getGold() + 5);
             }
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
             System.out.println("INVALID INPUT");
             creationOptionsFather();
@@ -226,6 +236,11 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
+            
+            if (option < 1 || option > 5)
+            {
+                throw new Exception();
+            }
 
             if (option == 1)
             {
@@ -253,7 +268,7 @@ public class Player extends Character
                 this.setDex(this.getDex() + 1);
             }
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
             System.out.println("INVALID INPUT");
             creationOptionsEarly();
@@ -272,6 +287,11 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
+            
+            if (option < 1 || option > 5)
+            {
+                throw new Exception();
+            }
 
             if (option == 1)
             {
@@ -304,7 +324,7 @@ public class Player extends Character
                 this.setWis(this.getWis() + 1);
             }
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
             System.out.println("INVALID INPUT");
             creationOptionsEarly();
@@ -322,6 +342,11 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
+            
+            if (option < 1 || option > 5)
+            {
+                throw new Exception();
+            }
 
             if (option == 1)
             {
@@ -349,7 +374,7 @@ public class Player extends Character
                 this.setDex(this.getDex() + 1);
             }
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
             System.out.println("INVALID INPUT");
             creationOptionsEarly();

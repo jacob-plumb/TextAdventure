@@ -1,15 +1,12 @@
 public class Dialogue
 {
     private String initStatement;
+    private String exitStatement = "Goodbye!";
     
     private String[] response;
     private Dialogue[] contra;
     
     private int id;
-    //Dialgues objects could have dialogue objects inside of them
-    //Each response leads to another connected dialogue, similar to 
-    
-    //import NPC list, public initDialogue(NPC.getDialogue)
     
     public Dialogue(int numOfResponses)
     {
@@ -35,6 +32,16 @@ public class Dialogue
     public void setInitStatement(String initStatement)
     {
         this.initStatement = initStatement;
+    }
+    
+    public String getExitStatement()
+    {
+        return exitStatement;
+    }
+    
+    public void setExitStatement(String exitStatement)
+    {
+        this.exitStatement = exitStatement;
     }
     
     public String getResponse(int index)
