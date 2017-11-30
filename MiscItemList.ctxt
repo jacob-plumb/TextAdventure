@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=MiscItemList
+comment1.params=
+comment1.target=MiscItemList()
+comment2.params=ID
+comment2.target=MiscItem\ getItem(int)
+numComments=3

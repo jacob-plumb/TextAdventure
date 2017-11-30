@@ -26,7 +26,7 @@ public class EnemyList
        bandit.setMaxMP(bandit.getKnow() * 5);
        bandit.setTempHP(bandit.getMaxHP());
        bandit.setTempMP(bandit.getMaxMP());
-       bandit.setID(301);
+       bandit.setID(101);
        enemyList.put(bandit.getID(), bandit);
        
        //OTHER ENEMIES
