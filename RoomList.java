@@ -107,7 +107,7 @@ public class RoomList
         
         eApproach.setWest(104);
         
-        sMarketSquare.setNorth(104);
+        sMarketSquare.setNorth(103);
         sMarketSquare.setSouth(110);
         sMarketSquare.setEast(109);
         sMarketSquare.setWest(107);

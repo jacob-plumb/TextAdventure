@@ -3,6 +3,7 @@ import java.lang.Math;
 public class Player extends Character
 {
     private Room currentRoom;
+    private Inventory inventory;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -13,6 +14,16 @@ public class Player extends Character
     public Player(Room currentRoom)
     {
         this.currentRoom = currentRoom;
+    }
+    
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
+    
+    public void setInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
     }
 
     public String getRoomName()
