@@ -45,6 +45,32 @@ public class Player extends Character
         System.out.println("PLAYER STATS");
         super.printStats();
     }
+    
+    public void printMenu()
+    {
+        System.out.println("MENU");
+        System.out.println("1. Stats");
+        System.out.println("2. Inventory");
+        try 
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+
+            if (option == 1)
+            {
+                this.printStats();
+            }
+            else
+            {
+                //go to inventory
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.printMenu();
+        }
+    }
 
     public void playerMove(int newRoomID)
     {

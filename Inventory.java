@@ -47,10 +47,11 @@ public class Inventory
     
     //create getters for magic arrays and misc arrays once classes created
     
-    /*
+    /* 
+     * Once weapon inventory is selected, make new array list
      * ArrayList<Weapons> = backpack.getWeapons()
-     * show options
-     * select
+     * print all options in the array
+     * select weapon
      * end 
      */
 }
