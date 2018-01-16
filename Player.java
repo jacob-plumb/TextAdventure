@@ -51,6 +51,7 @@ public class Player extends Character
         System.out.println("MENU");
         System.out.println("1. Stats");
         System.out.println("2. Inventory");
+        System.out.println("3. Exit");
         try 
         {
             String input = scanner.nextLine();
@@ -60,9 +61,13 @@ public class Player extends Character
             {
                 this.printStats();
             }
+            else if(option == 2)
+            {
+                this.getInventory().accessMain();
+            }
             else
             {
-                //go to inventory
+                //exit
             }
         }
         catch(NumberFormatException e)
@@ -368,6 +373,7 @@ public class Player extends Character
         }
     }
 
+    //UNFINISHED
     private void creationOptionsReason()
     {
         System.out.println("Your reason for adventuring is: ");

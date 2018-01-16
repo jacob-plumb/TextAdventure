@@ -28,7 +28,6 @@ public class WeaponList
         qualitySword.setValue(5);
         qualitySword.setDamage(1, 10);
         weaponList.put(qualitySword.getID(), qualitySword);
-
     }
 
     public Weapon getItem(int ID)
