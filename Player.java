@@ -63,7 +63,7 @@ public class Player extends Character
             }
             else if(option == 2)
             {
-                this.getInventory().accessMain();
+                this.getInventory().accessMain(this);
             }
             else
             {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Inventory
 {
     private ArrayList<Item> backpack;
-    
+
     Scanner scanner = new Scanner(System.in);
     WeaponList weaponList = new WeaponList();
     ArmorList armorList = new ArmorList();
@@ -20,12 +20,17 @@ public class Inventory
     {
         backpack.add(item);
     }
-    
+
+    public void removeItem(Item item)
+    {
+        backpack.remove(item);
+    }
+
     public Item getItem(int index)
     {
         return backpack.get(index);
     }
-    
+
     public ArrayList<Weapon> getWeapons()
     {
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
@@ -38,7 +43,7 @@ public class Inventory
         }
         return weapons;
     }
-    
+
     public ArrayList<Armor> getArmors()
     {
         ArrayList<Armor> armors = new ArrayList<Armor>();
@@ -51,28 +56,28 @@ public class Inventory
         }
         return armors;
     }
-    
+
     //create getters for magic arrays and misc arrays once classes created
-    
+
     //CREATE METHODS FOR ARMOR, MAGIC, MISC
     //TEST
-    
-    public void accessMain()
+
+    public void accessMain(Player player)
     {
         System.out.println("INVENTORY");
         System.out.println("1. Weapons");
         System.out.println("2. Armor");
         System.out.println("3. Magic");
         System.out.println("4. Miscellaneous");
-        System.out.println("5. Exit");
+        System.out.println("5. Back");
         try
         {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option == 1)
             {
-                //Weapons
+                accessWeapons(player);
             }
             else if (option == 2)
             {
@@ -88,68 +93,85 @@ public class Inventory
             }
             else
             {
-                //Exit
+                player.printMenu();
             }
         }
         catch (NumberFormatException e)
         {
             System.out.println("INVALID INPUT");
-            this.accessMain();
+            this.accessMain(player);
         }
     }
-    
-    public void accessWeapons()
+
+    public void accessWeapons(Player player)
     {
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
         weapons = getWeapons();
+        System.out.println("WEAPONS");
+        int endNum = 1;
         for(int i = 0; i < weapons.size(); i++)
         {
             System.out.println("" + (i+1) + ". " + weapons.get(i).getName());
+            endNum++;
         }
+        System.out.println("" + endNum + ". Back");
         try
         {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            if(option > weapons.size() && option < 1)
+            if(option > weapons.size()+1 && option < 1)
             {
                 throw new NumberFormatException();
             }
-            option--;
-            showWeapon(weapons, option);
+            if(option == endNum)
+            {
+                this.accessMain(player);
+            }
+            else
+            {
+                option--;
+                showWeapon(weapons, option, player);
+            }
         }
         catch (NumberFormatException e)
         {
             System.out.println("INVALID INPUT");
-            this.accessWeapons();
+            this.accessWeapons(player);
         }
     }
-    
-    public void showWeapon(ArrayList<Weapon> list, int index)
+
+    public void showWeapon(ArrayList<Weapon> list, int index, Player player)
     {
         Weapon weapon = list.get(index);
         System.out.println(weapon.getName());
         System.out.println(weapon.getDesc());
         System.out.println("Damage: " + weapon.getMinDamage() + " to " + weapon.getMaxDamage());
         System.out.println("Value: " + weapon.getValue() + " gold.");
-        
+        System.out.println("1. Equip");
+        System.out.println("2. Back");
+
         try
         {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option == 1)
             {
-                //Equip
+                Weapon oldWep = player.getWep();
+                addItem(oldWep);
+                player.setWep(weaponList.getItem(weapon.getID()));
+                removeItem(weapon);
+                System.out.println("You equip your " + weapon.getName()); 
             }
             else
             {
-                //Exit
+                this.accessWeapons(player);
             }
         }
         catch (NumberFormatException e)
         {
             System.out.println("INVALID INPUT");
-            this.accessWeapons();
+            this.accessWeapons(player);
         }
     }
 }

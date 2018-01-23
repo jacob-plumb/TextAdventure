@@ -14,6 +14,7 @@ public class TextAdventure
         ArmorList armorList = new ArmorList();
         EnemyList enemyList = new EnemyList();
         RoomList roomList = new RoomList();
+        Inventory backpack = new Inventory();
 
         //CREATING THE PLAYER
         Player player = new Player(roomList.getRoom(101));
@@ -27,6 +28,9 @@ public class TextAdventure
 
         player.setWep(weaponList.getItem(101));
         player.setArmor(armorList.getItem(201));
+        player.setInventory(backpack);
+        
+        player.getInventory().addItem(weaponList.getItem(199));
 
         player.setLevel(1);
         player.setGold(0);
@@ -74,9 +78,9 @@ public class TextAdventure
             {
                 player.playerMove((player.getRoom()).getWest());
             }
-            else if (action.equals("stats"))
+            else if (action.equals("menu"))
             {
-                player.printStats();
+                player.printMenu();
             }
             else if (action.equals("talk"))
             {
