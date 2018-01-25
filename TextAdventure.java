@@ -35,7 +35,7 @@ public class TextAdventure
         player.setLevel(1);
         player.setGold(0);
         player.setXP(0);
-        player.setMaxHP((player.getCon() * 5) + player.getArmor().getArmorValue());
+        player.setMaxHP(player.getCon() * 5);
         player.setMaxMP(player.getKnow() * 5);
         player.setTempHP(player.getMaxHP());
         player.setTempMP(player.getMaxMP());

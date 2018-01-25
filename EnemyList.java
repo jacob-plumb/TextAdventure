@@ -22,7 +22,7 @@ public class EnemyList
        bandit.setLevel(1);
        bandit.setGold(5);
        bandit.setXP(25);
-       bandit.setMaxHP((bandit.getCon() * 5) + bandit.getArmor().getArmorValue());
+       bandit.setMaxHP(bandit.getCon() * 5);
        bandit.setMaxMP(bandit.getKnow() * 5);
        bandit.setTempHP(bandit.getMaxHP());
        bandit.setTempMP(bandit.getMaxMP());

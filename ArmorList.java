@@ -9,8 +9,9 @@ public class ArmorList
        gambeson.setName("GAMBESON");
        gambeson.setDesc("This is a gambeson.");
        gambeson.setID(201);
-       gambeson.setValue(10);
-       gambeson.setArmorValue(15);
+       gambeson.setValue(15);
+       gambeson.setArmorValue(3);
+       gambeson.setStrReq(0);
        armorList.put(gambeson.getID(), gambeson);
        
        Armor clothes = new Armor();
@@ -18,8 +19,41 @@ public class ArmorList
        clothes.setDesc("These are normal clothes.");
        clothes.setID(202);
        clothes.setValue(1);
-       clothes.setArmorValue(5);
+       clothes.setArmorValue(1);
+       clothes.setStrReq(0);
        armorList.put(clothes.getID(), clothes);
+       
+       Armor mailShirt = new Armor();
+       mailShirt.setName("MAIL SHIRT");
+       mailShirt.setDesc("This is a mail shirt.");
+       mailShirt.setID(211);
+       mailShirt.setValue(50);
+       mailShirt.setArmorValue(5);
+       armorList.put(mailShirt.getID(), mailShirt);
+       
+       Armor mailHauberk = new Armor();
+       mailHauberk.setName("MAIL HAUBERK");
+       mailHauberk.setDesc("This is a mail hauberk.");
+       mailHauberk.setID(212);
+       mailHauberk.setValue(60);
+       mailHauberk.setArmorValue(6);
+       armorList.put(mailHauberk.getID(), mailHauberk);
+       
+       Armor halfPlate = new Armor();
+       halfPlate.setName("HALF PLATE");
+       halfPlate.setDesc("This is the upper half of a suit of armor.");
+       halfPlate.setID(221);
+       halfPlate.setValue(100);
+       halfPlate.setArmorValue(8);
+       armorList.put(halfPlate.getID(), halfPlate);
+       
+       Armor fullPlate = new Armor();
+       fullPlate.setName("FULL PLATE");
+       fullPlate.setDesc("This is a full suit of armor.");
+       fullPlate.setID(222);
+       fullPlate.setValue(140);
+       fullPlate.setArmorValue(10);
+       armorList.put(fullPlate.getID(), fullPlate);
     }
     
     public Armor getItem(int ID)

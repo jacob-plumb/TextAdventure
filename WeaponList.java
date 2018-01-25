@@ -13,21 +13,29 @@ public class WeaponList
         sword.setDamage(1, 6);
         weaponList.put(sword.getID(), sword);
 
-        Weapon rustySword = new Weapon();
-        rustySword.setName("RUSTY SWORD");
-        rustySword.setDesc("This is a rusty sword.");
-        rustySword.setID(102);
-        rustySword.setValue(1);
-        rustySword.setDamage(1, 4);
-        weaponList.put(rustySword.getID(), rustySword);
+        Weapon dagger = new Weapon();
+        dagger.setName("DAGGER");
+        dagger.setDesc("This is a dagger.");
+        dagger.setID(102);
+        dagger.setValue(1);
+        dagger.setDamage(1, 4);
+        weaponList.put(dagger.getID(), dagger);
 
-        Weapon fineSword = new Weapon();
-        fineSword.setName("FINE SWORD");
-        fineSword.setDesc("This is a fine sword.");
-        fineSword.setID(103);
-        fineSword.setValue(5);
-        fineSword.setDamage(1, 8);
-        weaponList.put(fineSword.getID(), fineSword);
+        Weapon longsword = new Weapon();
+        longsword.setName("LONGSWORD");
+        longsword.setDesc("This is a longsword.");
+        longsword.setID(103);
+        longsword.setValue(5);
+        longsword.setDamage(1, 8);
+        weaponList.put(longsword.getID(), longsword);
+        
+        Weapon stick = new Weapon();
+        stick.setName("STICK");
+        stick.setDesc("This is a stick.");
+        stick.setID(100);
+        stick.setValue(0);
+        stick.setDamage(1, 2);
+        weaponList.put(stick.getID(), stick);
         
         Weapon dragonSlayer = new Weapon();
         dragonSlayer.setName("DRAGON SLAYER");
