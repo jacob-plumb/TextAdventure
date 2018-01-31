@@ -109,7 +109,33 @@ public class Player extends Character
             this.playerTurn(enemy);
             if (enemy.getTempHP() > 0)
             {
-                enemy.attack(enemy, this);
+                int lightProc = 10;
+                int heavyProc = 10;
+                //More likely to light attack if the player has higher dex
+                if(this.getDex() > enemy.getDex())
+                {
+                    lightProc += 5;
+                }
+                //More likely to heavy attack if the player has less strength
+                if(this.getStr() < enemy.getStr())
+                {
+                    heavyProc += 5;
+                }
+                //More likely to heavy attack if the player has less dex
+                if(this.getDex() < enemy.getDex())
+                {
+                    heavyProc += 5;
+                }
+                
+                int check = Dice.roll(1, lightProc + heavyProc);
+                if(check <= lightProc)
+                {
+                    enemy.lightAttack(enemy, this);
+                }
+                else if(check > lightProc)
+                {
+                    enemy.heavyAttack(enemy, this);
+                }
             }
         }
         if (this.getTempHP() <= 0)
@@ -131,8 +157,9 @@ public class Player extends Character
 
     public void playerTurn(Enemy enemy)
     {
-        System.out.println("1. Attack");
-        System.out.println("2. Die");
+        System.out.println("1. Light Attack");
+        System.out.println("2. Heavy Attack");
+        System.out.println("3. Die");
         try 
         {
             String input = scanner.nextLine();
@@ -140,7 +167,11 @@ public class Player extends Character
 
             if (option == 1)
             {
-                this.attack(this, enemy);
+                this.lightAttack(this, enemy);
+            }
+            else if (option == 2)
+            {
+                this.heavyAttack(this, enemy);
             }
             else
             {

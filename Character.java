@@ -214,15 +214,44 @@ public abstract class Character
         System.out.println("" + name + " Health: " + tempHP);
         System.out.println("" + name + " Magic: " + tempMP);
     }
-
-    public void attack(Character attacker, Character target)
+    
+    //Target uses half dex mod to dodge; attacker uses half str mod to damage
+    public void lightAttack(Character attacker, Character target)
     {
-        int toHit = (int)((Math.random() * 20) + 1) + attacker.getDex();
-        int targetDodge = (int)((((Math.random() * 20) + 1) / 2) + target.getDex());
+        int toHit = Dice.roll(1, 20) + attacker.getDex();
+        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
 
         if (toHit > targetDodge)
         {
-            int damage = (int)((Math.random() * attacker.getWep().getMaxDamage()) + attacker.getWep().getMinDamage() + (attacker.getStr() / 2));
+            int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + (attacker.getStr() / 2);
+            damage = damage - target.getArmor().getArmorValue();
+            if(damage < 1)
+            {
+                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+                + attacker.getWep().getName() + " but deals no damage!");
+            }
+            else
+            {
+                target.setTempHP(target.getTempHP() - damage);
+                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+                + attacker.getWep().getName() + " dealing " + damage + " damage!");
+            }
+        }
+        else
+        {
+            System.out.println("" + attacker.getName() + "'s attack misses!");
+        }
+    }
+    
+    //Target uses full dex to dodge; attacker uses full str to damage
+    public void heavyAttack(Character attacker, Character target)
+    {
+        int toHit = Dice.roll(1, 20) + attacker.getDex();
+        int targetDodge = Dice.roll(1, 20) + target.getDex();
+
+        if (toHit > targetDodge)
+        {
+            int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + attacker.getStr();
             damage = damage - target.getArmor().getArmorValue();
             if(damage < 1)
             {
