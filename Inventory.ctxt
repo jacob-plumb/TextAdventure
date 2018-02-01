@@ -2,6 +2,10 @@
 comment0.target=Inventory
 comment1.params=
 comment1.target=Inventory()
+comment10.params=player
+comment10.target=void\ accessArmors(Player)
+comment11.params=list\ index\ player
+comment11.target=void\ showArmors(java.util.ArrayList,\ int,\ Player)
 comment2.params=item
 comment2.target=void\ addItem(Item)
 comment3.params=item
@@ -18,4 +22,4 @@ comment8.params=player
 comment8.target=void\ accessWeapons(Player)
 comment9.params=list\ index\ player
 comment9.target=void\ showWeapon(java.util.ArrayList,\ int,\ Player)
-numComments=10
+numComments=12

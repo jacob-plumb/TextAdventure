@@ -29,6 +29,7 @@ public class ArmorList
        mailShirt.setID(211);
        mailShirt.setValue(50);
        mailShirt.setArmorValue(5);
+       mailShirt.setStrReq(3);
        armorList.put(mailShirt.getID(), mailShirt);
        
        Armor mailHauberk = new Armor();
@@ -37,6 +38,7 @@ public class ArmorList
        mailHauberk.setID(212);
        mailHauberk.setValue(60);
        mailHauberk.setArmorValue(6);
+       mailHauberk.setStrReq(5);
        armorList.put(mailHauberk.getID(), mailHauberk);
        
        Armor halfPlate = new Armor();
@@ -45,6 +47,7 @@ public class ArmorList
        halfPlate.setID(221);
        halfPlate.setValue(100);
        halfPlate.setArmorValue(8);
+       halfPlate.setStrReq(6);
        armorList.put(halfPlate.getID(), halfPlate);
        
        Armor fullPlate = new Armor();
@@ -53,6 +56,7 @@ public class ArmorList
        fullPlate.setID(222);
        fullPlate.setValue(140);
        fullPlate.setArmorValue(10);
+       fullPlate.setStrReq(8);
        armorList.put(fullPlate.getID(), fullPlate);
     }
     

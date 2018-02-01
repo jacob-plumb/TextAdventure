@@ -81,7 +81,7 @@ public class Inventory
             }
             else if (option == 2)
             {
-                //Armor
+                accessArmors(player);
             }
             else if (option == 3)
             {
@@ -172,6 +172,86 @@ public class Inventory
         {
             System.out.println("INVALID INPUT");
             this.accessWeapons(player);
+        }
+    }
+
+    public void accessArmors(Player player)
+    {
+        ArrayList<Armor> armors = new ArrayList<Armor>();
+        armors = getArmors();
+        System.out.println("ARMORS");
+        int endNum = 1;
+        for(int i = 0; i < armors.size(); i++)
+        {
+            System.out.println("" + (i+1) + ". " + armors.get(i).getName());
+            endNum++;
+        }
+        System.out.println("" + endNum + ". Back");
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            if(option > armors.size()+1 && option < 1)
+            {
+                throw new NumberFormatException();
+            }
+            if(option == endNum)
+            {
+                this.accessMain(player);
+            }
+            else
+            {
+                option--;
+                showArmors(armors, option, player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessArmors(player);
+        }
+    }
+
+    public void showArmors(ArrayList<Armor> list, int index, Player player)
+    {
+        Armor armor = list.get(index);
+        System.out.println(armor.getName());
+        System.out.println(armor.getDesc());
+        System.out.println("Armor Value: " + armor.getArmorValue());
+        System.out.println("Value: " + armor.getValue() + " gold.");
+        System.out.println("1. Equip");
+        System.out.println("2. Back");
+
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+
+            if (option == 1)
+            {
+                if(player.getStr() >= armor.getStrReq())
+                {
+                    Armor oldArmor = player.getArmor();
+                    addItem(oldArmor);
+                    player.setArmor(armorList.getItem(armor.getID()));
+                    removeItem(armor);
+                    System.out.println("You equip your " + armor.getName()); 
+                }
+                else
+                {
+                    System.out.println("You need " + (armor.getStrReq()-player.getStr()) + " more strength to equip that.");
+                    this.accessArmors(player);
+                }
+            }
+            else
+            {
+                this.accessArmors(player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessArmors(player);
         }
     }
 }

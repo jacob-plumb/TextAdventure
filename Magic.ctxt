@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Magic
+comment1.params=
+comment1.target=int\ getManaCost()
+comment2.params=manaCost
+comment2.target=void\ setManaCost(int)
+comment3.params=
+comment3.target=int\ getKnowReq()
+comment4.params=knowReq
+comment4.target=void\ setKnowReq(int)
+numComments=5

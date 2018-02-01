@@ -215,7 +215,7 @@ public abstract class Character
         System.out.println("" + name + " Magic: " + tempMP);
     }
     
-    //Target uses half dex mod to dodge; attacker uses half str mod to damage
+    //Target uses half dex to dodge; attacker uses half str to damage
     public void lightAttack(Character attacker, Character target)
     {
         int toHit = Dice.roll(1, 20) + attacker.getDex();
