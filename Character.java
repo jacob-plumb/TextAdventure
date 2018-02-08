@@ -270,5 +270,9 @@ public abstract class Character
             System.out.println("" + attacker.getName() + "'s attack misses!");
         }
     }
-
+    
+    public void castSpell(Character attacker, Character target)
+    {
+        
+    }
 }

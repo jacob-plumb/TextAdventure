@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=SpellList
+comment1.params=
+comment1.target=SpellList()
+comment2.params=ID
+comment2.target=Spell\ getSpell(int)
+numComments=3

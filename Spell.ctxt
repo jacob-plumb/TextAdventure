@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Spell
+comment1.params=
+comment1.target=Effect\ getEffect()
+comment2.params=effect
+comment2.target=void\ setEffect(Effect)
+comment3.params=
+comment3.target=int\ getManaCost()
+comment4.params=manaCost
+comment4.target=void\ setManaCost(int)
+comment5.params=
+comment5.target=int\ getKnowReq()
+comment6.params=knowReq
+comment6.target=void\ setKnowReq(int)
+comment7.params=
+comment7.target=int\ getDuration()
+comment8.params=duration
+comment8.target=void\ setDuration(int)
+numComments=9

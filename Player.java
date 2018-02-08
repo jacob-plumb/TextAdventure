@@ -159,7 +159,9 @@ public class Player extends Character
     {
         System.out.println("1. Light Attack");
         System.out.println("2. Heavy Attack");
-        System.out.println("3. Die");
+        System.out.println("3. Magic");
+        System.out.println("4. Consumables");
+        System.out.println("5. Flee");
         try 
         {
             String input = scanner.nextLine();
