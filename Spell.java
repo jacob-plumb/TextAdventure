@@ -3,16 +3,24 @@ public class Spell extends Item
     private int manaCost;
     private int knowReq;
     private int duration;
-    private Effect effect;
+    private int minHE;
+    private int maxHE;
+    private boolean drain = false;
     
-    public Effect getEffect()
+    public int getMinHE()
     {
-        return effect;
+        return minHE;
     }
     
-    public void setEffect(Effect effect)
+    public int getMaxHE()
     {
-        this.effect = effect;
+        return maxHE;
+    }
+    
+    public void setHE(int minHE, int maxHE)
+    {
+        this.minHE = minHE;
+        this.maxHE = maxHE;
     }
     
     public int getManaCost()
@@ -43,5 +51,15 @@ public class Spell extends Item
     public void setDuration(int duration)
     {
         this.duration = duration;
+    }
+    
+    public boolean getDrain()
+    {
+        return drain;
+    }
+    
+    public void setDrain(boolean drain)
+    {
+        this.drain = drain;
     }
 }

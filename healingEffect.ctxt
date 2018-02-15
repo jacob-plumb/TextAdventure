@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=healingEffect
-comment1.params=
-comment1.target=int\ getHeal()
-comment2.params=heal
-comment2.target=void\ setHeal(int)
-numComments=3

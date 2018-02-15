@@ -57,6 +57,19 @@ public class Inventory
         return armors;
     }
 
+    public ArrayList<Spell> getSpells()
+    {
+        ArrayList<Spell> spells = new ArrayList<Spell>();
+        for (Item item : backpack)
+        {
+            if (item instanceof Spell)
+            {
+                spells.add(0,(Spell) item);
+            }
+        }
+        return spells;
+    }
+
     //create getters for magic arrays and misc arrays once classes created
 
     //CREATE METHODS FOR ARMOR, MAGIC, MISC
@@ -85,7 +98,7 @@ public class Inventory
             }
             else if (option == 3)
             {
-                //Magic
+                accessSpells(player);
             }
             else if (option == 4)
             {
@@ -254,4 +267,66 @@ public class Inventory
             this.accessArmors(player);
         }
     }
+
+    public void accessSpells(Player player)
+    {
+        ArrayList<Spell> spells = new ArrayList<Spell>();
+        spells = getSpells();
+        System.out.println("SPELLS");
+        int endNum = 1;
+        for(int i = 0; i < spells.size(); i++)
+        {
+            System.out.println("" + (i+1) + ". " + spells.get(i).getName());
+            endNum++;
+        }
+        System.out.println("" + endNum + ". Back");
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            if(option > spells.size()+1 && option < 1)
+            {
+                throw new NumberFormatException();
+            }
+            if(option == endNum)
+            {
+                this.accessMain(player);
+            }
+            else
+            {
+                option--;
+                showSpell(spells, option, player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessSpells(player);
+        }
+    }
+
+    public void showSpell(ArrayList<Spell> list, int index, Player player)
+    {
+        Spell spell = list.get(index);
+        System.out.println(spell.getName());
+        System.out.println(spell.getDesc());
+        System.out.println("Value: " + spell.getValue() + " gold.");
+        System.out.println("Cost: " + spell.getManaCost() + " mana.");
+        System.out.println("Requirement: " + spell.getKnowReq() + " knowledge.");
+        System.out.println("1. Back");
+
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+
+            this.accessSpells(player);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessSpells(player);
+        }
+    }
 }
+

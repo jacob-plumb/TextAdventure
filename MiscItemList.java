@@ -10,6 +10,7 @@ public class MiscItemList
         necklace.setDesc("This is a necklace.");
         necklace.setValue(100);
         necklace.setID(301);
+        miscItemList.put(necklace.getID(), necklace);
     }
     
     public MiscItem getItem(int ID)

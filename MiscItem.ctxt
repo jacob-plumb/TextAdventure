@@ -1,3 +1,7 @@
 #BlueJ class context
 comment0.target=MiscItem
-numComments=1
+comment1.params=
+comment1.target=boolean\ getQuestItem()
+comment2.params=questItem
+comment2.target=void\ setQuestItem(boolean)
+numComments=3

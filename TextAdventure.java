@@ -14,6 +14,7 @@ public class TextAdventure
         ArmorList armorList = new ArmorList();
         EnemyList enemyList = new EnemyList();
         RoomList roomList = new RoomList();
+        SpellList spellList = new SpellList();
         Inventory backpack = new Inventory();
 
         //CREATING THE PLAYER
@@ -33,6 +34,8 @@ public class TextAdventure
         player.getInventory().addItem(weaponList.getItem(199));
         player.getInventory().addItem(armorList.getItem(222));
         player.getInventory().addItem(armorList.getItem(211));
+        player.getInventory().addItem(spellList.getSpell(101));
+        player.getInventory().addItem(spellList.getSpell(102));
 
         player.setLevel(1);
         player.setGold(0);
