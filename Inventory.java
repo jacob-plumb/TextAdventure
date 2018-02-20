@@ -9,7 +9,6 @@ public class Inventory
     Scanner scanner = new Scanner(System.in);
     WeaponList weaponList = new WeaponList();
     ArmorList armorList = new ArmorList();
-    //arraylist of magic
 
     public Inventory()
     {
@@ -70,6 +69,19 @@ public class Inventory
         return spells;
     }
 
+    public ArrayList<MiscItem> getMiscItems()
+    {
+        ArrayList<MiscItem> misc = new ArrayList<MiscItem>();
+        for (Item item: backpack)
+        {
+            if (item instanceof MiscItem)
+            {
+                misc.add(0,(MiscItem) item);
+            }
+        }
+        return misc;
+    }
+
     //create getters for magic arrays and misc arrays once classes created
 
     //CREATE METHODS FOR ARMOR, MAGIC, MISC
@@ -102,7 +114,7 @@ public class Inventory
             }
             else if (option == 4)
             {
-                //Miscellaneous
+                accessMiscItems(player);
             }
             else
             {
@@ -326,6 +338,64 @@ public class Inventory
         {
             System.out.println("INVALID INPUT");
             this.accessSpells(player);
+        }
+    }
+    
+    public void accessMiscItems(Player player)
+    {
+        ArrayList<MiscItem> misc = new ArrayList<MiscItem>();
+        misc = getMiscItems();
+        System.out.println("ITEMS");
+        int endNum = 1;
+        for(int i = 0; i < misc.size(); i++)
+        {
+            System.out.println("" + (i+1) + ". " + misc.get(i).getName());
+            endNum++;
+        }
+        System.out.println("" + endNum + ". Back");
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            if(option > misc.size()+1 && option < 1)
+            {
+                throw new NumberFormatException();
+            }
+            if(option == endNum)
+            {
+                this.accessMain(player);
+            }
+            else
+            {
+                option--;
+                showMiscItem(misc, option, player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessMiscItems(player);
+        }
+    }
+    
+    public void showMiscItem(ArrayList<MiscItem> list, int index, Player player)
+    {
+        MiscItem misc = list.get(index);
+        System.out.println(misc.getName());
+        System.out.println(misc.getDesc());
+        System.out.println("1. Back");
+
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+
+            this.accessMiscItems(player);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessMiscItems(player);
         }
     }
 }

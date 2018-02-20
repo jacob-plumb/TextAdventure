@@ -53,22 +53,44 @@ public class SpellList
         fireball.setDesc("This spell deals " + Math.abs(fireball.getMinHE()) + " to " + Math.abs(fireball.getMaxHE()) + " damage instantly.");
         spellList.put(fireball.getID(), fireball);
         
-        Spell minorDrainLife = new Spell();
-        minorDrainLife.setName("MINOR DRAIN LIFE");
-        minorDrainLife.setID(111);
-        minorDrainLife.setValue(100);
-        minorDrainLife.setManaCost(15);
-        minorDrainLife.setKnowReq(6);
-        minorDrainLife.setHE(-2, -8);
-        minorDrainLife.setDuration(1);
-        minorDrainLife.setDrain(true);
-        firebolt.setDesc("This spell steals " + Math.abs(minorDrainLife.getMinHE()) + " to " + 
-                        Math.abs(minorDrainLife.getMaxHE()) + " health instantly and gives it to you.");
-        spellList.put(minorDrainLife.getID(), minorDrainLife);
+        Spell drainLife = new Spell();
+        drainLife.setName("DRAIN LIFE");
+        drainLife.setID(111);
+        drainLife.setValue(100);
+        drainLife.setManaCost(15);
+        drainLife.setKnowReq(6);
+        drainLife.setHE(-2, -8);
+        drainLife.setDuration(1);
+        drainLife.setDrain(true);
+        firebolt.setDesc("This spell steals " + Math.abs(drainLife.getMinHE()) + " to " + 
+                        Math.abs(drainLife.getMaxHE()) + " health instantly and gives it to you.");
+        spellList.put(drainLife.getID(), drainLife);
         
         //HEALING SPELLS
-        //minor instant heal, medium instant heal, major instant heal
-        //minor HoT, medium HoT, major HoT
+        //still needs major HoT & instant heal
+        Spell healingWord = new Spell();
+        healingWord.setName("HEALING WORD");
+        healingWord.setID(121);
+        healingWord.setValue(70);
+        healingWord.setManaCost(8);
+        healingWord.setKnowReq(4);
+        healingWord.setHE(3, 9);
+        healingWord.setDuration(1);
+        healingWord.setDesc("This spell heals the caster for" + healingWord.getMinHE() + " to " + 
+                            healingWord.getMaxHE() + " health instantly.");
+        spellList.put(healingWord.getID(), healingWord);
+        
+        Spell renew = new Spell();
+        renew.setName("RENEW");
+        renew.setID(122);
+        renew.setValue(60);
+        renew.setManaCost(5);
+        renew.setKnowReq(4);
+        renew.setHE(1, 3);
+        renew.setDuration(3);
+        renew.setDesc("This spell heals the caster for " + renew.getMinHE() + " to " + renew.getMaxHE() + " health over " + 
+                      renew.getDuration() + " turns.");
+        spellList.put(renew.getID(), renew);
     }
     
     public Spell getSpell(int ID)
