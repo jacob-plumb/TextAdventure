@@ -76,6 +76,7 @@ public class SpellList
         healingWord.setKnowReq(4);
         healingWord.setHE(3, 9);
         healingWord.setDuration(1);
+        healingWord.setIgnoreArmor(true);
         healingWord.setDesc("This spell heals the caster for" + healingWord.getMinHE() + " to " + 
                             healingWord.getMaxHE() + " health instantly.");
         spellList.put(healingWord.getID(), healingWord);
@@ -88,9 +89,12 @@ public class SpellList
         renew.setKnowReq(4);
         renew.setHE(1, 3);
         renew.setDuration(3);
+        renew.setIgnoreArmor(true);
         renew.setDesc("This spell heals the caster for " + renew.getMinHE() + " to " + renew.getMaxHE() + " health over " + 
                       renew.getDuration() + " turns.");
         spellList.put(renew.getID(), renew);
+        
+        //MAKE SPELLS THAT IGNORE ARMOR
     }
     
     public Spell getSpell(int ID)

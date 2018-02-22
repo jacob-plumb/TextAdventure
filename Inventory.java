@@ -316,6 +316,47 @@ public class Inventory
             this.accessSpells(player);
         }
     }
+    
+    //method for accessing player spells in combat
+    public Spell getPlayerSpells(Player player, Enemy enemy)
+    {
+        ArrayList<Spell> spells = new ArrayList<Spell>();
+        spells = getSpells();
+        System.out.println("SPELLS");
+        int endNum = 1;
+        for(int i = 0; i < spells.size(); i++)
+        {
+            System.out.println("" + (i+1) + ". " + spells.get(i).getName());
+            endNum++;
+        }
+        System.out.println("" + endNum + ". Back");
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            if(option > spells.size()+1 && option < 1)
+            {
+                throw new NumberFormatException();
+            }
+            if(option == endNum)
+            {
+                player.playerTurn(enemy);
+                return null;
+            }
+            else
+            {
+                option--;
+                return spells.get(option);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.getPlayerSpells(player, enemy);
+        }
+        return null;
+    }
+    
 
     public void showSpell(ArrayList<Spell> list, int index, Player player)
     {

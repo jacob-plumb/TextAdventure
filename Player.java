@@ -15,12 +15,12 @@ public class Player extends Character
     {
         this.currentRoom = currentRoom;
     }
-    
+
     public Inventory getInventory()
     {
         return inventory;
     }
-    
+
     public void setInventory(Inventory inventory)
     {
         this.inventory = inventory;
@@ -45,7 +45,7 @@ public class Player extends Character
         System.out.println("PLAYER STATS");
         super.printStats();
     }
-    
+
     public void printMenu()
     {
         System.out.println("MENU");
@@ -100,13 +100,100 @@ public class Player extends Character
 
     public boolean playerCombat(Enemy enemy)
     {
+        //Effect over time on the player
+        int[] pEoT = null;
+        //Effect over time on the enemy
+        int[] eEoT = null;
         while (this.getTempHP() > 0 && enemy.getTempHP() > 0)
         {
             System.out.println();
-            System.out.println("You are facing a " + enemy.getName());
+            System.out.println("-------------" + enemy.getName() + "-------------");
+            //Enemy taking an effect each turn
+            if(eEoT != null)
+            {
+                //healing
+                if(eEoT[1] > 0)
+                {
+                    int effect = Dice.roll(eEoT[1], eEoT[2]) + this.getKnow();
+                    if((enemy.getTempHP() + effect) > enemy.getMaxHP())
+                    {
+                        enemy.setTempHP(enemy.getMaxHP());
+                        System.out.println("" + enemy.getName() + " regains full health.");
+                    }
+                    else
+                    {
+                        enemy.setTempHP(enemy.getTempHP() + effect);
+                        System.out.println("" + enemy.getName() + " regains " + effect + " health.");
+                    }
+                }
+                //damage
+                else
+                {
+                    int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow();
+                    enemy.setTempHP(enemy.getTempHP() + effect);
+                    System.out.println("" + enemy.getName() + " takes " + Math.abs(effect) + " damage.");
+                }
+
+                eEoT[0] = eEoT[0] - 1;
+
+                if(eEoT[0] == 0)
+                {
+                    eEoT = null;
+                }
+            }
+
+            if(pEoT != null)
+            {
+                //healing
+                if(pEoT[1] > 0)
+                {
+                    int effect = Dice.roll(pEoT[1], pEoT[2]) + this.getKnow();
+                    if((this.getTempHP() + effect) > this.getMaxHP())
+                    {
+                        this.setTempHP(this.getMaxHP());
+                        System.out.println("You regain full health.");
+                    }
+                    else
+                    {
+                        this.setTempHP(this.getTempHP() + effect);
+                        System.out.println("You regain " + effect + " health.");
+                    }
+                }
+                //damage
+                else
+                {
+                    int effect = Dice.roll(pEoT[1], pEoT[2]) - this.getKnow();
+                    this.setTempHP(this.getTempHP() + effect);
+                    System.out.println("You take " + Math.abs(effect) + " damage.");
+                }
+
+                pEoT[0] = pEoT[0] - 1;
+
+                if(pEoT[0] == 0)
+                {
+                    pEoT = null;
+                }
+            }
+            
+            System.out.println();
             this.printCombatStats();
             enemy.printCombatStats();
-            this.playerTurn(enemy);
+            int[] pturn = this.playerTurn(enemy);
+            //if the uses a DoT/HoT spell
+            if(pturn != null)
+            {
+                //if the spell is a HoT, it targets the player
+                if(pturn[1] > 0)
+                {
+                    pEoT = pturn;
+                }
+                //if the spell is a DoT, it targets the enemy
+                else
+                {
+                    eEoT = pturn;
+                }
+            }
+
             if (enemy.getTempHP() > 0)
             {
                 int lightProc = 10;
@@ -126,7 +213,7 @@ public class Player extends Character
                 {
                     heavyProc += 5;
                 }
-                
+
                 int check = Dice.roll(1, lightProc + heavyProc);
                 if(check <= lightProc)
                 {
@@ -155,7 +242,7 @@ public class Player extends Character
         }
     }
 
-    public void playerTurn(Enemy enemy)
+    public int[] playerTurn(Enemy enemy)
     {
         System.out.println("1. Light Attack");
         System.out.println("2. Heavy Attack");
@@ -175,6 +262,27 @@ public class Player extends Character
             {
                 this.heavyAttack(this, enemy);
             }
+            else if (option == 3)
+            {
+                Spell chosenSpell = this.getInventory().getPlayerSpells(this, enemy);
+                if(chosenSpell == null)
+                {
+                    playerTurn(enemy);
+                }
+                else
+                {
+                    if((this.getTempMP() - chosenSpell.getManaCost()) >= 0)
+                    {
+                        int[] values = this.castSpell(this, enemy, chosenSpell);
+                        return values;
+                    }
+                    else
+                    {
+                        System.out.println("You do not have enough mana to cast that.");
+                        playerTurn(enemy);
+                    }
+                }
+            }
             else
             {
                 this.setTempHP(0);
@@ -187,6 +295,7 @@ public class Player extends Character
             enemy.printCombatStats();
             playerTurn(enemy);
         }
+        return null;
     }
 
     public void initDialogue(NPC npc)
@@ -251,7 +360,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option < 1 || option > 5)
             {
                 throw new Exception();
@@ -311,7 +420,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option < 1 || option > 5)
             {
                 throw new Exception();
@@ -362,7 +471,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option < 1 || option > 5)
             {
                 throw new Exception();
@@ -418,7 +527,7 @@ public class Player extends Character
         try {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
+
             if (option < 1 || option > 5)
             {
                 throw new Exception();

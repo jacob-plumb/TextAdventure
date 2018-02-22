@@ -6,6 +6,7 @@ public class Spell extends Item
     private int minHE;
     private int maxHE;
     private boolean drain = false;
+    private boolean ignoreArmor = false;
     
     public int getMinHE()
     {
@@ -61,5 +62,15 @@ public class Spell extends Item
     public void setDrain(boolean drain)
     {
         this.drain = drain;
+    }
+    
+    public boolean getIgnoreArmor()
+    {
+        return ignoreArmor;
+    }
+    
+    public void setIgnoreArmor(boolean ignoreArmor)
+    {
+        this.ignoreArmor = ignoreArmor;
     }
 }

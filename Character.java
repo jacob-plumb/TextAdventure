@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Math;
 public abstract class Character
 {
     //ATTRIBUTES
@@ -214,7 +215,7 @@ public abstract class Character
         System.out.println("" + name + " Health: " + tempHP);
         System.out.println("" + name + " Magic: " + tempMP);
     }
-    
+
     //Target uses half dex to dodge; attacker uses half str to damage
     public void lightAttack(Character attacker, Character target)
     {
@@ -228,13 +229,13 @@ public abstract class Character
             if(damage < 1)
             {
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " but deals no damage!");
+                    + attacker.getWep().getName() + " but deals no damage!");
             }
             else
             {
                 target.setTempHP(target.getTempHP() - damage);
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " dealing " + damage + " damage!");
+                    + attacker.getWep().getName() + " dealing " + damage + " damage!");
             }
         }
         else
@@ -242,7 +243,7 @@ public abstract class Character
             System.out.println("" + attacker.getName() + "'s attack misses!");
         }
     }
-    
+
     //Target uses full dex to dodge; attacker uses full str to damage
     public void heavyAttack(Character attacker, Character target)
     {
@@ -256,13 +257,13 @@ public abstract class Character
             if(damage < 1)
             {
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " but deals no damage!");
+                    + attacker.getWep().getName() + " but deals no damage!");
             }
             else
             {
                 target.setTempHP(target.getTempHP() - damage);
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " dealing " + damage + " damage!");
+                    + attacker.getWep().getName() + " dealing " + damage + " damage!");
             }
         }
         else
@@ -270,9 +271,72 @@ public abstract class Character
             System.out.println("" + attacker.getName() + "'s attack misses!");
         }
     }
-    
-    public void castSpell(Character attacker, Character target)
+
+    public int[] castSpell(Character attacker, Character target, Spell spell)
     {
-        
+        int toHit = Dice.roll(1, 20) + attacker.getDex();
+        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
+        int duration = spell.getDuration();
+        int effect;
+        //healing spell cast
+        if(spell.getMinHE() > 0)
+        {
+            effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) + attacker.getKnow();
+            if((attacker.getTempHP() + effect) > attacker.getMaxHP())
+            {
+                attacker.setTempHP(attacker.getMaxHP());
+                System.out.println("" + attacker.getName() + " heals themselves with " + spell.getName()
+                    + " to full health.");
+            }
+            else
+            {
+                attacker.setTempHP(attacker.getTempHP() + effect);
+                System.out.println("" + attacker.getName() + " heals themselves with " + spell.getName()
+                    + " for " + effect + " health.");
+            }
+        }
+        //damage spell cast
+        else if (toHit > targetDodge)
+        {
+            effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) - attacker.getKnow();
+            if(!spell.getIgnoreArmor())
+            {
+                effect = effect + target.getArmor().getArmorValue();
+            }
+
+            if(effect > -1)
+            {
+                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+                    + spell.getName() + " but deals no damage!");
+            }
+            else
+            {
+                target.setTempHP(target.getTempHP() + effect);
+                System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
+                    + target.getName() + " and deals " + Math.abs(effect) + " damage!");
+            }
+        }
+        else
+        {
+            System.out.println("" + attacker.getName() + "'s spell misses!");
+            effect = 0;
+            return null;
+        }
+        attacker.setTempMP(attacker.getTempMP() - spell.getManaCost());
+        duration--;
+
+        if(duration > 0)
+        {
+            int[] values = new int[3];
+            values[0] = duration;
+            values[1] = spell.getMinHE();
+            values[2] = spell.getMaxHE();
+            return values;
+        }
+        else
+        {
+            return null;
+        }
     }
+
 }
