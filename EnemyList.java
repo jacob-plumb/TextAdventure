@@ -5,22 +5,20 @@ public class EnemyList
     
     WeaponList weaponList = new WeaponList();
     ArmorList armorList = new ArmorList();
+    SpellList spellList = new SpellList();
+    MiscItemList miscItemList = new MiscItemList();
     
+    //STR, DEX, CON, KNOW, WIS, CHA
     EnemyList()
     {
        //BANDIT
        Enemy bandit = new Enemy();
        bandit.setName("BANDIT");
-       bandit.setStr(5);
-       bandit.setDex(5);
-       bandit.setCon(5);
-       bandit.setKnow(5);
-       bandit.setWis(5);
-       bandit.setCha(5);
-       bandit.setWep(weaponList.getItem(102));
+       bandit.setAtt(3, 4, 4, 2, 1, 3);
+       bandit.setWep(weaponList.getItem(101));
        bandit.setArmor(armorList.getItem(202));
        bandit.setLevel(1);
-       bandit.setGold(5);
+       bandit.setGold(1, 6);
        bandit.setXP(25);
        bandit.setMaxHP(bandit.getCon() * 3);
        bandit.setMaxMP(bandit.getKnow() * 3);
@@ -29,7 +27,22 @@ public class EnemyList
        bandit.setID(101);
        enemyList.put(bandit.getID(), bandit);
        
-       //OTHER ENEMIES
+       //CULTIST
+       Enemy cultist = new Enemy();
+       cultist.setName("CULTIST");
+       cultist.setAtt(2, 4, 2, 5, 3, 2);
+       cultist.setWep(weaponList.getItem(102));
+       cultist.setArmor(armorList.getItem(202));
+       cultist.setLevel(1);
+       cultist.setGold(4, 10);
+       cultist.setXP(35);
+       cultist.setMaxHP(cultist.getCon() * 3);
+       cultist.setMaxMP(cultist.getKnow() * 3);
+       cultist.setTempHP(cultist.getMaxHP());
+       cultist.setTempMP(cultist.getMaxMP());
+       cultist.setID(102);
+       cultist.addSpell(spellList.getSpell(102));
+       enemyList.put(cultist.getID(), cultist);
     }
     
     public Enemy getEnemy(int ID)

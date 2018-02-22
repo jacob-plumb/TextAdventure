@@ -114,7 +114,7 @@ public class Player extends Character
                 //healing
                 if(eEoT[1] > 0)
                 {
-                    int effect = Dice.roll(eEoT[1], eEoT[2]) + this.getKnow();
+                    int effect = Dice.roll(eEoT[1], eEoT[2]) + enemy.getKnow();
                     if((enemy.getTempHP() + effect) > enemy.getMaxHP())
                     {
                         enemy.setTempHP(enemy.getMaxHP());
@@ -129,7 +129,7 @@ public class Player extends Character
                 //damage
                 else
                 {
-                    int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow();
+                    int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow() + enemy.getArmor().getArmorValue();
                     enemy.setTempHP(enemy.getTempHP() + effect);
                     System.out.println("" + enemy.getName() + " takes " + Math.abs(effect) + " damage.");
                 }
@@ -141,7 +141,8 @@ public class Player extends Character
                     eEoT = null;
                 }
             }
-
+            
+            //Player taking an effect each turn
             if(pEoT != null)
             {
                 //healing
@@ -162,7 +163,7 @@ public class Player extends Character
                 //damage
                 else
                 {
-                    int effect = Dice.roll(pEoT[1], pEoT[2]) - this.getKnow();
+                    int effect = Dice.roll(pEoT[1], pEoT[2]) - enemy.getKnow() + this.getArmor().getArmorValue();
                     this.setTempHP(this.getTempHP() + effect);
                     System.out.println("You take " + Math.abs(effect) + " damage.");
                 }
@@ -174,23 +175,27 @@ public class Player extends Character
                     pEoT = null;
                 }
             }
-            
-            System.out.println();
-            this.printCombatStats();
-            enemy.printCombatStats();
-            int[] pturn = this.playerTurn(enemy);
-            //if the player uses a DoT/HoT spell
-            if(pturn != null)
+            //showing the player the combat stats and options
+            //redundant if statements to allow for enemy to die from DoT
+            if(enemy.getTempHP() > 0)
             {
-                //if the spell is a HoT, it targets the player
-                if(pturn[1] > 0)
+                this.printCombatStats();
+                enemy.printCombatStats();
+                System.out.println();
+                int[] pturn = this.playerTurn(enemy);
+                //if the player uses a DoT/HoT spell
+                if(pturn != null)
                 {
-                    pEoT = pturn;
-                }
-                //if the spell is a DoT, it targets the enemy
-                else
-                {
-                    eEoT = pturn;
+                    //if the spell is a HoT, it targets the player
+                    if(pturn[1] > 0)
+                    {
+                        pEoT = pturn;
+                    }
+                    //if the spell is a DoT, it targets the enemy
+                    else
+                    {
+                        eEoT = pturn;
+                    }
                 }
             }
 
@@ -234,10 +239,14 @@ public class Player extends Character
         }
         else
         {
+            int goldDrop = enemy.dropGold();
             System.out.println("" + this.getName() + " wins, gaining " + enemy.getXP() 
-                + " XP and " + enemy.getGold() + " gold!");
+                + " XP and " + goldDrop + " gold!");
             this.setXP(this.getXP() + enemy.getXP());
-            this.setGold(this.getGold() + enemy.getGold());
+            this.setGold(this.getGold() + goldDrop);
+            //reset enemy in the list
+            enemy.setTempHP(enemy.getMaxHP());
+            enemy.setTempMP(enemy.getMaxMP());
             return true;
         }
     }
@@ -339,230 +348,6 @@ public class Player extends Character
             {
                 System.out.println("INVALID INPUT");
             }
-        }
-    }
-
-    public void playerCreation()
-    {
-        creationOptionsFather();
-        creationOptionsEarly();
-        creationOptionsAdult();
-    }
-
-    private void creationOptionsFather()
-    {
-        System.out.println("Your father was a: ");
-        System.out.println("1. Nobleman");
-        System.out.println("2. Veteran soldier");
-        System.out.println("3. Hunter");
-        System.out.println("4. Nomad");
-        System.out.println("5. Thief");
-        try {
-            String input = scanner.nextLine();
-            int option = Integer.parseInt(input);
-
-            if (option < 1 || option > 5)
-            {
-                throw new Exception();
-            }
-
-            if (option == 1)
-            {
-                this.setCon(this.getCon() - 1);
-                this.setKnow(this.getKnow() + 1);
-                this.setCha(this.getCha() + 1);
-                this.setGold(this.getGold() + 20);
-            }
-            else if (option == 2)
-            {
-                this.setKnow(this.getKnow() - 1);
-                this.setStr(this.getStr() + 1);
-                this.setCon(this.getCon() + 1);
-                this.setGold(this.getGold() + 10);
-            }
-            else if(option == 3)
-            {
-                this.setCha(this.getCha() - 1);
-                this.setDex(this.getDex() + 1);
-                this.setKnow(this.getKnow() + 1);
-                this.setGold(this.getGold() + 10);
-            }
-            else if (option == 4)
-            {
-                this.setDex(this.getDex() - 1);
-                this.setCon(this.getCon() + 1);
-                this.setKnow(this.getKnow() + 1);
-                this.setGold(this.getGold() + 5);
-            }
-            else if (option == 5)
-            {
-                this.setStr(this.getStr() - 1);
-                this.setDex(this.getDex() + 1);
-                this.setWis(this.getWis() + 1);
-                this.setGold(this.getGold() + 5);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("INVALID INPUT");
-            creationOptionsFather();
-        }
-    }
-
-    private void creationOptionsEarly()
-    {
-        System.out.println("During your childhood, you were a: ");
-        System.out.println("1. Page");
-        System.out.println("2. Apprentice");
-        System.out.println("3. Assistant");
-        System.out.println("4. Street Urchin");
-        System.out.println("5. Steppe Child");
-        try {
-            String input = scanner.nextLine();
-            int option = Integer.parseInt(input);
-
-            if (option < 1 || option > 5)
-            {
-                throw new Exception();
-            }
-
-            if (option == 1)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setCha(this.getCha() + 1);
-            }
-            else if (option == 2)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setStr(this.getStr() + 1);
-            }
-            else if(option == 3)
-            {
-                this.setCha(this.getCha() + 1);
-                this.setKnow(this.getKnow() + 1);
-            }
-            else if (option == 4)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setDex(this.getDex() + 1);
-            }
-            else if (option == 5)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setDex(this.getDex() + 1);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("INVALID INPUT");
-            creationOptionsEarly();
-        }
-    }
-
-    private void creationOptionsAdult()
-    {
-        System.out.println("During your adulthood, you were a: ");
-        System.out.println("1. Squire");
-        System.out.println("2. Troubador");
-        System.out.println("3. Student");
-        System.out.println("4. Peddler");
-        System.out.println("5. Smith");
-        System.out.println("6. Poacher");
-        try {
-            String input = scanner.nextLine();
-            int option = Integer.parseInt(input);
-
-            if (option < 1 || option > 5)
-            {
-                throw new Exception();
-            }
-
-            if (option == 1)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setDex(this.getDex() + 1);
-            }
-            else if (option == 2)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setCha(this.getCha() + 1);
-            }
-            else if(option == 3)
-            {
-                this.setDex(this.getDex() + 1);
-                this.setCha(this.getCha() + 1);
-            }
-            else if (option == 4)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setWis(this.getWis() + 1);
-            }
-            else if (option == 5)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setCon(this.getCon() + 1);
-            }
-            else if (option == 6)
-            {
-                this.setDex(this.getDex() + 1);
-                this.setWis(this.getWis() + 1);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("INVALID INPUT");
-            creationOptionsEarly();
-        }
-    }
-
-    //UNFINISHED
-    private void creationOptionsReason()
-    {
-        System.out.println("Your reason for adventuring is: ");
-        System.out.println("1. Page");
-        System.out.println("2. The loss of a loved one.");
-        System.out.println("3. Unquenchable wanderlust");
-        System.out.println("4. Being forced from your home");
-        System.out.println("5. Steppe Child");
-        try {
-            String input = scanner.nextLine();
-            int option = Integer.parseInt(input);
-
-            if (option < 1 || option > 5)
-            {
-                throw new Exception();
-            }
-
-            if (option == 1)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setCha(this.getCha() + 1);
-            }
-            else if (option == 2)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setStr(this.getStr() + 1);
-            }
-            else if(option == 3)
-            {
-                this.setCha(this.getCha() + 1);
-                this.setKnow(this.getKnow() + 1);
-            }
-            else if (option == 4)
-            {
-                this.setKnow(this.getKnow() + 1);
-                this.setDex(this.getDex() + 1);
-            }
-            else if (option == 5)
-            {
-                this.setStr(this.getStr() + 1);
-                this.setDex(this.getDex() + 1);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("INVALID INPUT");
-            creationOptionsEarly();
         }
     }
 }

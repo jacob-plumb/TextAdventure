@@ -3,12 +3,7 @@ import java.lang.Math;
 public abstract class Character
 {
     //ATTRIBUTES
-    private int str;
-    private int dex;
-    private int con;
-    private int know;
-    private int wis;
-    private int cha;
+    private int[] att = new int[6];
 
     //HEALTH/MANA
     private int maxHP;
@@ -27,64 +22,79 @@ public abstract class Character
     private Armor currentArmor;
 
     //PLAYER ATTRIBUTES
+    public int[] getAtt()
+    {
+        return att;
+    }
+
+    public void setAtt(int str, int dex, int con, int know, int wis, int cha)
+    {
+        att[0] = str;
+        att[1] = dex;
+        att[2] = con;
+        att[3] = know;
+        att[4] = wis;
+        att[5] = cha;
+    }
+
     public int getStr()
     {
-        return str;
+        return att[0];
     }
 
     public void setStr(int str)
     {
-        this.str = str;
+        att[0] = str;
     }
 
     public int getDex()
     {
-        return dex;
+        return att[1];
     }
 
     public void setDex(int dex)
     {
-        this.dex = dex;
+        att[1] = dex;
     }
 
     public int getCon()
     {
-        return con;
+        return att[2];
     }
 
     public void setCon(int con)
     {
-        this.con = con;
+        att[2] = con;
     }
 
     public int getKnow()
     {
-        return know;
+        return att[3];
     }
 
     public void setKnow(int know)
     {
-        this.know = know;
+        att[3] = know;
     }
 
     public int getWis()
     {
-        return wis;
+        return att[4];
     }
 
     public void setWis(int wis)
     {
-        this.wis = wis;
+        att[4] = wis;
     }
 
     public int getCha()
     {
-        return cha;
+        return att[5];
     }
 
     public void setCha(int cha)
     {
-        this.cha = cha;
+        att[5] = cha;
     }
 
     //HEALTH/MANA
@@ -200,12 +210,12 @@ public abstract class Character
         System.out.println("Magic: " + tempMP);
         System.out.println("Gold: " + gold);
         System.out.println("XP: " + xp);
-        System.out.println("Strength: " + str);
-        System.out.println("Dexterity: " + dex);
-        System.out.println("Constitution: " + con);
-        System.out.println("Knowledge: " + know);
-        System.out.println("Wisdom: " + wis);
-        System.out.println("Charisma: " + cha);
+        System.out.println("Strength: " + att[0]);
+        System.out.println("Dexterity: " + att[1]);
+        System.out.println("Constitution: " + att[2]);
+        System.out.println("Knowledge: " + att[3]);
+        System.out.println("Wisdom: " + att[4]);
+        System.out.println("Charisma: " + att[5]);
         System.out.println("Weapon: " + currentWep.getName());
         System.out.println("Armor: " + currentArmor.getName());
     }
@@ -278,6 +288,8 @@ public abstract class Character
         int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
         int duration = spell.getDuration();
         int effect;
+        
+        attacker.setTempMP(attacker.getTempMP() - spell.getManaCost());
         //healing spell cast
         if(spell.getMinHE() > 0)
         {
@@ -312,8 +324,24 @@ public abstract class Character
             else
             {
                 target.setTempHP(target.getTempHP() + effect);
-                System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
-                    + target.getName() + " and deals " + Math.abs(effect) + " damage!");
+                if(spell.isDrain())
+                {
+                    if((attacker.getTempHP() - effect) > attacker.getMaxHP())
+                    {
+                        attacker.setTempHP(attacker.getMaxHP());
+                    }
+                    else
+                    {
+                        attacker.setTempHP(attacker.getTempHP() - effect);
+                    }
+                    System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
+                        + target.getName() + " and steals " + Math.abs(effect) + " health!");
+                }
+                else
+                {
+                    System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
+                        + target.getName() + " and deals " + Math.abs(effect) + " damage!");
+                }
             }
         }
         else
@@ -322,7 +350,6 @@ public abstract class Character
             effect = 0;
             return null;
         }
-        attacker.setTempMP(attacker.getTempMP() - spell.getManaCost());
         duration--;
 
         if(duration > 0)

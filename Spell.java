@@ -6,6 +6,7 @@ public class Spell extends Item
     private int minHE;
     private int maxHE;
     private boolean drain = false;
+    //no DoT can ingnore armor
     private boolean ignoreArmor = false;
     
     public int getMinHE()
@@ -54,7 +55,7 @@ public class Spell extends Item
         this.duration = duration;
     }
     
-    public boolean getDrain()
+    public boolean isDrain()
     {
         return drain;
     }

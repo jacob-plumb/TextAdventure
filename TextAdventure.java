@@ -10,6 +10,7 @@ public class TextAdventure
 
         //CREATING ITEMS
 
+        //ask Jacob if I should make these public so I don't have to instantiate more in other classes
         WeaponList weaponList = new WeaponList();
         ArmorList armorList = new ArmorList();
         EnemyList enemyList = new EnemyList();
@@ -49,9 +50,6 @@ public class TextAdventure
         player.setTempMP(player.getMaxMP());
 
         //START THE GAME WITH PLAYER CREATION
-        /**
-         * player.playerCreation();
-         */
 
         //WHILE loop for game running condition
         while (gameLoop == true)
