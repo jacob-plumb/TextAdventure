@@ -136,7 +136,7 @@ public class Player extends Character
 
                 eEoT[0] = eEoT[0] - 1;
 
-                if(eEoT[0] == 0)
+                if(eEoT[0] < 0)
                 {
                     eEoT = null;
                 }
@@ -169,7 +169,7 @@ public class Player extends Character
 
                 pEoT[0] = pEoT[0] - 1;
 
-                if(pEoT[0] == 0)
+                if(pEoT[0] < 0)
                 {
                     pEoT = null;
                 }
@@ -179,7 +179,7 @@ public class Player extends Character
             this.printCombatStats();
             enemy.printCombatStats();
             int[] pturn = this.playerTurn(enemy);
-            //if the uses a DoT/HoT spell
+            //if the player uses a DoT/HoT spell
             if(pturn != null)
             {
                 //if the spell is a HoT, it targets the player
