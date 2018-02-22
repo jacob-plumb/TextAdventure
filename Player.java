@@ -141,7 +141,7 @@ public class Player extends Character
                     eEoT = null;
                 }
             }
-            
+
             //Player taking an effect each turn
             if(pEoT != null)
             {
@@ -203,6 +203,8 @@ public class Player extends Character
             {
                 int lightProc = 10;
                 int heavyProc = 10;
+                int magicProc = 15;
+                int check;
                 //More likely to light attack if the player has higher dex
                 if(this.getDex() > enemy.getDex())
                 {
@@ -218,15 +220,51 @@ public class Player extends Character
                 {
                     heavyProc += 5;
                 }
-
-                int check = Dice.roll(1, lightProc + heavyProc);
-                if(check <= lightProc)
+                //More likely to use magic if it has more knowledge than strength
+                if(enemy.getKnow() > enemy.getStr())
                 {
-                    enemy.lightAttack(enemy, this);
+                    magicProc += 10;
                 }
-                else if(check > lightProc)
+                //if the enemy uses magic
+                if(enemy.getSpells() != null)
                 {
-                    enemy.heavyAttack(enemy, this);
+                    Spell selectedSpell = enemy.selectSpell();
+                    //if the enemy has enough mana to cast a spell
+                    if(selectedSpell != null)
+                    {
+                        check = Dice.roll(1, lightProc + heavyProc + magicProc);
+                    }
+                    else
+                    //else the enemy does not roll high enough to use magic
+                    {
+                        check = Dice.roll(1, lightProc + heavyProc);
+                    }
+                    
+                    if(check <= lightProc)
+                        {
+                            enemy.lightAttack(enemy, this);
+                        }
+                        else if(check > lightProc && check <= lightProc + heavyProc)
+                        {
+                            enemy.heavyAttack(enemy, this);
+                        }
+                        else
+                        {
+                            enemy.castSpell(enemy, this, selectedSpell);
+                        }
+                }
+                //if the enemy doesn't use magic
+                else
+                {
+                    check = Dice.roll(1, lightProc + heavyProc);
+                    if(check <= lightProc)
+                    {
+                        enemy.lightAttack(enemy, this);
+                    }
+                    else if(check > lightProc)
+                    {
+                        enemy.heavyAttack(enemy, this);
+                    }
                 }
             }
         }

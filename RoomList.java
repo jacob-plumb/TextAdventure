@@ -41,6 +41,7 @@ public class RoomList
         cMarketSquare.setName("CENTRAL MARKET SQUARE");
         cMarketSquare.setDesc("This is the central market square.");
         cMarketSquare.setID(103);
+        cMarketSquare.setEnemy(102);
         roomList.put(cMarketSquare.getID(), cMarketSquare);
         
         Room blacksmith = new Room();

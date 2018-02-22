@@ -5,22 +5,22 @@ public class Enemy extends Character
     private ArrayList<Spell> spells;
     private int minGold;
     private int maxGold;
-    
+
     public int getID()
     {
         return id;
     }
-    
+
     public void setID(int id)
     {
         this.id = id;
     }
-    
+
     public ArrayList<Spell> getSpells()
     {
         return spells;
     }
-    
+
     public void addSpell(Spell spell)
     {
         try
@@ -33,18 +33,46 @@ public class Enemy extends Character
             spells.add(spell);
         }
     }
-    
+
     public void setSpells(ArrayList<Spell> spells)
     {
         this.spells = spells;
     }
+
+    public ArrayList<Spell> getCastableSpells()
+    {
+        ArrayList<Spell> castable = new ArrayList<Spell>();
+        for(Spell s : spells)
+        {
+            if(s.getManaCost() < this.getTempMP())
+            {
+                castable.add(s);
+            }
+        }
+        
+        return castable;
+    }
     
+    public Spell selectSpell()
+    {
+        ArrayList<Spell>castableSpells = this.getCastableSpells();
+        if(castableSpells.size() > 0)
+        {
+            int index = Dice.roll(1, castableSpells.size()-1);
+            return castableSpells.get(index);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public void setGold(int minGold, int maxGold)
     {
         this.minGold = minGold;
         this.maxGold = maxGold;
     }
-    
+
     public int dropGold()
     {
         return Dice.roll(minGold, maxGold);

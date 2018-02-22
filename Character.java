@@ -137,6 +137,11 @@ public abstract class Character
     {
         this.maxMP = maxMP;
     }
+    
+    public void calcMaxHP()
+    {
+        maxHP = (this.getCon() * 3) + (this.getLevel() * 5);
+    }
 
     //STATS
 

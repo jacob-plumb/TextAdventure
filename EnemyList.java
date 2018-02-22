@@ -20,7 +20,7 @@ public class EnemyList
        bandit.setLevel(1);
        bandit.setGold(1, 6);
        bandit.setXP(25);
-       bandit.setMaxHP(bandit.getCon() * 3);
+       bandit.calcMaxHP();
        bandit.setMaxMP(bandit.getKnow() * 3);
        bandit.setTempHP(bandit.getMaxHP());
        bandit.setTempMP(bandit.getMaxMP());
@@ -36,7 +36,7 @@ public class EnemyList
        cultist.setLevel(1);
        cultist.setGold(4, 10);
        cultist.setXP(35);
-       cultist.setMaxHP(cultist.getCon() * 3);
+       cultist.calcMaxHP();
        cultist.setMaxMP(cultist.getKnow() * 3);
        cultist.setTempHP(cultist.getMaxHP());
        cultist.setTempMP(cultist.getMaxMP());
