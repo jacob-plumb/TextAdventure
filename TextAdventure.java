@@ -34,6 +34,7 @@ public class TextAdventure
         player.setInventory(backpack);
         
         player.getInventory().addItem(weaponList.getItem(199));
+        player.getInventory().addItem(weaponList.getItem(103));
         player.getInventory().addItem(armorList.getItem(222));
         player.getInventory().addItem(armorList.getItem(211));
         player.getInventory().addItem(spellList.getSpell(101));

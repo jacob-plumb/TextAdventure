@@ -172,6 +172,7 @@ public class Inventory
         System.out.println(weapon.getDesc());
         System.out.println("Damage: " + weapon.getMinDamage() + " to " + weapon.getMaxDamage());
         System.out.println("Value: " + weapon.getValue() + " gold.");
+        System.out.println("Armor Penetration: " + weapon.getAP());
         System.out.println("1. Equip");
         System.out.println("2. Back");
 

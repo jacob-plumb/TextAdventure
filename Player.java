@@ -129,9 +129,20 @@ public class Player extends Character
                 //damage
                 else
                 {
-                    int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow() + enemy.getArmor().getArmorValue();
+                    int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow();
+                    int blocked;
+                    String blockedString = "";
+
+                    blocked = Math.abs(effect) - (Math.abs(effect) - enemy.getArmor().getArmorValue());
+                    blockedString = (" (" + blocked + " damage blocked)");
+                    effect = effect + enemy.getArmor().getArmorValue();
+                    if(blocked <= 0)
+                    {
+                        blockedString = "";
+                    }
+                    
                     enemy.setTempHP(enemy.getTempHP() + effect);
-                    System.out.println("" + enemy.getName() + " takes " + Math.abs(effect) + " damage.");
+                    System.out.println("" + enemy.getName() + " takes " + Math.abs(effect) + " damage." + blockedString);
                 }
 
                 eEoT[0] = eEoT[0] - 1;
@@ -163,9 +174,20 @@ public class Player extends Character
                 //damage
                 else
                 {
-                    int effect = Dice.roll(pEoT[1], pEoT[2]) - enemy.getKnow() + this.getArmor().getArmorValue();
+                    int effect = Dice.roll(pEoT[1], pEoT[2]) - enemy.getKnow();
+                    int blocked;
+                    String blockedString = "";
+
+                    blocked = Math.abs(effect) - (Math.abs(effect) - this.getArmor().getArmorValue());
+                    blockedString = (" (" + blocked + " damage blocked)");
+                    effect = effect + this.getArmor().getArmorValue();
+                    if(blocked <= 0)
+                    {
+                        blockedString = "";
+                    }
+                    
                     this.setTempHP(this.getTempHP() + effect);
-                    System.out.println("You take " + Math.abs(effect) + " damage.");
+                    System.out.println("You take " + Math.abs(effect) + " damage." + blockedString);
                 }
 
                 pEoT[0] = pEoT[0] - 1;
@@ -179,6 +201,7 @@ public class Player extends Character
             //redundant if statements to allow for enemy to die from DoT
             if(enemy.getTempHP() > 0)
             {
+                System.out.println();
                 this.printCombatStats();
                 enemy.printCombatStats();
                 System.out.println();
@@ -239,19 +262,19 @@ public class Player extends Character
                     {
                         check = Dice.roll(1, lightProc + heavyProc);
                     }
-                    
+
                     if(check <= lightProc)
-                        {
-                            enemy.lightAttack(enemy, this);
-                        }
-                        else if(check > lightProc && check <= lightProc + heavyProc)
-                        {
-                            enemy.heavyAttack(enemy, this);
-                        }
-                        else
-                        {
-                            enemy.castSpell(enemy, this, selectedSpell);
-                        }
+                    {
+                        enemy.lightAttack(enemy, this);
+                    }
+                    else if(check > lightProc && check <= lightProc + heavyProc)
+                    {
+                        enemy.heavyAttack(enemy, this);
+                    }
+                    else
+                    {
+                        enemy.castSpell(enemy, this, selectedSpell);
+                    }
                 }
                 //if the enemy doesn't use magic
                 else

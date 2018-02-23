@@ -23,6 +23,15 @@ public class ArmorList
        clothes.setStrReq(0);
        armorList.put(clothes.getID(), clothes);
        
+       Armor robes = new Armor();
+       robes.setName("ROBES");
+       robes.setDesc("These are normal robes.");
+       robes.setID(203);
+       robes.setValue(10);
+       robes.setArmorValue(2);
+       robes.setStrReq(0);
+       armorList.put(robes.getID(), robes);
+       
        Armor mailShirt = new Armor();
        mailShirt.setName("MAIL SHIRT");
        mailShirt.setDesc("This is a mail shirt.");

@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Collectible
+comment1.params=
+comment1.target=int\ getAmount()
+comment2.params=amount
+comment2.target=void\ setAmount(int)
+comment3.params=gathered
+comment3.target=void\ addAmount(int)
+numComments=4

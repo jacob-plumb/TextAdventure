@@ -32,7 +32,7 @@ public class EnemyList
        cultist.setName("CULTIST");
        cultist.setAtt(2, 4, 2, 5, 3, 2);
        cultist.setWep(weaponList.getItem(102));
-       cultist.setArmor(armorList.getItem(202));
+       cultist.setArmor(armorList.getItem(203));
        cultist.setLevel(1);
        cultist.setGold(4, 10);
        cultist.setXP(35);

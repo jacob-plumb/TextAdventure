@@ -137,7 +137,7 @@ public abstract class Character
     {
         this.maxMP = maxMP;
     }
-    
+
     public void calcMaxHP()
     {
         maxHP = (this.getCon() * 3) + (this.getLevel() * 5);
@@ -240,17 +240,34 @@ public abstract class Character
         if (toHit > targetDodge)
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + (attacker.getStr() / 2);
-            damage = damage - target.getArmor().getArmorValue();
+            int armor = target.getArmor().getArmorValue();
+            if(armor - attacker.getWep().getAP() < 0)
+            {
+                armor = 0;
+            }
+            else
+            {
+                armor -= attacker.getWep().getAP();
+            }
+
+            int blocked = damage - (damage - armor);
+            String blockedString = (" (" + blocked + " damage blocked)");
+            if(blocked <= 0)
+            {
+                blockedString = "";
+            }
+
+            damage = damage - armor;
             if(damage < 1)
             {
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " but deals no damage!");
+                    + attacker.getWep().getName() + " but deals no damage!" + blockedString);
             }
             else
             {
                 target.setTempHP(target.getTempHP() - damage);
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " dealing " + damage + " damage!");
+                    + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
             }
         }
         else
@@ -268,17 +285,34 @@ public abstract class Character
         if (toHit > targetDodge)
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + attacker.getStr();
-            damage = damage - target.getArmor().getArmorValue();
+            int armor = target.getArmor().getArmorValue();
+            if(armor - attacker.getWep().getAP() < 0)
+            {
+                armor = 0;
+            }
+            else
+            {
+                armor -= attacker.getWep().getAP();
+            }
+
+            int blocked = damage - (damage - armor);
+            String blockedString = (" (" + blocked + " damage blocked)");
+            if(blocked <= 0)
+            {
+                blockedString = "";
+            }
+
+            damage = damage - armor;
             if(damage < 1)
             {
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " but deals no damage!");
+                    + attacker.getWep().getName() + " but deals no damage!" + blockedString);
             }
             else
             {
                 target.setTempHP(target.getTempHP() - damage);
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " dealing " + damage + " damage!");
+                    + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
             }
         }
         else
@@ -293,7 +327,7 @@ public abstract class Character
         int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
         int duration = spell.getDuration();
         int effect;
-        
+
         attacker.setTempMP(attacker.getTempMP() - spell.getManaCost());
         //healing spell cast
         if(spell.getMinHE() > 0)
@@ -316,15 +350,26 @@ public abstract class Character
         else if (toHit > targetDodge)
         {
             effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) - attacker.getKnow();
+
+            int armor = target.getArmor().getArmorValue();
+            int blocked;
+            String blockedString = "";
+
             if(!spell.getIgnoreArmor())
             {
+                blocked = Math.abs(effect) - (Math.abs(effect) - armor);
+                blockedString = (" (" + blocked + " damage blocked)");
                 effect = effect + target.getArmor().getArmorValue();
+                if(blocked <= 0)
+                {
+                    blockedString = "";
+                }
             }
 
             if(effect > -1)
             {
                 System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + spell.getName() + " but deals no damage!");
+                    + spell.getName() + " but deals no damage!" + blockedString);
             }
             else
             {
@@ -345,7 +390,7 @@ public abstract class Character
                 else
                 {
                     System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
-                        + target.getName() + " and deals " + Math.abs(effect) + " damage!");
+                        + target.getName() + " and deals " + Math.abs(effect) + " damage!" + blockedString);
                 }
             }
         }
