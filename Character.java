@@ -234,12 +234,25 @@ public abstract class Character
     //Target uses half dex to dodge; attacker uses half str to damage
     public void lightAttack(Character attacker, Character target)
     {
-        int toHit = Dice.roll(1, 20) + attacker.getDex();
+        double strMod = 1;
+        double dexMod = 1;
+        
+        if(attacker.getStr() < attacker.getWep().getStrReq())
+        {
+            strMod = 0.5;
+        }
+        if(attacker.getDex() < attacker.getWep().getDexReq())
+        {
+            dexMod = 0.5;
+        }
+        
+        int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
         int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
 
         if (toHit > targetDodge)
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + (attacker.getStr() / 2);
+            damage = (int)(damage * strMod);
             int armor = target.getArmor().getArmorValue();
             if(armor - attacker.getWep().getAP() < 0)
             {
@@ -258,17 +271,9 @@ public abstract class Character
             }
 
             damage = damage - armor;
-            if(damage < 1)
-            {
-                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " but deals no damage!" + blockedString);
-            }
-            else
-            {
-                target.setTempHP(target.getTempHP() - damage);
-                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
-            }
+            target.setTempHP(target.getTempHP() - damage);
+            System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+                + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
         }
         else
         {
@@ -279,12 +284,25 @@ public abstract class Character
     //Target uses full dex to dodge; attacker uses full str to damage
     public void heavyAttack(Character attacker, Character target)
     {
-        int toHit = Dice.roll(1, 20) + attacker.getDex();
+        double strMod = 1;
+        double dexMod = 1;
+        
+        if(attacker.getStr() < attacker.getWep().getStrReq())
+        {
+            strMod = 0.5;
+        }
+        if(attacker.getDex() < attacker.getWep().getDexReq())
+        {
+            dexMod = 0.5;
+        }
+        
+        int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
         int targetDodge = Dice.roll(1, 20) + target.getDex();
 
         if (toHit > targetDodge)
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + attacker.getStr();
+            damage = (int)(damage * strMod);
             int armor = target.getArmor().getArmorValue();
             if(armor - attacker.getWep().getAP() < 0)
             {
@@ -303,17 +321,9 @@ public abstract class Character
             }
 
             damage = damage - armor;
-            if(damage < 1)
-            {
-                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " but deals no damage!" + blockedString);
-            }
-            else
-            {
-                target.setTempHP(target.getTempHP() - damage);
-                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
-            }
+            target.setTempHP(target.getTempHP() - damage);
+            System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
+                + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
         }
         else
         {

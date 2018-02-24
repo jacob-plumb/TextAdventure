@@ -42,6 +42,7 @@ public class EnemyList
        cultist.setTempMP(cultist.getMaxMP());
        cultist.setID(102);
        cultist.addSpell(spellList.getSpell(102));
+       cultist.addSpell(spellList.getSpell(101));
        enemyList.put(cultist.getID(), cultist);
     }
     

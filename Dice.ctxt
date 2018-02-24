@@ -2,4 +2,8 @@
 comment0.target=Dice
 comment1.params=min\ max
 comment1.target=int\ roll(int,\ int)
-numComments=2
+comment2.params=iterations\ min\ max
+comment2.target=void\ testDie(int,\ int,\ int)
+comment3.params=
+comment3.target=void\ testHalf()
+numComments=4

@@ -140,7 +140,7 @@ public class Player extends Character
                     {
                         blockedString = "";
                     }
-                    
+
                     enemy.setTempHP(enemy.getTempHP() + effect);
                     System.out.println("" + enemy.getName() + " takes " + Math.abs(effect) + " damage." + blockedString);
                 }
@@ -185,7 +185,7 @@ public class Player extends Character
                     {
                         blockedString = "";
                     }
-                    
+
                     this.setTempHP(this.getTempHP() + effect);
                     System.out.println("You take " + Math.abs(effect) + " damage." + blockedString);
                 }
@@ -248,7 +248,7 @@ public class Player extends Character
                 {
                     magicProc += 10;
                 }
-                //if the enemy uses magic
+                //if the enemy can use magic
                 if(enemy.getSpells() != null)
                 {
                     Spell selectedSpell = enemy.selectSpell();
@@ -273,10 +273,24 @@ public class Player extends Character
                     }
                     else
                     {
-                        enemy.castSpell(enemy, this, selectedSpell);
+                        int[] eturn = enemy.castSpell(enemy, this, selectedSpell);
+                        //if the enemy casts a HoT/DoT
+                        if(eturn != null)
+                        {
+                            //if the spell is a HoT, it targets the enemy
+                            if(eturn[1] > 0)
+                            {
+                                eEoT = eturn;
+                            }
+                            //if the spell is a DoT, it targets the player
+                            else
+                            {
+                                pEoT = eturn;
+                            }
+                        }
                     }
                 }
-                //if the enemy doesn't use magic
+                //if the enemy cannot use magic
                 else
                 {
                     check = Dice.roll(1, lightProc + heavyProc);
@@ -318,7 +332,8 @@ public class Player extends Character
         System.out.println("2. Heavy Attack");
         System.out.println("3. Magic");
         System.out.println("4. Consumables");
-        System.out.println("5. Flee");
+        System.out.println("5. Menu");
+        System.out.println("6. Flee");
         try 
         {
             String input = scanner.nextLine();
@@ -353,6 +368,16 @@ public class Player extends Character
                     }
                 }
             }
+            else if(option == 5)
+            {
+                this.printMenu();
+                System.out.println("-------------" + enemy.getName() + "-------------");
+                System.out.println();
+                this.printCombatStats();
+                enemy.printCombatStats();
+                System.out.println();
+                playerTurn(enemy);
+            }
             else
             {
                 this.setTempHP(0);
@@ -361,8 +386,11 @@ public class Player extends Character
         catch(NumberFormatException e)
         {
             System.out.println("INVALID INPUT");
+            System.out.println("-------------" + enemy.getName() + "-------------");
+            System.out.println();
             this.printCombatStats();
             enemy.printCombatStats();
+            System.out.println();
             playerTurn(enemy);
         }
         return null;

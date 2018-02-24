@@ -30,27 +30,29 @@ public class Inventory
         return backpack.get(index);
     }
 
-    public ArrayList<Weapon> getWeapons()
+    public ArrayList<Weapon> getWeapons(Player player)
     {
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+        weapons.add(player.getWep());
         for (Item item : backpack)
         {
             if (item instanceof Weapon)
             {
-                weapons.add(0,(Weapon) item);
+                weapons.add((Weapon) item);
             }
         }
         return weapons;
     }
 
-    public ArrayList<Armor> getArmors()
+    public ArrayList<Armor> getArmors(Player player)
     {
         ArrayList<Armor> armors = new ArrayList<Armor>();
+        armors.add(player.getArmor());
         for (Item item : backpack)
         {
             if (item instanceof Armor)
             {
-                armors.add(0,(Armor) item);
+                armors.add((Armor) item);
             }
         }
         return armors;
@@ -63,7 +65,7 @@ public class Inventory
         {
             if (item instanceof Spell)
             {
-                spells.add(0,(Spell) item);
+                spells.add((Spell) item);
             }
         }
         return spells;
@@ -76,7 +78,7 @@ public class Inventory
         {
             if (item instanceof MiscItem)
             {
-                misc.add(0,(MiscItem) item);
+                misc.add((MiscItem) item);
             }
         }
         return misc;
@@ -131,7 +133,7 @@ public class Inventory
     public void accessWeapons(Player player)
     {
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-        weapons = getWeapons();
+        weapons = getWeapons(player);
         System.out.println("WEAPONS");
         int endNum = 1;
         for(int i = 0; i < weapons.size(); i++)
@@ -171,8 +173,9 @@ public class Inventory
         System.out.println(weapon.getName());
         System.out.println(weapon.getDesc());
         System.out.println("Damage: " + weapon.getMinDamage() + " to " + weapon.getMaxDamage());
-        System.out.println("Value: " + weapon.getValue() + " gold.");
+        System.out.println("Value: " + weapon.getValue() + " gold");
         System.out.println("Armor Penetration: " + weapon.getAP());
+        System.out.println("Stat Requirements: " + weapon.getStrReq() + " strength, " + weapon.getDexReq() + " dexterity");
         System.out.println("1. Equip");
         System.out.println("2. Back");
 
@@ -187,7 +190,25 @@ public class Inventory
                 addItem(oldWep);
                 player.setWep(weaponList.getItem(weapon.getID()));
                 removeItem(weapon);
-                System.out.println("You equip your " + weapon.getName()); 
+                if(player.getStr() < weapon.getStrReq() && player.getDex() < weapon.getDexReq())
+                {
+                    System.out.println("You equip your " + weapon.getName()
+                        + " but lack the strength and dexterity to wield it effectively.");
+                }
+                else if (player.getStr() < weapon.getStrReq())
+                {
+                    System.out.println("You equip your " + weapon.getName()
+                        + " but lack the strength to wield it effectively.");
+                }
+                else if (player.getDex() < weapon.getDexReq())
+                {
+                    System.out.println("You equip your " + weapon.getName()
+                        + " but lack the dexterity to wield it effectively.");
+                }
+                else
+                {
+                    System.out.println("You equip your " + weapon.getName()); 
+                }
             }
             else
             {
@@ -204,7 +225,7 @@ public class Inventory
     public void accessArmors(Player player)
     {
         ArrayList<Armor> armors = new ArrayList<Armor>();
-        armors = getArmors();
+        armors = getArmors(player);
         System.out.println("ARMORS");
         int endNum = 1;
         for(int i = 0; i < armors.size(); i++)
@@ -287,10 +308,17 @@ public class Inventory
         spells = getSpells();
         System.out.println("SPELLS");
         int endNum = 1;
-        for(int i = 0; i < spells.size(); i++)
+        if(spells.size() > 1)
         {
-            System.out.println("" + (i+1) + ". " + spells.get(i).getName());
-            endNum++;
+            for(int i = 0; i < spells.size(); i++)
+            {
+                System.out.println("" + (i+1) + ". " + spells.get(i).getName());
+                endNum++;
+            }
+        }
+        else
+        {
+            System.out.println("Your spellbook is empty.");
         }
         System.out.println("" + endNum + ". Back");
         try
@@ -317,7 +345,7 @@ public class Inventory
             this.accessSpells(player);
         }
     }
-    
+
     //method for accessing player spells in combat
     public Spell getPlayerSpells(Player player, Enemy enemy)
     {
@@ -357,7 +385,6 @@ public class Inventory
         }
         return null;
     }
-    
 
     public void showSpell(ArrayList<Spell> list, int index, Player player)
     {
@@ -382,17 +409,24 @@ public class Inventory
             this.accessSpells(player);
         }
     }
-    
+
     public void accessMiscItems(Player player)
     {
         ArrayList<MiscItem> misc = new ArrayList<MiscItem>();
         misc = getMiscItems();
         System.out.println("ITEMS");
         int endNum = 1;
-        for(int i = 0; i < misc.size(); i++)
+        if(misc.size() > 0)
         {
-            System.out.println("" + (i+1) + ". " + misc.get(i).getName());
-            endNum++;
+            for(int i = 0; i < misc.size(); i++)
+            {
+                System.out.println("" + (i+1) + ". " + misc.get(i).getName());
+                endNum++;
+            }
+        }
+        else
+        {
+            System.out.println("Your item pouch is empty.");
         }
         System.out.println("" + endNum + ". Back");
         try
@@ -419,7 +453,7 @@ public class Inventory
             this.accessMiscItems(player);
         }
     }
-    
+
     public void showMiscItem(ArrayList<MiscItem> list, int index, Player player)
     {
         MiscItem misc = list.get(index);

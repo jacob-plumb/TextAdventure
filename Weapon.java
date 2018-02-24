@@ -3,6 +3,7 @@ public class Weapon extends Item
     private int minDamage;
     private int maxDamage;
     private int strReq;
+    private int dexReq;
     private int armorPenetration;
     
     public int getMinDamage()
@@ -29,6 +30,16 @@ public class Weapon extends Item
     public void setStrReq(int strReq)
     {
         this.strReq = strReq;
+    }
+    
+    public int getDexReq()
+    {
+        return dexReq;
+    }
+    
+    public void setDexReq(int dexReq)
+    {
+        this.dexReq = dexReq;
     }
     
     public int getAP()

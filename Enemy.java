@@ -58,7 +58,7 @@ public class Enemy extends Character
         ArrayList<Spell>castableSpells = this.getCastableSpells();
         if(castableSpells.size() > 0)
         {
-            int index = Dice.roll(1, castableSpells.size()-1);
+            int index = Dice.roll(0, castableSpells.size()-1);
             return castableSpells.get(index);
         }
         else
