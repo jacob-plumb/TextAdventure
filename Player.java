@@ -198,8 +198,8 @@ public class Player extends Character
                 }
             }
             //showing the player the combat stats and options
-            //redundant if statements to allow for enemy to die from DoT
-            if(enemy.getTempHP() > 0)
+            //redundant if statements to allow for enemy to die from DoT and for player to die from DoT
+            if(enemy.getTempHP() > 0 && this.getTempHP() > 0)
             {
                 System.out.println();
                 this.printCombatStats();
