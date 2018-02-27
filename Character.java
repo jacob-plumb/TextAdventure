@@ -253,34 +253,7 @@ public abstract class Character
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + (attacker.getStr() / 2);
             damage = (int)(damage * strMod);
-            int armor = target.getArmor().getArmorValue();
-            if(armor - attacker.getWep().getAP() < 0)
-            {
-                armor = 0;
-            }
-            else
-            {
-                armor -= attacker.getWep().getAP();
-            }
-
-            String blockedString = (" (" + armor + " damage blocked)");
-            if(armor <= 0)
-            {
-                blockedString = "";
-            }
-
-            if(armor > damage)
-            {
-                damage = 0;
-            }
-            else
-            {
-                damage = damage - armor;
-            }
-
-            target.setTempHP(target.getTempHP() - damage);
-            System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
+            target.takeDamage(damage, attacker, null);
         }
         else
         {
@@ -310,34 +283,7 @@ public abstract class Character
         {
             int damage = Dice.roll(attacker.getWep().getMinDamage(), attacker.getWep().getMaxDamage()) + attacker.getStr();
             damage = (int)(damage * strMod);
-            int armor = target.getArmor().getArmorValue();
-            if(armor - attacker.getWep().getAP() < 0)
-            {
-                armor = 0;
-            }
-            else
-            {
-                armor -= attacker.getWep().getAP();
-            }
-
-            String blockedString = (" (" + armor + " damage blocked)");
-            if(armor <= 0)
-            {
-                blockedString = "";
-            }
-
-            if(armor > damage)
-            {
-                damage = 0;
-            }
-            else
-            {
-                damage = damage - armor;
-            }
-
-            target.setTempHP(target.getTempHP() - damage);
-            System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
+            target.takeDamage(damage, attacker, null);
         }
         else
         {
@@ -357,72 +303,13 @@ public abstract class Character
         if(spell.getMinHE() > 0)
         {
             effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) + attacker.getKnow();
-            if((attacker.getTempHP() + effect) > attacker.getMaxHP())
-            {
-                attacker.setTempHP(attacker.getMaxHP());
-                System.out.println("" + attacker.getName() + " heals themselves with " + spell.getName()
-                    + " to full health.");
-            }
-            else
-            {
-                attacker.setTempHP(attacker.getTempHP() + effect);
-                System.out.println("" + attacker.getName() + " heals themselves with " + spell.getName()
-                    + " for " + effect + " health.");
-            }
+            attacker.healFor(effect, spell);
         }
         //damage spell cast
         else if (toHit > targetDodge)
         {
             effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) - attacker.getKnow();
-
-            int armor = target.getArmor().getArmorValue();
-            String blockedString = "";
-
-            if(!spell.getIgnoreArmor())
-            {
-                blockedString = (" (" + armor + " damage blocked)");
-                if(armor <= 0)
-                {
-                    blockedString = "";
-                }
-
-                if(armor > Math.abs(effect))
-                {
-                    effect = 0;
-                }
-                else
-                {
-                    effect = effect + armor;
-                }
-            }
-
-            if(effect > -1)
-            {
-                System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
-                    + spell.getName() + " but deals no damage!" + blockedString);
-            }
-            else
-            {
-                target.setTempHP(target.getTempHP() + effect);
-                if(spell.isDrain())
-                {
-                    if((attacker.getTempHP() - effect) > attacker.getMaxHP())
-                    {
-                        attacker.setTempHP(attacker.getMaxHP());
-                    }
-                    else
-                    {
-                        attacker.setTempHP(attacker.getTempHP() - effect);
-                    }
-                    System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
-                        + target.getName() + " and steals " + Math.abs(effect) + " health!");
-                }
-                else
-                {
-                    System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
-                        + target.getName() + " and deals " + Math.abs(effect) + " damage!" + blockedString);
-                }
-            }
+            target.takeDamage(Math.abs(effect), attacker, spell);
         }
         else
         {
@@ -443,6 +330,106 @@ public abstract class Character
         else
         {
             return null;
+        }
+    }
+
+    public void takeDamage(int damage, Character attacker, Spell spell)
+    {
+        //no spell, normal attack
+        if(spell == null)
+        {
+            int armor = this.getArmor().getArmorValue();
+            String blockedString;
+            if(armor - attacker.getWep().getAP() <= 0)
+            {
+                armor = 0;
+                blockedString = "";
+            }
+            else
+            {
+                armor -= attacker.getWep().getAP();
+                blockedString = (" (" + armor + " damage blocked)");
+            }
+
+            if(armor > damage)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = damage - armor;
+            }
+
+            this.setTempHP(this.getTempHP() - damage);
+            System.out.println("" + attacker.getName() + " hits " + this.getName() + " with their " 
+                + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
+        }
+        //spell was cast
+        else
+        {
+            int armor = this.getArmor().getArmorValue();
+            String blockedString;
+            if(armor - spell.getAP() <= 0)
+            {
+                armor = 0;
+                blockedString = "";
+            }
+            else
+            {
+                armor -= spell.getAP();
+                blockedString = (" (" + armor + " damage blocked)");
+            }
+            
+            if(armor <= 0)
+            {
+                blockedString = "";
+            }
+
+            if(armor > damage)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = damage - armor;
+            }
+            
+            this.setTempHP(this.getTempHP() - damage);
+
+            if(spell.isDrain())
+            {
+                if((attacker.getTempHP() + damage) > attacker.getMaxHP())
+                {
+                    attacker.setTempHP(attacker.getMaxHP());
+                }
+                else
+                {
+                    attacker.setTempHP(attacker.getTempHP() + damage);
+                }
+                System.out.println("" + attacker.getName() + " casts " + spell.getName() + " at " 
+                    + this.getName() + " and steals " + damage + " health!");
+            }
+            else
+            {
+                System.out.println("" + attacker.getName() + " deals " + damage + " damage to " 
+                    + this.getName() + " with " + spell.getName() + blockedString);
+            }
+        }
+    }
+
+    public void healFor(int heal, Spell spell)
+    {
+        if((this.getTempHP() + heal) > this.getMaxHP())
+        {
+            this.setTempHP(this.getMaxHP());
+            System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
+                + " to full health.");
+        }
+        else
+        {
+            this.setTempHP(this.getTempHP() + heal);
+            System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
+                + " for " + heal + " health.");
         }
     }
 

@@ -7,7 +7,7 @@ public class Spell extends Item
     private int maxHE;
     private boolean drain = false;
     //no DoT can ingnore armor
-    private boolean ignoreArmor = false;
+    private int armorPenetration = 0;
     
     public int getMinHE()
     {
@@ -65,13 +65,13 @@ public class Spell extends Item
         this.drain = drain;
     }
     
-    public boolean getIgnoreArmor()
+    public int getAP()
     {
-        return ignoreArmor;
+        return armorPenetration;
     }
     
-    public void setIgnoreArmor(boolean ignoreArmor)
+    public void setAP(int armorPenetration)
     {
-        this.ignoreArmor = ignoreArmor;
+        this.armorPenetration = armorPenetration;
     }
 }
