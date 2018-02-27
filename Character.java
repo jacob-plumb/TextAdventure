@@ -236,7 +236,7 @@ public abstract class Character
     {
         double strMod = 1;
         double dexMod = 1;
-        
+
         if(attacker.getStr() < attacker.getWep().getStrReq())
         {
             strMod = 0.5;
@@ -245,7 +245,7 @@ public abstract class Character
         {
             dexMod = 0.5;
         }
-        
+
         int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
         int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
 
@@ -263,14 +263,21 @@ public abstract class Character
                 armor -= attacker.getWep().getAP();
             }
 
-            int blocked = damage - (damage - armor);
-            String blockedString = (" (" + blocked + " damage blocked)");
-            if(blocked <= 0)
+            String blockedString = (" (" + armor + " damage blocked)");
+            if(armor <= 0)
             {
                 blockedString = "";
             }
 
-            damage = damage - armor;
+            if(armor > damage)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = damage - armor;
+            }
+
             target.setTempHP(target.getTempHP() - damage);
             System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
                 + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
@@ -286,7 +293,7 @@ public abstract class Character
     {
         double strMod = 1;
         double dexMod = 1;
-        
+
         if(attacker.getStr() < attacker.getWep().getStrReq())
         {
             strMod = 0.5;
@@ -295,7 +302,7 @@ public abstract class Character
         {
             dexMod = 0.5;
         }
-        
+
         int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
         int targetDodge = Dice.roll(1, 20) + target.getDex();
 
@@ -313,14 +320,21 @@ public abstract class Character
                 armor -= attacker.getWep().getAP();
             }
 
-            int blocked = damage - (damage - armor);
-            String blockedString = (" (" + blocked + " damage blocked)");
-            if(blocked <= 0)
+            String blockedString = (" (" + armor + " damage blocked)");
+            if(armor <= 0)
             {
                 blockedString = "";
             }
 
-            damage = damage - armor;
+            if(armor > damage)
+            {
+                damage = 0;
+            }
+            else
+            {
+                damage = damage - armor;
+            }
+
             target.setTempHP(target.getTempHP() - damage);
             System.out.println("" + attacker.getName() + " hits " + target.getName() + " with their " 
                 + attacker.getWep().getName() + " dealing " + damage + " damage!" + blockedString);
@@ -362,17 +376,23 @@ public abstract class Character
             effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) - attacker.getKnow();
 
             int armor = target.getArmor().getArmorValue();
-            int blocked;
             String blockedString = "";
 
             if(!spell.getIgnoreArmor())
             {
-                blocked = Math.abs(effect) - (Math.abs(effect) - armor);
-                blockedString = (" (" + blocked + " damage blocked)");
-                effect = effect + target.getArmor().getArmorValue();
-                if(blocked <= 0)
+                blockedString = (" (" + armor + " damage blocked)");
+                if(armor <= 0)
                 {
                     blockedString = "";
+                }
+
+                if(armor > Math.abs(effect))
+                {
+                    effect = 0;
+                }
+                else
+                {
+                    effect = effect + armor;
                 }
             }
 

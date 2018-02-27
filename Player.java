@@ -130,15 +130,20 @@ public class Player extends Character
                 else
                 {
                     int effect = Dice.roll(eEoT[1], eEoT[2]) - this.getKnow();
-                    int blocked;
-                    String blockedString = "";
-
-                    blocked = Math.abs(effect) - (Math.abs(effect) - enemy.getArmor().getArmorValue());
-                    blockedString = (" (" + blocked + " damage blocked)");
-                    effect = effect + enemy.getArmor().getArmorValue();
-                    if(blocked <= 0)
+                    int armor = enemy.getArmor().getArmorValue();
+                    String blockedString = (" (" + armor + " damage blocked)");
+                    if(armor <= 0)
                     {
                         blockedString = "";
+                    }
+
+                    if(armor > Math.abs(effect))
+                    {
+                        effect = 0;
+                    }
+                    else
+                    {
+                        effect = effect + armor;
                     }
 
                     enemy.setTempHP(enemy.getTempHP() + effect);
@@ -175,15 +180,20 @@ public class Player extends Character
                 else
                 {
                     int effect = Dice.roll(pEoT[1], pEoT[2]) - enemy.getKnow();
-                    int blocked;
-                    String blockedString = "";
-
-                    blocked = Math.abs(effect) - (Math.abs(effect) - this.getArmor().getArmorValue());
-                    blockedString = (" (" + blocked + " damage blocked)");
-                    effect = effect + this.getArmor().getArmorValue();
-                    if(blocked <= 0)
+                    int armor = this.getArmor().getArmorValue();
+                    String blockedString = (" (" + armor + " damage blocked)");
+                    if(armor <= 0)
                     {
                         blockedString = "";
+                    }
+
+                    if(armor > Math.abs(effect))
+                    {
+                        effect = 0;
+                    }
+                    else
+                    {
+                        effect = effect + armor;
                     }
 
                     this.setTempHP(this.getTempHP() + effect);
