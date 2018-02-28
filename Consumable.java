@@ -1,73 +1,134 @@
 public class Consumable extends Collectible
 {
-    private int uses;
+    private int maxUses;
+    private int tempUses;
     private int minEffect;
     private int maxEffect;
+    private int armorPenetration;
     private String type;
-    
-    public int getUses()
+
+    public int getMaxUses()
     {
-        return uses;
+        return maxUses;
     }
-    
-    public void setUses(int uses)
+
+    public void setMaxUses(int maxUses)
     {
-        this.uses = uses;
+        this.maxUses = maxUses;
     }
-    
+
+    public int getTempUses()
+    {
+        return tempUses;
+    }
+
+    public void setTempUses(int tempUses)
+    {
+        this.tempUses = tempUses;
+    }
+
     public int getMinEffect()
     {
         return minEffect;
     }
-    
+
     public void setMinEffect(int minEffect)
     {
         this.minEffect = minEffect;
     }
-    
+
     public int getMaxEffect()
     {
         return maxEffect;
     }
-    
+
     public void setMaxEffect(int maxEffect)
     {
         this.maxEffect = maxEffect;
     }
-    
+
+    public int getAP()
+    {
+        return armorPenetration;
+    }
+
+    public void setAP(int armorPenetration)
+    {
+        this.armorPenetration = armorPenetration;
+    }
+
     public String getType()
     {
         return type;
     }
-    
+
     public void setType(String type)
     {
         this.type = type;
     }
-    
-    public void use(Character user, Character target)
+
+    //returns whether or not the item can be used (ie. if there is an object to be uses)
+    public boolean use(Character user, Character target)
     {
-        if(type.equals("thrown"))
+        if(this.getAmount() > 0)
         {
-            //throwItem
+            if(type.equals("bomb") || type.equals("knife"))
+            {
+                throwItem(user, target);
+            }
+            else if(type.equals("healthPotion") || type.equals("manaPotion"))
+            {
+                drinkPotion(user);
+            }
+
+            tempUses--;
+            if(tempUses == 0)
+            {
+                this.setAmount(this.getAmount() - 1);
+                if(this.getAmount() > 0)
+                {
+                    this.setTempUses(maxUses);
+                }
+            }
+
+            if(this.getAmount() == 0 && (user instanceof Player))
+            {
+                Player player = (Player)user;
+                player.getInventory().removeItem(this);
+            }
+            return true;
         }
-        else if(type.equals("healthPotion") || type.equals("manaPotion"))
+        else
         {
-            drinkPotion(user);
-        }
-        
-        uses--;
-        if(uses == 0)
-        {
-            this.setAmount(this.getAmount() - 1);
+            return false;
         }
     }
-    
+
     public void throwItem(Character user, Character target)
     {
-        
+        int toHit = Dice.roll(1, 20) + user.getDex();
+        int targetDodge = Dice.roll(1, 20) + target.getDex();
+
+        if(toHit > targetDodge)
+        {
+            int damage = 0;
+            if(type.equals("knife"))
+            {
+                damage = Dice.roll(minEffect, maxEffect) + (user.getStr() / 2);
+            }
+            else if(type.equals("bomb"))
+            {
+                damage = Dice.roll(minEffect, maxEffect) + (user.getKnow() / 2);
+            }
+
+            target.takeDamage(damage, user, null, this);
+        }
+        else
+        {
+            System.out.println("" + user.getName() + "'s attack misses!");
+        }
     }
-    
+
     public void drinkPotion(Character user)
     {
         int effect = Dice.roll(minEffect, maxEffect);
