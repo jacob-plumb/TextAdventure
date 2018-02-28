@@ -17,7 +17,15 @@ public class Inventory
 
     public void addItem(Item item)
     {
-        backpack.add(item);
+        if(item instanceof Collectible & backpack.contains(item))
+        {
+            Collectible collectible = (Collectible)item;
+            collectible.addAmount(1);
+        }
+        else
+        {
+            backpack.add(item);
+        }
     }
 
     public void removeItem(Item item)

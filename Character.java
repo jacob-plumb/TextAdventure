@@ -303,7 +303,7 @@ public abstract class Character
         if(spell.getMinHE() > 0)
         {
             effect = Dice.roll(spell.getMinHE(), spell.getMaxHE()) + attacker.getKnow();
-            attacker.healFor(effect, spell);
+            attacker.healFor(effect, spell, null);
         }
         //damage spell cast
         else if (toHit > targetDodge)
@@ -379,7 +379,7 @@ public abstract class Character
                 armor -= spell.getAP();
                 blockedString = (" (" + armor + " damage blocked)");
             }
-            
+
             if(armor <= 0)
             {
                 blockedString = "";
@@ -393,7 +393,7 @@ public abstract class Character
             {
                 damage = damage - armor;
             }
-            
+
             this.setTempHP(this.getTempHP() - damage);
 
             if(spell.isDrain())
@@ -417,19 +417,52 @@ public abstract class Character
         }
     }
 
-    public void healFor(int heal, Spell spell)
+    public void healFor(int heal, Spell spell, Consumable potion)
     {
-        if((this.getTempHP() + heal) > this.getMaxHP())
+        if(spell != null)
         {
-            this.setTempHP(this.getMaxHP());
-            System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
-                + " to full health.");
+            if((this.getTempHP() + heal) > this.getMaxHP())
+            {
+                this.setTempHP(this.getMaxHP());
+                System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
+                    + " to full health.");
+            }
+            else
+            {
+                this.setTempHP(this.getTempHP() + heal);
+                System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
+                    + " for " + heal + " health.");
+            }
         }
-        else
+        else if(potion != null && potion.getType().equals("healthPotion"))
         {
-            this.setTempHP(this.getTempHP() + heal);
-            System.out.println("" + this.getName() + " heals themselves with " + spell.getName()
-                + " for " + heal + " health.");
+            if((this.getTempHP() + heal) > this.getMaxHP())
+            {
+                this.setTempHP(this.getMaxHP());
+                System.out.println("" + this.getName() + " drinks a " + potion.getName()
+                    + " and regains full health.");
+            }
+            else
+            {
+                this.setTempHP(this.getTempHP() + heal);
+                System.out.println("" + this.getName() + " drinks a " + potion.getName()
+                    + " and regains " + heal + " health.");
+            }
+        }
+        else if(potion != null && potion.getType().equals("manaPotion"))
+        {
+            if((this.getTempMP() + heal) > this.getMaxMP())
+            {
+                this.setTempMP(this.getMaxMP());
+                System.out.println("" + this.getName() + " drinks a " + potion.getName()
+                    + " and regains full mana.");
+            }
+            else
+            {
+                this.setTempMP(this.getTempMP() + heal);
+                System.out.println("" + this.getName() + " drinks a " + potion.getName()
+                    + " and regains " + heal + " mana.");
+            }
         }
     }
 

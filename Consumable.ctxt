@@ -1,3 +1,25 @@
 #BlueJ class context
 comment0.target=Consumable
-numComments=1
+comment1.params=
+comment1.target=int\ getUses()
+comment10.params=user\ target
+comment10.target=void\ throwItem(Character,\ Character)
+comment11.params=user
+comment11.target=void\ drinkPotion(Character)
+comment2.params=uses
+comment2.target=void\ setUses(int)
+comment3.params=
+comment3.target=int\ getMinEffect()
+comment4.params=minEffect
+comment4.target=void\ setMinEffect(int)
+comment5.params=
+comment5.target=int\ getMaxEffect()
+comment6.params=maxEffect
+comment6.target=void\ setMaxEffect(int)
+comment7.params=
+comment7.target=java.lang.String\ getType()
+comment8.params=type
+comment8.target=void\ setType(java.lang.String)
+comment9.params=user\ target
+comment9.target=void\ use(Character,\ Character)
+numComments=12
