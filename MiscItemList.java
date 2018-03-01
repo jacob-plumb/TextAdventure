@@ -5,10 +5,13 @@ public class MiscItemList
     
     MiscItemList()
     {
+        /*
+         * MISC:        3XYZ
+         */
         MiscItem necklace = new MiscItem();
         necklace.setName("NECKLACE");
         necklace.setDesc("This is a necklace.");
-        necklace.setValue(100);
+        necklace.setValue(3000);
         necklace.setID(301);
         miscItemList.put(necklace.getID(), necklace);
     }

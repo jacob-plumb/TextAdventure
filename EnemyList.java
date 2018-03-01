@@ -15,8 +15,8 @@ public class EnemyList
        Enemy bandit = new Enemy();
        bandit.setName("BANDIT");
        bandit.setAtt(3, 4, 4, 2, 1, 3);
-       bandit.setWep(weaponList.getItem(101));
-       bandit.setArmor(armorList.getItem(202));
+       bandit.setWep(weaponList.getItem(1021));
+       bandit.setArmor(armorList.getItem(1511));
        bandit.setLevel(1);
        bandit.setGold(1, 6);
        bandit.setXP(25);
@@ -31,8 +31,8 @@ public class EnemyList
        Enemy cultist = new Enemy();
        cultist.setName("CULTIST");
        cultist.setAtt(2, 4, 2, 5, 3, 2);
-       cultist.setWep(weaponList.getItem(102));
-       cultist.setArmor(armorList.getItem(203));
+       cultist.setWep(weaponList.getItem(1011));
+       cultist.setArmor(armorList.getItem(1513));
        cultist.setLevel(1);
        cultist.setGold(4, 10);
        cultist.setXP(35);
@@ -41,8 +41,8 @@ public class EnemyList
        cultist.setTempHP(cultist.getMaxHP());
        cultist.setTempMP(cultist.getMaxMP());
        cultist.setID(102);
-       cultist.addSpell(spellList.getSpell(102));
-       cultist.addSpell(spellList.getSpell(101));
+       cultist.addSpell(spellList.getSpell(2101));
+       cultist.addSpell(spellList.getSpell(2201));
        enemyList.put(cultist.getID(), cultist);
     }
     

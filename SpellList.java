@@ -6,10 +6,19 @@ public class SpellList
     
     SpellList()
     {
+        /*
+         * SPELLS:      2XYZ
+         * DoT:         21XY
+         * Damage:      22XY
+         * Drain:       23XY
+         * HoT:         24XY
+         * Heal:        25XY
+         */
+        
         //DAMAGE SPELLS
         Spell burn = new Spell();
         burn.setName("BURN");
-        burn.setID(101);
+        burn.setID(2101);
         burn.setValue(50);
         burn.setManaCost(5);
         burn.setKnowReq(3);
@@ -17,11 +26,23 @@ public class SpellList
         burn.setDuration(3);
         burn.setDesc("This spell deals " + Math.abs(burn.getMinHE()) + " to " + Math.abs(burn.getMaxHE()) + " damage over " + 
                     burn.getDuration() + " turns.");
+                    
         spellList.put(burn.getID(), burn);
-        
+        Spell conflagrate = new Spell();
+        conflagrate.setName("CONFLAGRATE");
+        conflagrate.setID(2102);
+        conflagrate.setValue(175);
+        conflagrate.setManaCost(15);
+        conflagrate.setKnowReq(8);
+        conflagrate.setHE(-1, -6);
+        conflagrate.setDuration(4);
+        conflagrate.setDesc("This spell deals " + Math.abs(conflagrate.getMinHE()) + " to " + Math.abs(conflagrate.getMaxHE()) + " damage over " + 
+                    conflagrate.getDuration() + " turns.");
+                    
+        spellList.put(conflagrate.getID(), conflagrate);
         Spell firebolt = new Spell();
         firebolt.setName("FIREBOLT");
-        firebolt.setID(102);
+        firebolt.setID(2201);
         firebolt.setValue(60);
         firebolt.setManaCost(8);
         firebolt.setKnowReq(3);
@@ -30,21 +51,9 @@ public class SpellList
         firebolt.setDesc("This spell deals " + Math.abs(firebolt.getMinHE()) + " to " + Math.abs(firebolt.getMaxHE()) + " damage instantly.");
         spellList.put(firebolt.getID(), firebolt);
         
-        Spell conflagrate = new Spell();
-        conflagrate.setName("CONFLAGRATE");
-        conflagrate.setID(103);
-        conflagrate.setValue(175);
-        conflagrate.setManaCost(15);
-        conflagrate.setKnowReq(8);
-        conflagrate.setHE(-1, -6);
-        conflagrate.setDuration(4);
-        conflagrate.setDesc("This spell deals " + Math.abs(conflagrate.getMinHE()) + " to " + Math.abs(conflagrate.getMaxHE()) + " damage over " + 
-                    conflagrate.getDuration() + " turns.");
-        spellList.put(conflagrate.getID(), conflagrate);
-        
         Spell fireball = new Spell();
         fireball.setName("FIREBALL");
-        fireball.setID(104);
+        fireball.setID(2202);
         fireball.setValue(250);
         fireball.setManaCost(25);
         fireball.setKnowReq(8);
@@ -56,7 +65,7 @@ public class SpellList
         Spell drainLife = new Spell();
         drainLife.setName("DRAIN LIFE");
         drainLife.setID(111);
-        drainLife.setValue(100);
+        drainLife.setValue(2301);
         drainLife.setManaCost(15);
         drainLife.setKnowReq(6);
         drainLife.setHE(-2, -8);
@@ -70,7 +79,7 @@ public class SpellList
         //still needs major HoT & instant heal
         Spell healingWord = new Spell();
         healingWord.setName("HEALING WORD");
-        healingWord.setID(121);
+        healingWord.setID(2401);
         healingWord.setValue(70);
         healingWord.setManaCost(8);
         healingWord.setKnowReq(4);
@@ -83,7 +92,7 @@ public class SpellList
         
         Spell renew = new Spell();
         renew.setName("RENEW");
-        renew.setID(122);
+        renew.setID(2501);
         renew.setValue(60);
         renew.setManaCost(5);
         renew.setKnowReq(4);
