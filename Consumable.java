@@ -4,7 +4,7 @@ public class Consumable extends Collectible
     private int tempUses;
     private int minEffect;
     private int maxEffect;
-    private int armorPenetration;
+    private int armorPenetration = 0;
     private String type;
 
     public int getMaxUses()
@@ -107,7 +107,7 @@ public class Consumable extends Collectible
     public void throwItem(Character user, Character target)
     {
         int toHit = Dice.roll(1, 20) + user.getDex();
-        int targetDodge = Dice.roll(1, 20) + target.getDex();
+        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
 
         if(toHit > targetDodge)
         {

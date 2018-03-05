@@ -64,8 +64,8 @@ public class SpellList
         
         Spell drainLife = new Spell();
         drainLife.setName("DRAIN LIFE");
-        drainLife.setID(111);
-        drainLife.setValue(2301);
+        drainLife.setID(2301);
+        drainLife.setValue(100);
         drainLife.setManaCost(15);
         drainLife.setKnowReq(6);
         drainLife.setHE(-2, -8);

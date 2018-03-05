@@ -11,8 +11,8 @@ public class MiscItemList
         MiscItem necklace = new MiscItem();
         necklace.setName("NECKLACE");
         necklace.setDesc("This is a necklace.");
-        necklace.setValue(3000);
-        necklace.setID(301);
+        necklace.setValue(1);
+        necklace.setID(3001);
         miscItemList.put(necklace.getID(), necklace);
     }
     

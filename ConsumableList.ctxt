@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ConsumableList
+comment1.params=
+comment1.target=ConsumableList()
+comment2.params=ID
+comment2.target=Consumable\ getItem(int)
+numComments=3

@@ -8,12 +8,17 @@ public class RoomList
     
     RoomList()
     {
+        /*
+         * ROOMS:       6XYZ
+         * Town:        60YZ
+         * Crypt:       61YZ
+         */
         Room churchFoyer = new Room();
         churchFoyer.setName("CHURCH FOYER");
         churchFoyer.setDesc("You stand in the foyer of the church. The door to the main altar lies\n"+
                             "to the east, with the door to the town being south. A stone staircase\n"+
                             "leads up to the belltower.");
-        churchFoyer.setID(101);
+        churchFoyer.setID(6001);
         roomList.put(churchFoyer.getID(), churchFoyer);
         
         Room churchAltar = new Room();
@@ -23,8 +28,8 @@ public class RoomList
                             "Solaire, serving as the altar. Dozens of pews line the room. A door\n"+
                             "to the west leads to the foyer, and a stone stairway leads down into\n"+
                             "the crypts.");
-        churchAltar.setID(102);
-        churchAltar.setNPC(npcList.getNPC(101));
+        churchAltar.setID(6002);
+        churchAltar.setNPC(npcList.getNPC(4501));
         roomList.put(churchAltar.getID(), churchAltar);
         
         Room churchBellTower = new Room();
@@ -33,92 +38,92 @@ public class RoomList
                                 "head. You're able to see a good portion of the town -- the bakery,\n"+
                                 "the blacksmith, the inn, and the moderately sized marketplace.\n"+
                                 "Stone stairs lead down to the church foyer.");
-        churchBellTower.setID(111);
-        churchBellTower.setEnemy(101);
+        churchBellTower.setID(6011);
+        churchBellTower.setEnemy(5001);
         roomList.put(churchBellTower.getID(), churchBellTower);
         
         Room cMarketSquare = new Room();
         cMarketSquare.setName("CENTRAL MARKET SQUARE");
         cMarketSquare.setDesc("This is the central market square.");
-        cMarketSquare.setID(103);
-        cMarketSquare.setEnemy(102);
+        cMarketSquare.setID(6003);
+        cMarketSquare.setEnemy(5002);
         roomList.put(cMarketSquare.getID(), cMarketSquare);
         
         Room blacksmith = new Room();
         blacksmith.setName("BLACKSMITH SHOPPE");
         blacksmith.setDesc("This is the blacksmith shoppe.");
-        blacksmith.setID(106);
+        blacksmith.setID(6006);
         roomList.put(blacksmith.getID(), blacksmith);
         
         Room eMarketSquare = new Room();
         eMarketSquare.setName("EASTERN MARKET SQUARE");
         eMarketSquare.setDesc("This is the eastern market square.");
-        eMarketSquare.setID(104);
+        eMarketSquare.setID(6004);
         roomList.put(eMarketSquare.getID(), eMarketSquare);
         
         Room eApproach = new Room();
         eApproach.setName("EASTERN APPROACH");
         eApproach.setDesc("This is the eastern edge of the town.");
-        eApproach.setID(105);
+        eApproach.setID(6005);
         roomList.put(eApproach.getID(), eApproach);
         
         Room sMarketSquare = new Room();
         sMarketSquare.setName("SOUTHERN MARKET SQUARE");
         sMarketSquare.setDesc("This is the southern market square.");
-        sMarketSquare.setID(108);
+        sMarketSquare.setID(6008);
         roomList.put(sMarketSquare.getID(), sMarketSquare);
         
         Room bakery = new Room();
         bakery.setName("BAKERY");
         bakery.setDesc("This is the bakery.");
-        bakery.setID(107);
+        bakery.setID(6007);
         roomList.put(bakery.getID(), bakery);
         
         Room sApproach = new Room();
         sApproach.setName("SOUTHERN APPROACH");
         sApproach.setDesc("This is the southern edge of town.");
-        sApproach.setID(110);
+        sApproach.setID(6010);
         roomList.put(sApproach.getID(), sApproach);
         
         Room greendolphInn = new Room();
         greendolphInn.setName("GREENDOLPH INN");
         greendolphInn.setDesc("This is the Greendolph Inn.");
-        greendolphInn.setID(109);
+        greendolphInn.setID(6009);
         roomList.put(greendolphInn.getID(), greendolphInn);
         
         //GEO. SITUATION
-        churchFoyer.setUp(111);
-        churchFoyer.setEast(102);
-        churchFoyer.setSouth(103);
+        churchFoyer.setUp(6011);
+        churchFoyer.setEast(6002);
+        churchFoyer.setSouth(6003);
         
-        churchAltar.setWest(101);
+        churchAltar.setWest(6001);
         
-        churchBellTower.setDown(101);
+        churchBellTower.setDown(6001);
         
-        cMarketSquare.setNorth(101);
-        cMarketSquare.setSouth(108);
-        cMarketSquare.setEast(104);
-        cMarketSquare.setWest(106);
+        cMarketSquare.setNorth(6001);
+        cMarketSquare.setSouth(6008);
+        cMarketSquare.setEast(6004);
+        cMarketSquare.setWest(6006);
         
-        blacksmith.setEast(103);
+        blacksmith.setEast(6003);
         
-        eMarketSquare.setWest(103);
-        eMarketSquare.setEast(105);
-        eMarketSquare.setSouth(109);
+        eMarketSquare.setWest(6003);
+        eMarketSquare.setEast(6005);
+        eMarketSquare.setSouth(6009);
         
-        eApproach.setWest(104);
+        eApproach.setWest(6004);
         
-        sMarketSquare.setNorth(103);
-        sMarketSquare.setSouth(110);
-        sMarketSquare.setEast(109);
-        sMarketSquare.setWest(107);
+        sMarketSquare.setNorth(6003);
+        sMarketSquare.setSouth(6010);
+        sMarketSquare.setEast(6009);
+        sMarketSquare.setWest(6007);
         
-        bakery.setEast(108);
+        bakery.setEast(6008);
         
-        sApproach.setNorth(108);
+        sApproach.setNorth(6008);
         
-        greendolphInn.setNorth(104);
-        greendolphInn.setWest(108);
+        greendolphInn.setNorth(6004);
+        greendolphInn.setWest(6008);
     }
     
     public Room getRoom(int ID)

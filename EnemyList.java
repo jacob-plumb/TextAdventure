@@ -11,6 +11,10 @@ public class EnemyList
     //STR, DEX, CON, KNOW, WIS, CHA
     EnemyList()
     {
+       /*
+        * ENEMIES:  5XYZ
+        */
+       
        //BANDIT
        Enemy bandit = new Enemy();
        bandit.setName("BANDIT");
@@ -24,7 +28,7 @@ public class EnemyList
        bandit.setMaxMP(bandit.getKnow() * 3);
        bandit.setTempHP(bandit.getMaxHP());
        bandit.setTempMP(bandit.getMaxMP());
-       bandit.setID(101);
+       bandit.setID(5001);
        enemyList.put(bandit.getID(), bandit);
        
        //CULTIST
@@ -40,7 +44,7 @@ public class EnemyList
        cultist.setMaxMP(cultist.getKnow() * 3);
        cultist.setTempHP(cultist.getMaxHP());
        cultist.setTempMP(cultist.getMaxMP());
-       cultist.setID(102);
+       cultist.setID(5002);
        cultist.addSpell(spellList.getSpell(2101));
        cultist.addSpell(spellList.getSpell(2201));
        enemyList.put(cultist.getID(), cultist);

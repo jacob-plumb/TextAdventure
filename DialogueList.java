@@ -5,12 +5,16 @@ public class DialogueList
     
     DialogueList()
     {
+        /*
+         * Dialogue: 40XY
+         */
+        
         Dialogue testInit = new Dialogue(3);
         testInit.setInitStatement("Test init statement");
         testInit.setResponse(0, "Test player response 1");
         testInit.setResponse(1, "Test player response 2");
         testInit.setResponse(2, "Test player response 3 [Exit]");
-        testInit.setID(1001);
+        testInit.setID(4001);
         dialogueList.put(testInit.getID(), testInit);
         
         Dialogue testContra1 = new Dialogue(1);
