@@ -6,6 +6,7 @@ public class Consumable extends Collectible
     private int maxEffect;
     private int armorPenetration = 0;
     private String type;
+    private String subType;
 
     public int getMaxUses()
     {
@@ -66,17 +67,27 @@ public class Consumable extends Collectible
     {
         this.type = type;
     }
+    
+    public String getSubType()
+    {
+        return subType;
+    }
+    
+    public void setSubType(String subType)
+    {
+        this.subType = subType;
+    }
 
     //returns whether or not the item can be used (ie. if there is an object to be uses)
     public boolean use(Character user, Character target)
     {
         if(this.getAmount() > 0)
         {
-            if(type.equals("bomb") || type.equals("knife"))
+            if(type.equals("Thrown"))
             {
                 throwItem(user, target);
             }
-            else if(type.equals("healthPotion") || type.equals("manaPotion"))
+            else if(type.equals("Potions"))
             {
                 drinkPotion(user);
             }
@@ -112,11 +123,11 @@ public class Consumable extends Collectible
         if(toHit > targetDodge)
         {
             int damage = 0;
-            if(type.equals("knife"))
+            if(subType.equals("knife"))
             {
                 damage = Dice.roll(minEffect, maxEffect) + (user.getStr() / 2);
             }
-            else if(type.equals("bomb"))
+            else if(subType.equals("bomb"))
             {
                 damage = Dice.roll(minEffect, maxEffect) + (user.getKnow() / 2);
             }

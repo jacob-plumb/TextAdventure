@@ -91,11 +91,19 @@ public class Inventory
         }
         return misc;
     }
-
-    //create getters for magic arrays and misc arrays once classes created
-
-    //CREATE METHODS FOR ARMOR, MAGIC, MISC
-    //TEST
+    
+    public ArrayList<Consumable> getConsumables()
+    {
+        ArrayList<Consumable> con = new ArrayList<Consumable>();
+        for(Item item: backpack)
+        {
+            if(item instanceof Consumable)
+            {
+                con.add((Consumable) item);
+            }
+        }
+        return con;
+    }
 
     public void accessMain(Player player)
     {
@@ -104,7 +112,8 @@ public class Inventory
         System.out.println("2. Armor");
         System.out.println("3. Magic");
         System.out.println("4. Miscellaneous");
-        System.out.println("5. Back");
+        System.out.println("5. Consumables");
+        System.out.println("6. Back");
         try
         {
             String input = scanner.nextLine();
@@ -126,6 +135,10 @@ public class Inventory
             {
                 accessMiscItems(player);
             }
+            else if (option == 5)
+            {
+                accessConsumables(player);
+            }
             else
             {
                 player.printMenu();
@@ -135,6 +148,90 @@ public class Inventory
         {
             System.out.println("INVALID INPUT");
             this.accessMain(player);
+        }
+    }
+    
+    public void accessConsumables(Player player)
+    {
+        ArrayList<Consumable> consumables = new ArrayList<Consumable>();
+        consumables = getConsumables();
+        System.out.println("CONSUMABLES");
+        int endNum = 1;
+        for(int i = 0; i < consumables.size(); i++)
+        {
+            System.out.println("" + (i+1) + ". " + consumables.get(i).getName());
+            endNum++;
+        }
+        System.out.println("" + endNum + ". Back");
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            if(option > consumables.size()+1 && option < 1)
+            {
+                throw new NumberFormatException();
+            }
+            if(option == endNum)
+            {
+                if(player.getRoom().getEnemy() == null)
+                {
+                    this.accessMain(player);
+                }
+                else
+                {
+                    //blank
+                }
+            }
+            else
+            {
+                option--;
+                showConsumable(consumables, option, player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessConsumables(player);
+        }
+    }
+    
+    public void showConsumable(ArrayList<Consumable> list, int index, Player player)
+    {
+        Consumable consumable = list.get(index);
+        System.out.println(consumable.getName());
+        System.out.println(consumable.getDesc());
+        System.out.println("Value: " + consumable.getValue() + " gold.");
+        //boolean for if the player is not in combat
+        boolean nonCom = false;
+        if(player.getRoom().getEnemy() == null && consumable.getType().equals("Thrown"))
+        {
+            System.out.println("1. Back");
+            nonCom = true;
+        }
+        else
+        {
+            System.out.println("1. Use");
+            System.out.println("2. Back");
+        }
+
+        try
+        {
+            String input = scanner.nextLine();
+            int option = Integer.parseInt(input);
+            
+            if(option == 1 && nonCom == false)
+            {
+                consumable.use(player, player.getRoom().getEnemy());
+            }
+            else
+            {
+                this.accessConsumables(player);
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("INVALID INPUT");
+            this.accessConsumables(player);
         }
     }
 

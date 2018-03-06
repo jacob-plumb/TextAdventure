@@ -462,7 +462,7 @@ public abstract class Character
                     + " for " + heal + " health.");
             }
         }
-        else if(potion != null && potion.getType().equals("healthPotion"))
+        else if(potion != null && potion.getSubType().equals("Health"))
         {
             if((this.getTempHP() + heal) > this.getMaxHP())
             {
@@ -477,7 +477,7 @@ public abstract class Character
                     + " and regains " + heal + " health.");
             }
         }
-        else if(potion != null && potion.getType().equals("manaPotion"))
+        else if(potion != null && potion.getSubType().equals("Mana"))
         {
             if((this.getTempMP() + heal) > this.getMaxMP())
             {

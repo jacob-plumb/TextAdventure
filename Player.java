@@ -378,6 +378,16 @@ public class Player extends Character
                     }
                 }
             }
+            else if(option == 4)
+            {
+                this.getInventory().accessConsumables(this);
+                System.out.println("-------------" + enemy.getName() + "-------------");
+                System.out.println();
+                this.printCombatStats();
+                enemy.printCombatStats();
+                System.out.println();
+                playerTurn(enemy);
+            }
             else if(option == 5)
             {
                 this.printMenu();

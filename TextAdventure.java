@@ -17,6 +17,7 @@ public class TextAdventure
         RoomList roomList = new RoomList();
         SpellList spellList = new SpellList();
         MiscItemList miscItemList = new MiscItemList();
+        ConsumableList conList = new ConsumableList();
         Inventory backpack = new Inventory();
 
         //CREATING THE PLAYER
@@ -42,6 +43,8 @@ public class TextAdventure
         player.getInventory().addItem(spellList.getSpell(2201));
         player.getInventory().addItem(spellList.getSpell(2501));
         player.getInventory().addItem(miscItemList.getItem(3000));
+        player.getInventory().addItem(conList.getItem(7401));
+        player.getInventory().addItem(conList.getItem(7101));
 
         player.setLevel(1);
         player.setGold(0);
