@@ -91,7 +91,7 @@ public class Inventory
         }
         return misc;
     }
-    
+
     public ArrayList<Consumable> getConsumables()
     {
         ArrayList<Consumable> con = new ArrayList<Consumable>();
@@ -150,18 +150,25 @@ public class Inventory
             this.accessMain(player);
         }
     }
-    
+
     public void accessConsumables(Player player)
     {
         ArrayList<Consumable> consumables = new ArrayList<Consumable>();
         consumables = getConsumables();
         System.out.println("CONSUMABLES");
         int endNum = 1;
-        for(int i = 0; i < consumables.size(); i++)
+        if(consumables.size() > 0)
         {
-            System.out.println("" + (i+1) + ". " + consumables.get(i).getName());
-            endNum++;
+            for(int i = 0; i < consumables.size(); i++)
+            {
+                System.out.println("" + (i+1) + ". " + consumables.get(i).getName());
+                endNum++;
+            }
         }
+        else
+        {
+            System.out.println("You have no consumables.");
+        }   
         System.out.println("" + endNum + ". Back");
         try
         {
@@ -173,13 +180,9 @@ public class Inventory
             }
             if(option == endNum)
             {
-                if(player.getRoom().getEnemy() == null)
+                if(!(player.isInCombat()))
                 {
                     this.accessMain(player);
-                }
-                else
-                {
-                    //blank
                 }
             }
             else
@@ -194,19 +197,17 @@ public class Inventory
             this.accessConsumables(player);
         }
     }
-    
+
     public void showConsumable(ArrayList<Consumable> list, int index, Player player)
     {
         Consumable consumable = list.get(index);
         System.out.println(consumable.getName());
         System.out.println(consumable.getDesc());
         System.out.println("Value: " + consumable.getValue() + " gold.");
-        //boolean for if the player is not in combat
-        boolean nonCom = false;
-        if(player.getRoom().getEnemy() == null && consumable.getType().equals("Thrown"))
+
+        if(!(player.isInCombat()) && consumable.getType().equals("Thrown"))
         {
             System.out.println("1. Back");
-            nonCom = true;
         }
         else
         {
@@ -218,10 +219,10 @@ public class Inventory
         {
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
-            
-            if(option == 1 && nonCom == false)
+
+            if(option == 1 && (player.isInCombat() || !(consumable.getType().equals("Thrown"))))
             {
-                consumable.use(player, player.getRoom().getEnemy());
+                consumable.use(player, player.getNextRoom().getEnemy());
             }
             else
             {

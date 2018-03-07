@@ -3,6 +3,7 @@ import java.lang.Math;
 public class Player extends Character
 {
     private Room currentRoom;
+    private Room nextRoom = currentRoom;
     private Inventory inventory;
 
     Scanner scanner = new Scanner(System.in);
@@ -40,10 +41,36 @@ public class Player extends Character
     {
         return currentRoom;
     }
+    
+    public Room getNextRoom()
+    {
+        return nextRoom;
+    }
+    
+    public void setNextRoom(Room nextRoom)
+    {
+        this.nextRoom = nextRoom;
+    }
 
     public void printStats(){
         System.out.println("PLAYER STATS");
         super.printStats();
+    }
+    
+    public boolean isInCombat()
+    {
+        try
+        {
+            if(this.getNextRoom().getEnemy() != null)
+            {
+                return true;
+            }
+        }
+        catch (NullPointerException e)
+        {
+            return false;
+        }
+        return false;
     }
 
     public void printMenu()
@@ -82,6 +109,7 @@ public class Player extends Character
         if(roomList.getRoom(newRoomID) != null)
         {
             Room newRoom = roomList.getRoom(newRoomID);
+            this.setNextRoom(newRoom);
             if (newRoom.getEnemy() != null)
             {
                 System.out.println("You encounter a " + newRoom.getEnemy().getName() + " in the " + newRoom.getName());
@@ -95,6 +123,7 @@ public class Player extends Character
             {
                 currentRoom = newRoom;
             }
+            this.setNextRoom(currentRoom);
         }
     }
 

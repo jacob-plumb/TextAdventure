@@ -50,6 +50,10 @@ public class Room
     
     public Enemy getEnemy()
     {
+        if(enemy == null)
+        {
+            return null;
+        }
         return enemy;
     }
     

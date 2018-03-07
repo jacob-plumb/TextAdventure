@@ -62,6 +62,17 @@ public class SpellList
         fireball.setDesc("This spell deals " + Math.abs(fireball.getMinHE()) + " to " + Math.abs(fireball.getMaxHE()) + " damage instantly.");
         spellList.put(fireball.getID(), fireball);
         
+        Spell darkBlast = new Spell();
+        darkBlast.setName("BLAST OF PURE DARKNESS");
+        darkBlast.setID(2299);
+        darkBlast.setValue(5000);
+        darkBlast.setManaCost(50);
+        darkBlast.setKnowReq(10);
+        darkBlast.setHE(-8, -36);
+        darkBlast.setDuration(1);
+        darkBlast.setDesc("This spell deals " + Math.abs(darkBlast.getMinHE()) + " to " + Math.abs(darkBlast.getMaxHE()) + " damage instantly.");
+        spellList.put(darkBlast.getID(), darkBlast);
+        
         Spell drainLife = new Spell();
         drainLife.setName("DRAIN LIFE");
         drainLife.setID(2301);
