@@ -157,7 +157,7 @@ public class Inventory
         }
     }
 
-    public void accessConsumables(Player player)
+    public boolean accessConsumables(Player player)
     {
         ArrayList<Consumable> consumables = new ArrayList<Consumable>();
         consumables = getConsumables();
@@ -190,6 +190,7 @@ public class Inventory
                 {
                     this.accessMain(player);
                 }
+                return false;
             }
             else
             {
@@ -205,6 +206,7 @@ public class Inventory
                     {
                         consumable.use(player, null);
                     }
+                    return true;
                 }
                 else
                 {
@@ -217,6 +219,7 @@ public class Inventory
             System.out.println("INVALID INPUT");
             this.accessConsumables(player);
         }
+        return false;
     }
 
     public void showConsumable(ArrayList<Consumable> list, int index, Player player)

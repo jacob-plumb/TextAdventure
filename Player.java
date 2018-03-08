@@ -41,12 +41,12 @@ public class Player extends Character
     {
         return currentRoom;
     }
-    
+
     public Room getNextRoom()
     {
         return nextRoom;
     }
-    
+
     public void setNextRoom(Room nextRoom)
     {
         this.nextRoom = nextRoom;
@@ -56,7 +56,7 @@ public class Player extends Character
         System.out.println("PLAYER STATS");
         super.printStats();
     }
-    
+
     public boolean isInCombat()
     {
         try
@@ -409,11 +409,16 @@ public class Player extends Character
             }
             else if(option == 4)
             {
-                this.getInventory().accessConsumables(this);
-                //enemy turn afterwards even if the player doesnt pick something
-                //have .accessConsumables() return a boolean true if the player uses an item
-                //if usedItem == false; playerTurn(enemy)
-                //else blank
+                boolean usedItem = this.getInventory().accessConsumables(this);
+                if(usedItem == false)
+                {
+                    System.out.println("-------------" + enemy.getName() + "-------------");
+                    System.out.println();
+                    this.printCombatStats();
+                    enemy.printCombatStats();
+                    System.out.println();
+                    playerTurn(enemy);
+                }
             }
             else if(option == 5)
             {
