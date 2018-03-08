@@ -247,7 +247,7 @@ public abstract class Character
         }
 
         int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
-        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
+        int targetDodge = Dice.roll(1, 15) + (target.getDex() / 2);
 
         if (toHit > targetDodge)
         {
@@ -277,7 +277,7 @@ public abstract class Character
         }
 
         int toHit = (int)((Dice.roll(1, 20) + attacker.getDex()) * dexMod);
-        int targetDodge = Dice.roll(1, 20) + target.getDex();
+        int targetDodge = Dice.roll(1, 15) + target.getDex();
 
         if (toHit > targetDodge)
         {
@@ -294,7 +294,7 @@ public abstract class Character
     public int[] castSpell(Character attacker, Character target, Spell spell)
     {
         int toHit = Dice.roll(1, 20) + attacker.getDex();
-        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
+        int targetDodge = Dice.roll(1, 15) + (target.getDex() / 2);
         int duration = spell.getDuration();
         int effect;
 

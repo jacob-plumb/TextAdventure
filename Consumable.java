@@ -118,16 +118,16 @@ public class Consumable extends Collectible
     public void throwItem(Character user, Character target)
     {
         int toHit = Dice.roll(1, 20) + user.getDex();
-        int targetDodge = Dice.roll(1, 20) + (target.getDex() / 2);
+        int targetDodge = Dice.roll(1, 15) + (target.getDex() / 2);
 
         if(toHit > targetDodge)
         {
             int damage = 0;
-            if(subType.equals("knife"))
+            if(subType.equals("Knife"))
             {
                 damage = Dice.roll(minEffect, maxEffect) + (user.getStr() / 2);
             }
-            else if(subType.equals("bomb"))
+            else if(subType.equals("Bomb"))
             {
                 damage = Dice.roll(minEffect, maxEffect) + (user.getKnow() / 2);
             }

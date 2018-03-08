@@ -410,12 +410,10 @@ public class Player extends Character
             else if(option == 4)
             {
                 this.getInventory().accessConsumables(this);
-                System.out.println("-------------" + enemy.getName() + "-------------");
-                System.out.println();
-                this.printCombatStats();
-                enemy.printCombatStats();
-                System.out.println();
-                playerTurn(enemy);
+                //enemy turn afterwards even if the player doesnt pick something
+                //have .accessConsumables() return a boolean true if the player uses an item
+                //if usedItem == false; playerTurn(enemy)
+                //else blank
             }
             else if(option == 5)
             {

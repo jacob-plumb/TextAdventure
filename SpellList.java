@@ -66,7 +66,7 @@ public class SpellList
         darkBlast.setName("BLAST OF PURE DARKNESS");
         darkBlast.setID(2299);
         darkBlast.setValue(5000);
-        darkBlast.setManaCost(50);
+        darkBlast.setManaCost(100);
         darkBlast.setKnowReq(10);
         darkBlast.setHE(-8, -36);
         darkBlast.setDuration(1);

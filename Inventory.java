@@ -15,12 +15,18 @@ public class Inventory
         backpack = new ArrayList<Item>();
     }
 
-    public void addItem(Item item)
+    public void addItem(Item item, int amount)
     {
-        if(item instanceof Collectible & backpack.contains(item))
+        if(item instanceof Collectible && backpack.contains(item))
         {
             Collectible collectible = (Collectible)item;
-            collectible.addAmount(1);
+            collectible.addAmount(amount);
+        }
+        else if(item instanceof Collectible)
+        {
+            Collectible collectible = (Collectible)item;
+            collectible.setAmount(amount);
+            backpack.add(collectible);
         }
         else
         {
@@ -161,7 +167,7 @@ public class Inventory
         {
             for(int i = 0; i < consumables.size(); i++)
             {
-                System.out.println("" + (i+1) + ". " + consumables.get(i).getName());
+                System.out.println("" + (i+1) + ". " + consumables.get(i).getName() + " x" + consumables.get(i).getAmount());
                 endNum++;
             }
         }
@@ -188,7 +194,22 @@ public class Inventory
             else
             {
                 option--;
-                showConsumable(consumables, option, player);
+                Consumable consumable = consumables.get(option);
+                if(player.isInCombat())
+                {
+                    try
+                    {
+                        consumable.use(player, player.getNextRoom().getEnemy());
+                    }
+                    catch (NullPointerException e)
+                    {
+                        consumable.use(player, null);
+                    }
+                }
+                else
+                {
+                    showConsumable(consumables, option, player);
+                }
             }
         }
         catch (NumberFormatException e)
@@ -220,13 +241,20 @@ public class Inventory
             String input = scanner.nextLine();
             int option = Integer.parseInt(input);
 
-            if(option == 1 && (player.isInCombat() || !(consumable.getType().equals("Thrown"))))
+            try
             {
-                consumable.use(player, player.getNextRoom().getEnemy());
+                if(option == 1 && (player.isInCombat() || !(consumable.getType().equals("Thrown"))))
+                {
+                    consumable.use(player, player.getNextRoom().getEnemy());
+                }
+                else
+                {
+                    this.accessConsumables(player);
+                }
             }
-            else
+            catch (NullPointerException e)
             {
-                this.accessConsumables(player);
+                consumable.use(player, null);
             }
         }
         catch (NumberFormatException e)
@@ -293,7 +321,7 @@ public class Inventory
             if (option == 1)
             {
                 Weapon oldWep = player.getWep();
-                addItem(oldWep);
+                addItem(oldWep, 1);
                 player.setWep(weaponList.getItem(weapon.getID()));
                 removeItem(weapon);
                 if(player.getStr() < weapon.getStrReq() && player.getDex() < weapon.getDexReq())
@@ -385,7 +413,7 @@ public class Inventory
                 if(player.getStr() >= armor.getStrReq())
                 {
                     Armor oldArmor = player.getArmor();
-                    addItem(oldArmor);
+                    addItem(oldArmor, 1);
                     player.setArmor(armorList.getItem(armor.getID()));
                     removeItem(armor);
                     System.out.println("You equip your " + armor.getName()); 

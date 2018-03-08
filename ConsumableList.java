@@ -17,7 +17,7 @@ public class ConsumableList
         minorHP.setDesc("This is a minor health potion.");
         minorHP.setValue(10);
         minorHP.setID(7101);
-        minorHP.setAmount(1);
+        minorHP.setAmount(0);
         minorHP.setMaxUses(1);
         minorHP.setTempUses(minorHP.getMaxUses());
         minorHP.setMinEffect(1);
@@ -31,7 +31,7 @@ public class ConsumableList
         minorMP.setDesc("This is a minor mana potion.");
         minorMP.setValue(30);
         minorMP.setID(7201);
-        minorMP.setAmount(1);
+        minorMP.setAmount(0);
         minorMP.setMaxUses(1);
         minorMP.setTempUses(minorMP.getMaxUses());
         minorMP.setMinEffect(1);
@@ -45,7 +45,7 @@ public class ConsumableList
         smallKnife.setDesc("This is a small throwing knife.");
         smallKnife.setValue(2);
         smallKnife.setID(7301);
-        smallKnife.setAmount(1);
+        smallKnife.setAmount(0);
         smallKnife.setMaxUses(1);
         smallKnife.setTempUses(smallKnife.getMaxUses());
         smallKnife.setMinEffect(1);
@@ -59,13 +59,13 @@ public class ConsumableList
         fireBomb.setDesc("This is a firebomb.");
         fireBomb.setValue(20);
         fireBomb.setID(7401);
-        fireBomb.setAmount(1);
+        fireBomb.setAmount(0);
         fireBomb.setMaxUses(1);
         fireBomb.setTempUses(fireBomb.getMaxUses());
         fireBomb.setMinEffect(2);
         fireBomb.setMaxEffect(8);
         fireBomb.setType("Thrown");
-        fireBomb.setSubType("Firebomb");
+        fireBomb.setSubType("Bomb");
         conList.put(fireBomb.getID(), fireBomb);
     }
     

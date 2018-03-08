@@ -34,17 +34,17 @@ public class TextAdventure
         player.setArmor(armorList.getItem(1512));
         player.setInventory(backpack);
         
-        player.getInventory().addItem(weaponList.getItem(1039));
-        player.getInventory().addItem(weaponList.getItem(1031));
-        player.getInventory().addItem(weaponList.getItem(1000));
-        player.getInventory().addItem(armorList.getItem(1531));
-        player.getInventory().addItem(armorList.getItem(1521));
-        player.getInventory().addItem(spellList.getSpell(2101));
-        player.getInventory().addItem(spellList.getSpell(2201));
-        player.getInventory().addItem(spellList.getSpell(2501));
-        player.getInventory().addItem(miscItemList.getItem(3000));
-        player.getInventory().addItem(conList.getItem(7401));
-        player.getInventory().addItem(conList.getItem(7101));
+        player.getInventory().addItem(weaponList.getItem(1039), 1);
+        player.getInventory().addItem(weaponList.getItem(1031), 1);
+        player.getInventory().addItem(weaponList.getItem(1000), 1);
+        player.getInventory().addItem(armorList.getItem(1531), 1);
+        player.getInventory().addItem(armorList.getItem(1521), 1);
+        player.getInventory().addItem(spellList.getSpell(2101), 1);
+        player.getInventory().addItem(spellList.getSpell(2201), 1);
+        player.getInventory().addItem(spellList.getSpell(2501), 1);
+        player.getInventory().addItem(miscItemList.getItem(3000), 1);
+        player.getInventory().addItem(conList.getItem(7401), 3);
+        player.getInventory().addItem(conList.getItem(7101), 2);
 
         player.setLevel(1);
         player.setGold(0);
