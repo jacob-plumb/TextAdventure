@@ -5,6 +5,7 @@ public class Player extends Character
     private Room currentRoom;
     private Room nextRoom = currentRoom;
     private Inventory inventory;
+    private boolean fled = false;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -115,9 +116,13 @@ public class Player extends Character
                 System.out.println("You encounter a " + newRoom.getEnemy().getName() + " in the " + newRoom.getName());
                 if (playerCombat(newRoom.getEnemy()))
                 {
-                    newRoom.setEnemy(0);
-                    currentRoom = newRoom;
+                    if(!fled)
+                    {
+                        newRoom.setEnemy(0);
+                        currentRoom = newRoom;
+                    }
                 }
+                fled = false;
             }
             else
             {
@@ -133,7 +138,7 @@ public class Player extends Character
         int[] pEoT = null;
         //Effect over time on the enemy
         int[] eEoT = null;
-        while (this.getTempHP() > 0 && enemy.getTempHP() > 0)
+        while (this.getTempHP() > 0 && enemy.getTempHP() > 0 && !fled)
         {
             System.out.println();
             System.out.println("-------------" + enemy.getName() + "-------------");
@@ -238,7 +243,7 @@ public class Player extends Character
             }
             //showing the player the combat stats and options
             //redundant if statements to allow for enemy to die from DoT and for player to die from DoT
-            if(enemy.getTempHP() > 0 && this.getTempHP() > 0)
+            if(enemy.getTempHP() > 0 && this.getTempHP() > 0 && !fled)
             {
                 System.out.println();
                 this.printCombatStats();
@@ -261,7 +266,7 @@ public class Player extends Character
                 }
             }
 
-            if (enemy.getTempHP() > 0)
+            if (enemy.getTempHP() > 0 && !fled)
             {
                 int lightProc = 10;
                 int heavyProc = 10;
@@ -351,6 +356,14 @@ public class Player extends Character
             this.setTempHP(this.getMaxHP() / 2);
             return false;
         }
+        else if (fled)
+        {
+            System.out.println("" + this.getName() + " flees!");
+            //reset enemy in the list
+            enemy.setTempHP(enemy.getMaxHP());
+            enemy.setTempMP(enemy.getMaxMP());
+            return false;
+        }
         else
         {
             int goldDrop = enemy.dropGold();
@@ -432,7 +445,7 @@ public class Player extends Character
             }
             else
             {
-                this.setTempHP(0);
+                fled = true;
             }
         }
         catch(NumberFormatException e)
