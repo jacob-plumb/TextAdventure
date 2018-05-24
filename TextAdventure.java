@@ -9,8 +9,6 @@ public class TextAdventure
         System.out.println("Welcome to Text Adventure 0.0");
 
         //CREATING ITEMS
-
-        //ask Jacob if I should make these public so I don't have to instantiate more in other classes
         WeaponList weaponList = new WeaponList();
         ArmorList armorList = new ArmorList();
         EnemyList enemyList = new EnemyList();
@@ -18,6 +16,8 @@ public class TextAdventure
         SpellList spellList = new SpellList();
         MiscItemList miscItemList = new MiscItemList();
         ConsumableList conList = new ConsumableList();
+        
+        
         Inventory backpack = new Inventory();
 
         //CREATING THE PLAYER

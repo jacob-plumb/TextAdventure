@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=MetaList
+comment1.params=ID
+comment1.target=void\ getObject(int)
+comment2.params=ID
+comment2.target=Weapon\ getWeapon(int)
+comment3.params=ID
+comment3.target=Armor\ getArmor(int)
+comment4.params=ID
+comment4.target=Spell\ getSpell(int)
+comment5.params=ID
+comment5.target=MiscItem\ getMiscItem(int)
+comment6.params=ID
+comment6.target=Consumable\ getConsumable(int)
+numComments=7

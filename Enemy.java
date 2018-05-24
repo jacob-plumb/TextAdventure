@@ -5,6 +5,12 @@ public class Enemy extends Character
     private ArrayList<Spell> spells;
     private int minGold;
     private int maxGold;
+    private ArrayList<Integer> drops;
+
+    public int getRandDrop()
+    {
+        return (int)drops.get(Dice.roll(0, drops.size() - 1));
+    }
 
     public int getID()
     {
@@ -49,10 +55,10 @@ public class Enemy extends Character
                 castable.add(s);
             }
         }
-        
+
         return castable;
     }
-    
+
     public Spell selectSpell()
     {
         ArrayList<Spell>castableSpells = this.getCastableSpells();
