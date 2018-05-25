@@ -6,7 +6,12 @@ public class TextAdventure
         boolean gameLoop = true;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Text Adventure 0.0");
+        System.out.println("Welcome to Where Is My Sun v1.0");
+        System.out.println("");
+        System.out.println("To play, simply type the direction you wish to go in. Valid directions");
+        System.out.println("are north, south, east, west, up, and down. To access the menu, type");
+        System.out.println("'menu'. If you are in a room with an NPC, type 'talk' to speak with them.");
+        System.out.println("When options are presented, enter the number of the option you want.");
 
         //CREATING ITEMS
         WeaponList weaponList = new WeaponList();
