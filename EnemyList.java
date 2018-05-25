@@ -48,6 +48,22 @@ public class EnemyList
        cultist.addSpell(spellList.getSpell(2101));
        cultist.addSpell(spellList.getSpell(2201));
        enemyList.put(cultist.getID(), cultist);
+       
+       //BELLIGERENT DRUNK
+       Enemy drunk = new Enemy();
+       drunk.setName("BELLIGERENT DRUNK");
+       drunk.setAtt(5, 2, 5, 1, 2, 4);
+       drunk.setWep(weaponList.getItem(1021));
+       drunk.setArmor(armorList.getItem(1512));
+       drunk.setLevel(1);
+       drunk.setGold(4, 10);
+       drunk.setXP(35);
+       drunk.calcMaxHP();
+       drunk.setMaxMP(drunk.getKnow() * 3);
+       drunk.setTempHP(drunk.getMaxHP());
+       drunk.setTempMP(drunk.getMaxMP());
+       drunk.setID(5003);
+       enemyList.put(drunk.getID(), drunk);
     }
     
     public Enemy getEnemy(int ID)

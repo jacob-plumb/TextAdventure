@@ -105,6 +105,7 @@ public class RoomList
             "served to rowdy patrons, games and gambling galore. The northern exit\n"+
             "leads to the eastern square, while the western exit leads to the southern market.");
         greendolphInn.setID(6009);
+        greendolphInn.setEnemy(5003);
         roomList.put(greendolphInn.getID(), greendolphInn);
 
         //GEO. SITUATION
