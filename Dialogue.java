@@ -1,7 +1,7 @@
 public class Dialogue
 {
     private String initStatement;
-    private String exitStatement = "Goodbye!";
+    private String exitStatement = "Farewell!";
     
     private String[] response;
     private Dialogue[] contra;

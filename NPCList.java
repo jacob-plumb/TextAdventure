@@ -12,7 +12,7 @@ public class NPCList
          */
         
         NPC testNPC = new NPC();
-        testNPC.setName("TEST NPC");
+        testNPC.setName("Father Donovan");
         testNPC.setDialogue(dialogueList.getDialogue(4001));
         testNPC.setID(4501);
         npcList.put(testNPC.getID(), testNPC);
